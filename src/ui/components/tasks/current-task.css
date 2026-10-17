@@ -1,0 +1,79 @@
+/* The native summary and combat actions form one card. Native inline
+   display:none still hides either action group when combat ends. */
+html.sw-mobile .floating-current-task {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--bg-panel);
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+}
+html.sw-mobile .float-task-inner {
+  grid-column: 1 / -1;
+  min-width: 0;
+  padding: 5px 8px;
+  gap: 6px;
+  border: 0;
+  border-radius: 6px;
+}
+html.sw-mobile .floating-current-task.combat-expanded .float-task-inner {
+  border: 0;
+}
+html.sw-mobile .float-icon {
+  width: 44px;
+  height: 44px;
+}
+html.sw-mobile .float-icon :is(img, canvas) {
+  width: 34px;
+  height: 34px;
+}
+html.sw-mobile .float-details {
+  gap: 2px;
+}
+html.sw-mobile .float-task-name {
+  font-size: 15px;
+  line-height: 1.15;
+}
+html.sw-mobile .float-task-node {
+  font-size: 13px;
+  line-height: 1.3;
+}
+html.sw-mobile .float-bar {
+  height: 16px;
+}
+html.sw-mobile .float-bar-text span {
+  font-size: 12px;
+}
+html.sw-mobile :is(.float-combat-info, .float-combat-toggles) {
+  display: contents;
+}
+html.sw-mobile :is(.float-combat-col, .float-toggle-pill) {
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  padding: 4px 6px;
+  border: 0;
+  border-top: 1px solid var(--border-primary);
+  border-radius: 0;
+  font-size: 13px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+html.sw-mobile .float-combat-col + .float-combat-col {
+  border-inline: 1px solid var(--border-primary);
+}
+html.sw-mobile #ui-container .float-toggle-pill {
+  font-size: 13px;
+  border-radius: 0 0 5px;
+}
+html.sw-mobile .float-raid-lobby {
+  grid-column: 1 / -1;
+  width: auto;
+  min-height: 44px;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--border-primary);
+}

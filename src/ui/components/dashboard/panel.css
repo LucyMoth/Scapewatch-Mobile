@@ -1,0 +1,71 @@
+html.sw-mobile:not(.sw-dashboard) .dashboard-panel {
+  display: none !important;
+}
+html.sw-mobile.sw-dashboard .dashboard-panel {
+  position: fixed;
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 8px) !important;
+  bottom: calc(var(--sw-bottom) + 8px);
+  left: var(--sw-left) !important;
+  right: var(--sw-right);
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+}
+html.sw-mobile .dashboard-titlebar {
+  height: 48px;
+  padding: 2px 4px 2px 12px;
+  cursor: default;
+  touch-action: pan-y;
+}
+html.sw-mobile .dashboard-titlebar-label {
+  font-size: 16px;
+  letter-spacing: 0;
+}
+html.sw-mobile .dashboard-titlebar-min {
+  display: none;
+}
+html.sw-mobile .dashboard-titlebar-close {
+  width: 44px;
+  height: 44px;
+}
+html.sw-mobile .dashboard-titlebar-close svg {
+  width: 20px;
+  height: 20px;
+}
+html.sw-mobile .dashboard-tabbar {
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 6px;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  scrollbar-width: thin;
+}
+html.sw-mobile #ui-container .dashboard-tab {
+  flex: 0 0 auto;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 12px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+html.sw-mobile .dashboard-content {
+  min-width: 0;
+  padding: 12px;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  line-height: 1.35;
+}
+html.sw-mobile .dashboard-content::-webkit-scrollbar {
+  display: block;
+}
+html.sw-mobile .dashboard-content > * {
+  min-width: 0;
+}

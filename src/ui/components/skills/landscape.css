@@ -1,0 +1,35 @@
+html.sw-mobile.sw-landscape .skill-custom-tab .modal-header {
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 54px 6px 8px;
+  gap: 6px 12px;
+}
+html.sw-mobile.sw-landscape .skill-custom-tab .header-left {
+  flex: 1 1 180px;
+}
+html.sw-mobile.sw-landscape .skill-custom-tab :is(.header-mid-left, .header-mid-right) {
+  flex: 1 1 200px;
+  max-width: 280px;
+}
+html.sw-mobile.sw-landscape .skill-custom-tab .header-right {
+  flex: 0 1 auto;
+  align-items: center;
+}
+html.sw-mobile.sw-landscape .skill-custom-tab .header-icon {
+  width: 32px;
+  height: 32px;
+}
+html.sw-mobile.sw-landscape .skill-custom-tab .header-icon img {
+  width: 28px;
+  height: 28px;
+}
+html.sw-mobile.sw-landscape .skill-custom-tab .header-name {
+  font-size: 16px;
+}
+html.sw-mobile.sw-landscape .skill-custom-tab .skill-custom-navbar {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+html.sw-mobile.sw-landscape .skill-custom-tab .column-title {
+  font-size: 18px;
+}

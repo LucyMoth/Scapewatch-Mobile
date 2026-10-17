@@ -1,0 +1,38 @@
+html.sw-mobile .ingame-hud {
+  top: var(--sw-right-top) !important;
+  left: 12px !important;
+  max-width: calc(100% - 24px);
+  font-size: 14px;
+}
+html.sw-mobile .tutorial-checklist {
+  top: calc(var(--sw-hud-bottom) + 8px) !important;
+  left: 12px !important;
+  max-width: calc(100% - 24px);
+  max-height: 25dvh;
+  overflow: auto;
+}
+html.sw-mobile .floating-current-task {
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  top: auto !important;
+  bottom: calc(var(--sw-bottom) + 10px) !important;
+  transform: none !important;
+  width: auto !important;
+  max-width: calc(100% - 16px);
+  max-height: none !important;
+  overflow: visible;
+}
+html.sw-mobile:not(.sw-world) .floating-current-task {
+  display: none !important;
+}
+html.sw-mobile .recenter-camera-btn {
+  right: 12px !important;
+  bottom: calc(var(--sw-bottom) + 90px) !important;
+  left: auto !important;
+  top: auto !important;
+}
+html.sw-mobile .active-potions-pill {
+  top: calc(var(--sw-top) + 70px) !important;
+  right: 12px !important;
+  left: auto !important;
+}

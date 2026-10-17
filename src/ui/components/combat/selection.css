@@ -1,0 +1,314 @@
+html.sw-mobile
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs']) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 6px 8px;
+}
+html.sw-mobile
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  > .header-left {
+  grid-area: 1 / 1;
+}
+html.sw-mobile
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  > .modal-close {
+  grid-area: 1 / 2;
+  width: 44px;
+  height: 44px;
+}
+html.sw-mobile
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  > .processing-nav {
+  grid-area: 2 / 1 / 3 / -1;
+  position: static;
+  transform: none;
+  width: 100%;
+  gap: 6px;
+  justify-content: flex-start;
+}
+html.sw-mobile .processing-nav:has(> [data-tab='mobs']) .processing-nav-btn {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+html.sw-mobile .processing-nav:has(> [data-tab='mobs']) .processing-nav-icon {
+  width: 28px;
+  height: 28px;
+}
+html.sw-mobile .processing-nav:has(> [data-tab='mobs']) .processing-nav-tooltip {
+  display: none;
+}
+html.sw-mobile
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  > .collections-indicator {
+  grid-area: 2 / 1 / 3 / -1;
+  justify-self: end;
+  max-width: calc(100% - 104px);
+  min-height: 44px;
+  margin: 0;
+  padding: 6px;
+  font-size: 12px;
+  white-space: normal;
+  align-content: center;
+}
+html.sw-mobile
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  .header-info-group {
+  min-width: 0;
+}
+html.sw-mobile
+  #ui-container
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  .header-name {
+  font-size: 20px;
+  line-height: 1.2;
+}
+html.sw-mobile
+  #ui-container
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  .header-stats {
+  font-size: 12px;
+  gap: 4px 8px;
+}
+html.sw-mobile .slay-weights-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+}
+html.sw-mobile #tab-mobs.active {
+  display: block;
+  overflow-x: hidden;
+}
+html.sw-mobile .mob-list-side {
+  border: none;
+}
+html.sw-mobile .mob-list-toolbar {
+  padding: 4px;
+}
+html.sw-mobile #ui-container .mob-search {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  font-size: 16px;
+}
+html.sw-mobile .mob-list-scroll {
+  max-height: 38dvh;
+  overflow-x: hidden;
+}
+html.sw-mobile .mob-row {
+  min-height: 72px;
+  padding: 6px 48px 6px 4px;
+}
+html.sw-mobile .mob-row-icon,
+html.sw-mobile .mob-row-icon > :is(img, canvas) {
+  width: 60px;
+  height: 60px;
+}
+html.sw-mobile .mob-row-map-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+html.sw-mobile :is(.mob-row-tier, .mob-row-subname, .mob-row-name-text) {
+  font-size: 16px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .mob-row-level {
+  font-size: 13px;
+}
+html.sw-mobile .mob-detail-top {
+  flex-direction: column;
+  overflow: visible;
+}
+html.sw-mobile :is(.mob-info-panel, .mob-config-panel) {
+  min-width: 0;
+  width: 100%;
+  overflow: visible;
+  padding: 8px;
+}
+html.sw-mobile .mob-encounter-name {
+  font-size: 22px;
+}
+html.sw-mobile .mob-encounter-level {
+  font-size: 14px;
+}
+html.sw-mobile .mob-two-col {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+html.sw-mobile :is(.mob-col-left, .mob-col-right) {
+  min-width: 0;
+}
+html.sw-mobile .mob-unit-row {
+  height: auto;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+html.sw-mobile .mob-unit-item {
+  width: 88px;
+  height: auto;
+  flex: 0 0 88px;
+}
+html.sw-mobile .mob-unit-item canvas {
+  width: 64px;
+  height: 64px;
+}
+html.sw-mobile .mob-derived-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+html.sw-mobile :is(.mob-derived-label, .mob-skill-name, .mob-skill-val, .mob-panel-level) {
+  font-size: 14px;
+}
+html.sw-mobile :is(.mob-derived-value, .mob-section-header, .mob-panel-name) {
+  font-size: 18px;
+}
+html.sw-mobile .mob-skill-icon {
+  width: 24px;
+  height: 24px;
+}
+html.sw-mobile .mob-skill-grid {
+  gap: 4px;
+}
+html.sw-mobile .mob-skill-row {
+  min-width: 0;
+  gap: 4px;
+  padding: 3px;
+}
+html.sw-mobile .mob-equip-table {
+  table-layout: fixed;
+}
+html.sw-mobile .mob-equip-table :is(th, td) {
+  width: auto;
+  padding: 6px 3px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .pvp-layout {
+  padding: 4px;
+  height: auto;
+  overflow: visible;
+}
+html.sw-mobile .pvp-cols {
+  flex-direction: column;
+  gap: 16px;
+}
+html.sw-mobile :is(.pvp-left, .pvp-right) {
+  overflow: visible;
+  flex: none;
+  width: 100%;
+}
+html.sw-mobile .pvp-section-title {
+  font-size: 16px;
+}
+html.sw-mobile .pvp-toggle > .qp-toggle-btn {
+  min-height: 44px;
+  align-content: center;
+  font-size: 14px;
+}
+html.sw-mobile .pvp-left :is(.loadout-sel-families, .loadout-sel-slots) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+html.sw-mobile .pvp-left :is(.loadout-sel-family, .loadout-sel-slot) {
+  flex: 0 0 auto;
+  min-width: 52px;
+  min-height: 44px;
+  font-size: 13px;
+}
+html.sw-mobile :is(.pvp-hint, .pvp-pair-row) {
+  font-size: 14px;
+  line-height: 1.4;
+}
+html.sw-mobile .pvp-pair-row {
+  padding: 6px 8px;
+}
+html.sw-mobile .pvp-donate-row {
+  flex-wrap: wrap;
+}
+html.sw-mobile .pvp-member-row {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+html.sw-mobile .pvp-member-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #ui-container :is(.pvp-btn, .pvp-mini-btn, .pvp-donate-input) {
+  min-height: 44px;
+  min-width: 44px;
+  font-size: 14px;
+}
+html.sw-mobile .pvp-right .hs-table {
+  width: 100%;
+  table-layout: fixed;
+  font-size: 13px;
+}
+html.sw-mobile .pvp-right .hs-table :is(th, td) {
+  padding: 6px 4px;
+  width: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile.sw-landscape
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs']) {
+  grid-template-columns: minmax(0, 1fr) 94px minmax(104px, 160px) 44px;
+}
+html.sw-mobile.sw-landscape
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  > .processing-nav {
+  grid-area: 1 / 2;
+}
+html.sw-mobile.sw-landscape
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  > .modal-close {
+  grid-area: 1 / 4;
+}
+html.sw-mobile.sw-landscape
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs'])
+  > .collections-indicator {
+  grid-area: 1 / 3;
+  max-width: 100%;
+}
+html.sw-mobile.sw-landscape
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs']):has(
+    > .collections-indicator[style*='display: none']
+  ) {
+  grid-template-columns: minmax(0, 1fr) 94px 44px;
+}
+html.sw-mobile.sw-landscape
+  .modal-header:has(> .processing-nav:not([style*='display: none']) > [data-tab='mobs']):has(
+    > .collections-indicator[style*='display: none']
+  )
+  > .modal-close {
+  grid-area: 1 / 3;
+}
+html.sw-mobile.sw-landscape .mob-layout {
+  flex-direction: row !important;
+  align-items: flex-start;
+}
+html.sw-mobile.sw-landscape .mob-list-side {
+  width: 42% !important;
+  flex: 0 0 42% !important;
+}
+html.sw-mobile.sw-landscape .mob-detail-side {
+  flex: 1 !important;
+  width: auto !important;
+}
+html.sw-mobile.sw-landscape .mob-list-scroll {
+  max-height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 140px);
+}
+html.sw-mobile.sw-landscape .pvp-cols {
+  flex-direction: row;
+}
+html.sw-mobile.sw-landscape :is(.pvp-left, .pvp-right) {
+  flex: 1;
+  width: auto;
+}

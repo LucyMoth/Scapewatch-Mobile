@@ -1,0 +1,115 @@
+html.sw-mobile .skill-custom-tab :is(.main-layout, .columns-container, .column, .total-content) {
+  width: 100%;
+  min-width: 0;
+  height: auto !important;
+  min-height: 0;
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+}
+html.sw-mobile .skill-custom-tab .main-layout {
+  padding: 6px 0;
+}
+html.sw-mobile .skill-custom-tab :is(.column-scroll, .history-scroll) {
+  max-height: none;
+  overflow: visible !important;
+  height: auto;
+}
+html.sw-mobile .skill-custom-tab .history-sidebar {
+  order: 2;
+}
+html.sw-mobile .skill-custom-tab[data-sw-skill]:not([data-sw-skill='history']) .history-sidebar,
+html.sw-mobile .skill-custom-tab[data-sw-skill='history'] .columns-container,
+html.sw-mobile .skill-custom-tab[data-sw-skill='activities'] #nodes-column,
+html.sw-mobile .skill-custom-tab[data-sw-skill='nodes'] #activities-column,
+html.sw-mobile .skill-custom-tab[data-sw-skill='weights'] .unlocks-grid-section,
+html.sw-mobile .skill-custom-tab[data-sw-skill='unlocks'] .skill-columns-section {
+  display: none !important;
+}
+#sw-skill-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  flex: 0 0 auto;
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  background: var(--bg-panel, #2b2216);
+  border-bottom: 1px solid var(--border-primary, #5c4a2a);
+}
+#sw-skill-tabs[hidden],
+html:not(.sw-mobile) #sw-skill-tabs {
+  display: none !important;
+}
+#sw-skill-tabs button {
+  min-height: 44px;
+  flex: 1;
+  min-width: 0;
+  padding: 6px;
+  background: var(--bg-dark, #1c1c0e);
+  border: 1px solid var(--border-primary, #5c4a2a);
+  border-radius: 3px;
+  font-family: var(--game-font, sans-serif);
+  font-size: 14px;
+  color: var(--text-light, #cccccc);
+  touch-action: manipulation;
+}
+#sw-skill-tabs button:is([aria-selected='true'], [aria-pressed='true']) {
+  color: var(--text-bright, #ffff00);
+  border-color: var(--text-accent, #c8a83e);
+  background: var(--bg-cell, #3a3226);
+}
+html.sw-mobile .skill-custom-tab .column-header {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+html.sw-mobile .skill-custom-tab .column-title {
+  font-size: 20px;
+}
+html.sw-mobile .skill-custom-tab .column-subtitle {
+  font-size: 13px;
+}
+/* Activity header labels are repeated next to their values/actions. The
+   node header retains its original sortable Name/Bank/Distance controls. */
+html.sw-mobile .skill-custom-tab .activities-subheader:not(:has(.sh-sortable)) {
+  display: none;
+}
+html.sw-mobile .skill-custom-tab .activities-subheader:has(.sh-sortable) {
+  flex-wrap: wrap;
+  padding: 4px;
+  font-size: 13px;
+}
+html.sw-mobile .skill-custom-tab .activities-subheader:has(.sh-sortable) .sh-info-section {
+  flex-wrap: wrap;
+  overflow: visible;
+  gap: 4px;
+}
+html.sw-mobile .skill-custom-tab .activities-subheader:has(.sh-sortable) .sh-sortable {
+  width: auto;
+  min-height: 44px;
+  padding: 8px 6px;
+  margin: 0;
+}
+html.sw-mobile .skill-custom-tab .activities-subheader .sh-ctrl-section {
+  display: none;
+}
+html.sw-mobile .skill-custom-tab .nodes-subheader {
+  padding: 4px;
+}
+html.sw-mobile .skill-custom-tab .nodes-subheader :is(.sh-ctrl-section, .sh-nchance) {
+  display: none;
+}
+html.sw-mobile .skill-custom-tab .nodes-subheader .sh-info-section {
+  flex-wrap: wrap;
+  overflow: visible;
+  gap: 4px;
+}
+html.sw-mobile .skill-custom-tab .nodes-subheader :is(.sh-location, .sh-bank, .sh-dist) {
+  width: auto;
+  flex: 1 1 auto;
+  min-height: 40px;
+  padding: 8px 6px;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+  border: 1px solid var(--border-primary);
+}

@@ -1,0 +1,115 @@
+/* One original dock panel at a time, now a readable mobile sheet. */
+html.sw-mobile
+  #ui-container
+  > :is(
+    .uq-panel,
+    .tasks-panel,
+    .slay-tasks-panel,
+    .skills-panel,
+    .inventory-panel,
+    .quests-panel,
+    .diary-panel,
+    .equipment-panel,
+    .friends-panel,
+    .barter-panel
+  ) {
+  position: absolute !important;
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 8px) !important;
+  bottom: calc(var(--sw-bottom) + 8px) !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: none !important;
+  overflow: auto !important;
+  border-radius: 4px !important;
+  box-shadow: none;
+  z-index: 1100 !important;
+  padding: 10px;
+  overscroll-behavior: contain;
+}
+html.sw-mobile.sw-world
+  #ui-container
+  > :is(
+    .uq-panel,
+    .tasks-panel,
+    .slay-tasks-panel,
+    .skills-panel,
+    .inventory-panel,
+    .quests-panel,
+    .diary-panel,
+    .equipment-panel,
+    .friends-panel,
+    .barter-panel
+  ),
+html.sw-mobile.sw-chat
+  #ui-container
+  > :is(
+    .uq-panel,
+    .tasks-panel,
+    .slay-tasks-panel,
+    .skills-panel,
+    .inventory-panel,
+    .quests-panel,
+    .diary-panel,
+    .equipment-panel,
+    .friends-panel,
+    .barter-panel
+  ) {
+  display: none !important;
+}
+html.sw-mobile #ui-container > .skills-panel {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-content: start;
+  gap: 6px;
+}
+html.sw-mobile .skill-cell,
+html.sw-mobile .total-cell {
+  height: 62px;
+  padding: 4px;
+}
+html.sw-mobile .skill-cell {
+  flex-direction: column;
+  gap: 3px;
+}
+html.sw-mobile .skill-cell img {
+  width: 28px;
+  height: 28px;
+}
+html.sw-mobile .skill-level {
+  font-size: 18px;
+  margin: 0;
+}
+html.sw-mobile .total-cell .skill-level {
+  font-size: 18px;
+}
+html.sw-mobile #ui-container > .inventory-panel {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(7, minmax(60px, auto));
+  align-content: start;
+}
+html.sw-mobile .uq-rows {
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+html.sw-mobile .uq-col {
+  flex: 0 0 auto;
+}
+html.sw-mobile .uq-row {
+  height: auto !important;
+  min-height: 64px;
+  flex-shrink: 0;
+}
+html.sw-mobile .uq-current-row {
+  flex-shrink: 0;
+}
+html.sw-mobile .uq-controls {
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+  min-height: 54px;
+}

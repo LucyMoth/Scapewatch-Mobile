@@ -1,0 +1,33 @@
+html.sw-mobile .dashboard-panel :is(.dash-raid-dps, .dash-fort-stat) {
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+html.sw-mobile
+  .dashboard-panel
+  :is(.dash-raid-dps-name, .dash-raid-rank-n, .dash-fort-role, .dash-q-step-text) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .dashboard-panel .dash-fort-stat-name {
+  flex-basis: 100px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-raid-rank-top, .dash-raid-rank-item, .dash-q-step) {
+  font-size: 13px;
+}
+html.sw-mobile .dashboard-panel .dash-raid-rank-item {
+  padding: 6px 0;
+}
+html.sw-mobile
+  .dashboard-panel
+  :is(.dash-raid-live-title, .dash-fort-role, .dash-scroll-wp, .dash-scroll-done) {
+  font-size: 13px;
+  letter-spacing: 0;
+}
+html.sw-mobile .dashboard-panel .dash-scroll-wp {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,233 @@
+/* Return summaries use the same information in one scrollable column.
+   Narrowing the card alone cannot contain the legacy 360px/640px grids. */
+html.sw-mobile .ledger-return-overlay {
+  padding: 8px !important;
+}
+html.sw-mobile .ledger-card {
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100%;
+  padding: 10px !important;
+  gap: 10px;
+  overflow-x: hidden !important;
+  border-radius: 4px;
+  box-shadow: none;
+  overscroll-behavior: contain;
+}
+html.sw-mobile :is(.ledger, .ledger-compact, .ledger-body, .ledger-night-body) {
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto !important;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  gap: 10px;
+}
+html.sw-mobile :is(.ledger-compact-left, .ledger-compact-right, .ledger-col, .ledger-night-col) {
+  min-width: 0;
+  width: 100%;
+  max-height: none;
+  height: auto;
+  gap: 10px;
+}
+html.sw-mobile .ledger {
+  height: auto;
+}
+html.sw-mobile .ledger-card-id {
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+html.sw-mobile .ledger-card-portrait,
+html.sw-mobile .ledger-card-portrait .ledger-portrait-canvas {
+  width: 64px;
+  height: 64px;
+  flex-basis: 64px;
+}
+html.sw-mobile .ledger-card-titles {
+  flex: 1;
+  min-width: 0;
+}
+html.sw-mobile :is(.ledger-card-title, .ledger-card-name) {
+  font-size: 18px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .ledger-card-sub {
+  font-size: 13px;
+  line-height: 1.35;
+  white-space: normal;
+}
+html.sw-mobile .ledger-card-head {
+  padding: 0;
+}
+html.sw-mobile :is(.ledger-card-badges, .ledger-badges) {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+html.sw-mobile .ledger-badge {
+  min-width: 0;
+  padding: 5px 8px;
+  font-size: 13px;
+}
+html.sw-mobile
+  :is(
+    .ledger-top,
+    .ledger-top-left,
+    .ledger-tabs,
+    .ledger-opens,
+    .ledger-sec-h,
+    .ledger-sec-right
+  ) {
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+html.sw-mobile .modal-header .ledger-header-slot {
+  margin: 0;
+  flex: 1 1 100%;
+}
+html.sw-mobile .ledger-title {
+  font-size: 18px;
+  white-space: normal;
+}
+html.sw-mobile .ledger-sub {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .ledger-opens {
+  margin-right: 0;
+}
+html.sw-mobile .ledger-toggle {
+  min-height: 36px;
+  font-size: 12px;
+}
+html.sw-mobile .ledger-tab {
+  min-height: 44px;
+}
+html.sw-mobile .ledger-sec {
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px !important;
+  border-radius: 4px;
+}
+html.sw-mobile .ledger-sec-h {
+  margin-bottom: 8px;
+}
+html.sw-mobile .ledger-lbl {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+html.sw-mobile :is(.ledger-card, .ledger, .ledger-night) .ledger-sec > .ledger-sec-body {
+  max-height: none !important;
+  min-width: 0;
+  height: auto !important;
+  overflow: visible !important;
+}
+html.sw-mobile .ledger-row {
+  grid-template-columns: 24px minmax(0, 1fr) minmax(0, auto);
+  gap: 6px;
+  padding: 5px 4px !important;
+}
+html.sw-mobile .ledger-row-k {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+html.sw-mobile .ledger-row-v {
+  max-width: 116px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+/* Each original table row becomes a labelled card. Exact original values
+   remain in place; labels repeat beside them rather than shrinking7columns. */
+html.sw-mobile .ledger-table {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+html.sw-mobile .ledger-table thead {
+  display: none;
+}
+html.sw-mobile .ledger-table :is(tbody, tfoot) {
+  display: block;
+  width: 100%;
+}
+html.sw-mobile .ledger-table tr {
+  display: grid;
+  grid-template-columns: 28px repeat(5, minmax(0, 1fr));
+  gap: 5px 7px;
+  padding: 8px 2px;
+  border-bottom: 1px solid var(--border-primary);
+}
+html.sw-mobile .ledger-table td {
+  position: static !important;
+  min-width: 0;
+  width: auto;
+  padding: 0 !important;
+  border: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  text-align: left;
+}
+html.sw-mobile .ledger-table .ledger-td-icon {
+  grid-column: 1;
+  grid-row: 1;
+}
+html.sw-mobile .ledger-table .ledger-td-name {
+  grid-column: 2 / 5;
+  grid-row: 1;
+  align-self: center;
+  font-size: 15px;
+}
+html.sw-mobile .ledger-table td:nth-child(3) {
+  grid-column: 5 / 7;
+  grid-row: 1;
+  text-align: right;
+}
+html.sw-mobile .ledger-table td:nth-child(4) {
+  grid-column: 1 / 4;
+  grid-row: 2;
+}
+html.sw-mobile .ledger-table td:nth-child(5) {
+  grid-column: 4 / 7;
+  grid-row: 2;
+}
+html.sw-mobile .ledger-table td:nth-child(6) {
+  grid-column: 1 / 4;
+  grid-row: 3;
+}
+html.sw-mobile .ledger-table td:nth-child(7) {
+  grid-column: 4 / 7;
+  grid-row: 3;
+}
+html.sw-mobile .ledger-table td:nth-child(n + 3)::before {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 11px;
+  line-height: 1.25;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+html.sw-mobile .ledger-table td:nth-child(3)::before {
+  content: 'Level';
+}
+html.sw-mobile .ledger-table td:nth-child(4)::before {
+  content: 'Levels';
+}
+html.sw-mobile .ledger-table td:nth-child(5)::before {
+  content: 'XP';
+}
+html.sw-mobile .ledger-table td:nth-child(6)::before {
+  content: 'Tasks';
+}
+html.sw-mobile .ledger-table td:nth-child(7)::before {
+  content: 'Credits';
+}
+html.sw-mobile .ledger-table td[data-sw-ledger-label]::before {
+  content: attr(data-sw-ledger-label);
+}
+html.sw-mobile .ledger-table .ledger-total-row {
+  background: var(--bg-cell);
+  border-top: 2px solid var(--border-secondary);
+}

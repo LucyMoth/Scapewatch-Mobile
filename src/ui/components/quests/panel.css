@@ -1,0 +1,181 @@
+html.sw-mobile #tab-quests.active {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+html.sw-mobile #tab-quests .quest-layout {
+  width: 100%;
+  height: 100% !important;
+  min-height: 0;
+  overflow: hidden !important;
+  gap: 0;
+}
+html.sw-mobile #tab-quests :is(.quest-list-side, .quest-detail-side) {
+  flex: 1 1 0 !important;
+  min-height: 0;
+  height: 100% !important;
+  overflow: hidden !important;
+  border: none;
+}
+html.sw-mobile #tab-quests .quest-detail-side {
+  display: none;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-y: contain;
+}
+html.sw-mobile .sw-quest-back {
+  display: none;
+  min-height: 44px;
+  padding: 8px 12px;
+  flex-shrink: 0;
+  text-align: left;
+  font-size: 15px;
+  color: var(--text-accent);
+  background: var(--bg-panel);
+  border: none;
+  border-bottom: 1px solid var(--border-primary);
+}
+html.sw-mobile #tab-quests .sw-quest-detail > .sw-quest-back {
+  display: block;
+}
+html.sw-mobile #tab-quests .sw-quest-detail > .quest-list-side {
+  display: none;
+}
+html.sw-mobile #tab-quests .sw-quest-detail > .quest-detail-side {
+  display: block;
+}
+html.sw-mobile .quest-list-toolbar {
+  padding: 6px;
+  gap: 4px;
+}
+html.sw-mobile #ui-container .quest-search {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  font-size: 16px;
+}
+html.sw-mobile #ui-container :is(.quest-filter-btn, .quest-sort-btn) {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 6px;
+  font-size: 13px;
+}
+html.sw-mobile .quest-sort-row {
+  padding: 4px 6px;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+html.sw-mobile .quest-sort-label {
+  font-size: 12px;
+}
+html.sw-mobile .quest-list-scroll {
+  min-height: 0;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+}
+html.sw-mobile .quest-row {
+  min-height: 64px;
+  padding: 8px;
+  gap: 8px;
+}
+html.sw-mobile :is(.quest-row-name, .quest-row-info, .quest-step-body) {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .quest-row-name {
+  font-size: 16px;
+}
+html.sw-mobile :is(.quest-step-badge, .quest-progress-badge, .quest-req-badge) {
+  font-size: 13px;
+}
+html.sw-mobile .quest-row-meta {
+  flex-shrink: 0;
+}
+html.sw-mobile .quest-detail-header {
+  padding: 12px;
+}
+html.sw-mobile .quest-detail-title {
+  font-size: 22px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile :is(.quest-detail-desc, .quest-step-text, .quest-dialogue-text, .quest-req-item) {
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .quest-reqs-section {
+  padding: 8px 12px;
+}
+html.sw-mobile .quest-reqs-group {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+html.sw-mobile .quest-detail-content {
+  display: block;
+  overflow: visible;
+}
+html.sw-mobile :is(.quest-steps-col, .quest-dialogue-col) {
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+  border: none;
+}
+html.sw-mobile :is(.quest-steps-list, .quest-dialogue-scroll) {
+  overflow: visible;
+  flex: none;
+}
+html.sw-mobile :is(.quest-steps-header, .quest-dialogue-header, .quest-reqs-label) {
+  font-size: 16px;
+}
+html.sw-mobile .quest-step {
+  padding: 8px 12px;
+  gap: 8px;
+}
+html.sw-mobile .quest-step-num {
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  line-height: 26px;
+}
+html.sw-mobile .quest-bottom-bar {
+  padding: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+html.sw-mobile .quest-rewards-section {
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+html.sw-mobile :is(.quest-reward-xp, .quest-rewards-label, .quest-btn-done-label) {
+  font-size: 15px;
+}
+html.sw-mobile .quest-reward-items {
+  flex-wrap: wrap;
+}
+html.sw-mobile .quest-btn {
+  min-height: 44px;
+  font-size: 16px;
+  padding: 8px 12px;
+  white-space: normal;
+}
+html.sw-mobile.sw-landscape #tab-quests .quest-layout {
+  flex-direction: row !important;
+}
+html.sw-mobile.sw-landscape #tab-quests .quest-list-side {
+  display: flex;
+  flex: 0 0 40% !important;
+  max-width: 260px !important;
+  border-right: 1px solid var(--border-primary);
+}
+html.sw-mobile.sw-landscape #tab-quests .quest-detail-side {
+  display: block;
+}
+html.sw-mobile.sw-landscape #tab-quests .sw-quest-back {
+  display: none;
+}

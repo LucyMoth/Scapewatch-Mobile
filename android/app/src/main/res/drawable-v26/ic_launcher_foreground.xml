@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="20.37037%"
+    android:insetTop="20.37037%"
+    android:insetRight="20.37037%"
+    android:insetBottom="20.37037%">
+    <bitmap
+        android:src="@drawable/scapewatch_logo"
+        android:gravity="fill"
+        android:filter="true" />
+</inset>

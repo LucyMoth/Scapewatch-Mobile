@@ -1,0 +1,147 @@
+/* Dialog navigation becomes a horizontal, labelled strip above the page. */
+html.sw-mobile .modal-overlay {
+  top: var(--sw-top) !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom)) !important;
+  padding: 0;
+  align-items: stretch;
+}
+html.sw-mobile .modal-container {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  flex-direction: column;
+  border-radius: 0;
+  min-width: 0;
+}
+/* Menu exposes the same destinations. The desktop modal tab
+   column was emptied by the game in some views but still consumed 70px. */
+html.sw-mobile .modal-container > .modal-tabs {
+  display: none !important;
+}
+html.sw-mobile .modal-main {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+}
+html.sw-mobile .modal-header {
+  padding: 8px;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 56px;
+}
+html.sw-mobile .modal-header .header-left {
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+html.sw-mobile .header-icon {
+  width: 36px;
+  height: 36px;
+}
+html.sw-mobile .header-stats {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+html.sw-mobile .modal-close {
+  margin-right: 0 !important;
+  flex-shrink: 0;
+}
+html.sw-mobile .processing-nav {
+  position: static;
+  transform: none;
+  flex-wrap: wrap;
+}
+html.sw-mobile .modal-body {
+  min-height: 0;
+  min-width: 0;
+  overflow: auto !important;
+}
+html.sw-mobile .tab-content {
+  min-width: 0;
+  max-width: 100%;
+  overflow: auto;
+  padding: 10px;
+}
+html.sw-mobile .tab-content.active.layout-row {
+  flex-direction: column;
+}
+html.sw-mobile
+  :is(
+    .bank-layout,
+    .mob-layout,
+    .quest-layout,
+    .proc-main-layout,
+    .skill-custom-tab .main-layout,
+    .skill-custom-tab .columns-container
+  ) {
+  flex-direction: column !important;
+  min-height: 0;
+  height: auto !important;
+  overflow: visible !important;
+  gap: 12px;
+}
+html.sw-mobile
+  :is(
+    .bank-side,
+    .equip-side,
+    .mob-list-side,
+    .mob-detail-side,
+    .quest-list-side,
+    .quest-detail-side,
+    .proc-tier-sidebar,
+    .proc-content,
+    .settings-section,
+    .skill-custom-tab .history-sidebar,
+    .skill-custom-tab .column
+  ) {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  flex: 0 0 auto !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+html.sw-mobile
+  :is(
+    .mob-list,
+    .quest-list,
+    .bank-grid,
+    .proc-tier-list,
+    .skill-custom-tab .column-scroll,
+    .skill-custom-tab .history-scroll
+  ) {
+  max-height: 60dvh;
+  overflow: auto !important;
+  min-height: 0;
+}
+html.sw-mobile
+  :is(
+    .bank-toolbar,
+    .bank-header,
+    .bank-controls,
+    .settings-control,
+    .settings-toggle-row,
+    .skill-custom-tab .modal-header
+  ) {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+html.sw-mobile .bank-search {
+  min-width: 100px;
+  width: auto;
+  flex: 1;
+}
+html.sw-mobile .bank-grid {
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)) !important;
+}
+html.sw-mobile .settings-section {
+  padding: 12px !important;
+}
+html.sw-mobile .settings-toggle-desc {
+  font-size: 14px;
+}
+html.sw-mobile .diary-modal-grid {
+  grid-template-columns: 1fr !important;
+}

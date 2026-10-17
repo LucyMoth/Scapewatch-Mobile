@@ -1,0 +1,1140 @@
+/* ═══════════════════════════════════════════════════════════════
+   unified-queue.css — PROTOTYPE styling for UnifiedQueuePanel.
+
+   Kept out of style.css on purpose: this is a design probe for
+   merging the skilling queue and the slay queue into one list, and
+   it should be easy to delete or fold in wholesale later.
+
+   The panel takes the same bottom-right slot as .tasks-panel /
+   .slay-tasks-panel, but taller — it stands in for both of them, so
+   it can spend the height the two of them used to alternate over.
+   ═══════════════════════════════════════════════════════════════ */
+
+.uq-panel {
+    position: absolute;
+    right: 0px;
+    bottom: 66px;
+    display: flex;
+    flex-direction: column;
+    /* The outer pair only (current row | list | control row). Rows
+       inside the list keep their own 3px via .uq-col. 1px here is what
+       pays for the panel's 4px border in the height arithmetic — see
+       UnifiedQueuePanel.OUTER_GAP. */
+    gap: 1px;
+    padding: 5px;
+    background: var(--bg-panel);
+    border: 2px solid var(--border-primary);
+    border-radius: 6px;
+    /* Width and height are both set by
+       UnifiedQueuePanel._buildRowElements() from the layout and row
+       count, so every layout lands on an exact fit. */
+    width: 320px;
+    height: 616px;
+}
+
+/* Row area. One column normally; two side by side in the twocol
+   layout, which is how the queue doubles its depth without giving up a
+   single pixel of icon or type size. Columns read like newspaper
+   columns — the first fills top to bottom, then the next. */
+.uq-rows {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+.uq-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* ── Rows ─────────────────────────────────────────────────── */
+
+.uq-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-cell);
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    /* The lane stripe used to be an in-flow flex item here,
+       contributing 2.5px of width + 2px margin + the row's 6px
+       gap. It is absolutely positioned inside the popout now, so
+       the row carries that 10.5px itself and nothing else moves. */
+    padding: 3px 5px 3px 10.5px;
+    overflow: visible;
+    /* Exact height per density (set in the ladder) rather than sharing
+       out the leftover space — that is what lets `full` land on the
+       original panel's 66px row to the pixel. */
+    flex: 0 0 auto;
+    min-height: 0;
+}
+
+.uq-row.uq-current {
+    flex: 0 0 auto;
+    border: 2px solid var(--border-secondary);
+    padding: 4px 6px 4px 10.5px;
+}
+
+.uq-row.uq-empty {
+    opacity: 0.35;
+}
+
+/* Lane stripe. The one piece of chrome that says which lane a row is
+   in — green for skilling, crimson for slay. It is an indicator, not a
+   control: a row's lane comes from whichever option is selected, so you
+   change it by rerolling the other lane in and picking one. */
+/* The stripe also doubles as the row's drag handle, and that is why it
+   is a CHILD OF THE POPOUT WRAPPER rather than of the row (see
+   _laneStripe). Anchored to the wrapper's outer left edge, it tracks
+   whatever the row is currently showing: hard against the icon when
+   the popout is shut, and out past the last option when it is open.
+   A handle at the row's own left edge does not survive the open state
+   — the popout expands leftward across the whole left end of the row,
+   and pinned + collapsed it covers the row entirely, which is how the
+   handle became ungrabbable in the first place. */
+.uq-lane {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    bottom: 0;
+    width: 2.5px;
+    margin-right: 3px;
+    border-radius: 3px;
+    cursor: grab;
+    z-index: 2;
+}
+.uq-row.qsdh-source .uq-lane { cursor: grabbing; }
+/* A 2.5px-wide grab target is not one. This widens the HIT area on
+   both sides without touching the stripe's own width: it is
+   transparent, and hit testing attributes it to .uq-lane, so the drag
+   handler still sees the handle rather than the popout. It reaches
+   left into empty space and right only as far as the 3px gap, so it
+   never steals a click from an option tile. */
+.uq-lane::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -7px;
+    right: -3px;
+}
+
+/* The right-hand rail, collapsed only. The left stripe is anchored to
+   the popout, so the moment one opens it is out over the map — which is
+   what makes it grabbable there, but it means the narrow icon column
+   has nothing fixed to take hold of. This one sits just outside the
+   wrapper's right edge, which never moves (popouts grow leftward), so
+   collapsed it is always in the same place hard against the screen
+   edge. Twice the width, since it is the primary handle in that mode
+   and has the room. */
+.uq-lane-right {
+    display: none;
+    right: auto;
+    left: 100%;
+    width: 5px;
+    margin-right: 0;
+    margin-left: 3px;
+}
+.uq-panel.uq-collapsed .uq-lane-right { display: block; }
+/* Mirrored hit area: wide on the outside, only as far as the 3px gap on
+   the inside, so it never steals a click from the icon. */
+.uq-lane-right::after { left: -3px; right: -7px; }
+/* The lane stripe reuses the game's own bar fills, so a skilling row is
+   the same green as a progress bar and a slay row the same red as a
+   damage bar, and both follow the theme. */
+.uq-row[data-lane="skill"] .uq-lane { background: var(--bar-fill-progress); }
+.uq-row[data-lane="slay"]  .uq-lane { background: var(--bar-fill-damage); }
+
+.uq-row[data-lane="skill"] { background: linear-gradient(90deg, rgba(90, 138, 58, 0.16), var(--bg-cell) 46%); }
+.uq-row[data-lane="slay"]  { background: linear-gradient(90deg, rgba(184, 68, 45, 0.18), var(--bg-cell) 46%); }
+
+/* ── Icons ────────────────────────────────────────────────── */
+
+.uq-panel .icon-option > img,
+.uq-panel .uq-mob-sprite {
+    image-rendering: pixelated;
+}
+.uq-panel .uq-mob-sprite {
+    filter: drop-shadow(1px 1px 0 #000);
+}
+
+/* ── Text ─────────────────────────────────────────────────── */
+
+/* Only layout here — every size lives in the density ladder at the
+   bottom of this file, so one step of the ladder moves icons and type
+   together and a row never ends up with big icons and unreadable text. */
+.uq-panel .task-details {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+.uq-panel .task-name,
+.uq-panel .task-node {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* Same colours on the current row and every queued row — the current
+   row is already marked out by its border and progress bar, so it does
+   not need a second signal that costs the rest of the queue contrast. */
+.uq-panel .task-name { color: var(--text-bright); }
+.uq-panel .task-node { color: var(--text-light); }
+
+/* Route colors (Settings > Queue), painted by _paintRouteColors while
+   the World Map shows the task route: the location line reads like the
+   map's route legend, a dot plus the location in that leg's color. Its
+   own marker, so the lane stripe keeps meaning skilling vs slay. */
+.uq-panel .uq-row.uq-route-colored .task-node .uq-name-text { color: var(--uq-route-color); }
+.uq-panel .uq-row.uq-route-colored .task-node::before {
+    content: '';
+    display: inline-block;
+    width: 0.55em;
+    height: 0.55em;
+    margin-right: 0.35em;
+    border-radius: 50%;
+    background: var(--uq-route-color);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+    vertical-align: middle;
+}
+
+/* ── Lane switch badge ────────────────────────────────────── */
+
+/* Sits on the boundary the player crosses between a skilling block and
+   a slay block. Absolutely positioned so ten rows still fit, and small
+   enough that a 1-for-1 rhythm reads as a pattern rather than as ten
+   banners. Replaces the two draggable dividers the panels carry today. */
+.uq-switch {
+    position: absolute;
+    top: -8px;
+    left: -4px;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border-secondary);
+    background: var(--bg-panel);
+    pointer-events: none;
+    z-index: 30;
+}
+.uq-switch img {
+    width: 11px;
+    height: 11px;
+    image-rendering: pixelated;
+    display: block;
+}
+.uq-switch-slay  { border-color: #b8442d; }
+.uq-switch-skill { border-color: #5a8a3a; }
+
+/* The stripe used to square off its ends so a block of same-lane rows
+   read as one unbroken bar (.uq-block-start / .uq-block-end, still set
+   on the rows). It cannot any more: each stripe now tracks its own
+   popout, so an open row's stripe is nowhere near its neighbours'. It
+   is a rounded pill per row instead — see .uq-lane above. */
+
+/* ── Insertion bar ─────────────────────────────────────────── */
+
+/* "NEW TASKS" — where a freshly rolled row enters the queue.
+   Deliberately ZERO HEIGHT: at full depth the panel already sits
+   exactly on MAX_PANEL_H, and that ceiling is what keeps its top edge
+   level with the potions HUD's first entry. A bar that claimed a real
+   lane would either break that alignment or cost everyone a density
+   step, so the line and its pill are absolutely positioned across the
+   3px row gap instead and the layout never notices. */
+.uq-insert {
+    position: relative;
+    height: 0;
+    flex: 0 0 0;
+    z-index: 45;
+}
+.uq-insert-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -3px;
+    height: 5px;
+    background: var(--text-gold);
+    border-radius: 3px;
+    box-shadow: 0 0 6px rgba(201, 162, 39, 0.8);
+    pointer-events: none;
+}
+.uq-insert-label {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3px 13px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    white-space: nowrap;
+    color: #15130f;
+    background: var(--text-gold);
+    border-radius: 10px;
+    pointer-events: none;
+}
+/* The art is small; the drag target is not. Same trick as .uq-lane —
+   a transparent band the width of the row and 26px tall. */
+.uq-insert-grab {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -13px;
+    height: 26px;
+    cursor: grab;
+}
+.uq-insert-dragging .uq-insert-grab { cursor: grabbing; }
+/* Parked at the bottom, the pill has 11px of empty row above it, 1px of
+   gap, and 4px of control-row padding below — 16px, against a 20px
+   pill. Nothing in the control row sits above y=4, so dropping 2px of
+   padding and lifting 4px clears the credits, Auto Loadout, the route
+   readout AND the last row's node line. Mid-queue there is room on both
+   sides and the bar renders at full size, unlifted. */
+.uq-insert.uq-insert-last .uq-insert-line { top: -7px; }
+.uq-insert.uq-insert-last .uq-insert-label { top: -5px; padding: 2px 13px; }
+.uq-insert.uq-insert-last .uq-insert-grab { top: -17px; }
+
+/* Collapsed the panel is 88px wide — narrower than the pill — so the
+   line carries the meaning on its own. */
+.uq-panel.uq-collapsed .uq-insert-label { display: none; }
+
+/* Rows the bar is holding. The queue only ever drains what is above
+   the line, so these are parked, not next in line, and they read that
+   way — dimmed just enough to separate them from the live rows above
+   without making them hard to read or to drag. Parked at the bottom
+   (the default, and everyone without the Mark) nothing is below it and
+   nothing dims. */
+/* Brightness, not opacity. A row sits on the panel, but its open
+   popout hangs out past the panel's left edge with nothing behind it
+   but the world, so a translucent row let the map show straight
+   through the popout. brightness() dims every pixel without making any
+   of them see-through, so the popout keeps its solid background and
+   still reads as parked. It also composes with the 0.5 that unselected
+   options already carry, where dimming the tiles directly would have
+   overridden it and made a held row's unselected options BRIGHTER than
+   a live row's. Same stacking-context cost as the opacity it replaces,
+   which the popout already lived with. */
+.uq-row.uq-row-held { filter: brightness(0.72); }
+.uq-row.uq-row-held:hover { filter: none; }
+
+/* ── Progress bar ─────────────────────────────────────────── */
+
+.uq-panel .task-progress-bar {
+    height: 5px;
+    margin-top: 3px;
+}
+.uq-row[data-lane="slay"] .task-progress-fill {
+    background: linear-gradient(180deg, #e2643f 0%, #8f2f1c 100%);
+}
+
+/* ── Control row ──────────────────────────────────────────── */
+
+/* Control row: master picker hard left, then the reroll-credit readout
+   with the auto-loadout toggle stacked under it. Everything after that
+   is deliberately empty — reserved for whatever this queue grows next,
+   and kept as a flex spacer so nothing shifts when it fills. */
+.uq-controls {
+    position: relative;
+    flex: 0 0 49px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-cell);
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    padding: 3px 6px;
+    /* The master picker's popout grows leftward past this row. */
+    overflow: visible;
+}
+
+.uq-control-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.uq-control-spacer { flex: 1 1 auto; min-width: 0; }
+
+.uq-toggle.disabled { opacity: 0.4; pointer-events: none; }
+
+
+/* Master picker — the shared .icon-container popout, so it behaves
+   exactly like a task row's options: only the selected tile shows, and
+   hovering widens the wrapper leftward to reveal the rest. The base
+   rules live in style.css under .slay-master-picker; these only resize
+   the tiles to the control row's 41px and mark the torch, which is not
+   a master but the switch that turns the slay lane off. */
+.uq-master-picker {
+    width: 41px;
+    height: 41px;
+}
+.uq-master-picker .icons-wrapper { gap: 4px; }
+.uq-master-tile {
+    width: 41px;
+    height: 41px;
+    border: 2px solid var(--border-secondary);
+    border-radius: 4px;
+    background: var(--bg-panel);
+    cursor: pointer;
+}
+.uq-master-tile:hover { background: var(--bg-hover); }
+.uq-master-tile img {
+    width: 34px;
+    height: 34px;
+    image-rendering: pixelated;
+}
+.uq-master-tile.selected { box-shadow: 0 0 0 1px var(--text-gold) inset; }
+/* Slay lane off — the torch reads green, like the skilling lane. */
+.uq-master-tile.uq-master-off { border-color: #5a8a3a; }
+/* A master the player's slay level cannot use.
+   brightness(), never opacity: this picker is a popout that opens over
+   the world map, and opacity makes a stacking context every child
+   inherits, so the tile would go see-through against the map instead
+   of dark. Same reason the held queue rows dim this way.
+   Scoped to the portrait and its badge rather than the tile, because a
+   filter on the tile also lands on the tooltip inside it — and that
+   tooltip is the part that says WHY the tile is locked. */
+.uq-master-tile.uq-master-locked { cursor: default; }
+.uq-master-tile.uq-master-locked img,
+.uq-master-tile.uq-master-locked .master-tier-label {
+    filter: brightness(0.4);
+}
+.uq-master-tile.uq-master-locked:hover { background: var(--bg-panel); }
+.uq-master-tile .master-tier-label {
+    bottom: 1px;
+    left: 2px;
+    font-size: 9px;
+    line-height: 9px;
+}
+
+/* Tooltips.
+   The first two lines mirror the row: an icon strip then the text, so
+   the tooltip reads as the row under magnification rather than a
+   restatement of it. */
+/* Flipped below its icon when opening upward would run off the top of
+   the screen — set by _keepTooltipOnScreen after measuring. */
+.uq-panel .icon-tooltip.uq-tip-below {
+    bottom: auto;
+    top: calc(100% + 8px);
+}
+
+.uq-tt-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.uq-tt-row .uq-inline-icon {
+    flex: 0 0 auto;
+    vertical-align: middle;
+}
+/* The lane the toggle is on, called out among the two it lists. Only
+   the positive rule: an earlier :not() version dimmed the icons in
+   every task tooltip, because those rows are never .uq-tt-active. */
+.uq-tt-row.uq-tt-active { color: var(--text-bright); }
+
+/* NOTE on scoping for every rule in this block: TooltipManager copies a
+   local .tooltip's innerHTML into ONE global tooltip mounted on
+   document.body, outside the panel. So anything styling tooltip
+   internals has to match on its own class — an ancestor selector like
+   `.uq-tooltip .uq-tt-row` silently stops applying the moment the
+   markup is copied out, which is exactly how a 340px-capped line ended
+   up 887px wide. */
+
+/* Tooltips default to nowrap, which is right for a task name but not
+   for a sentence. These lines wrap inside a sane column instead of
+   running off the side of the screen. */
+.tt-line.uq-tt-wrap {
+    white-space: normal;
+    max-width: 340px;
+}
+/* Caution lines. --text-accent is carried by every theme; a literal red
+   is not, and reads badly on several of the palettes. */
+.tt-line.uq-tt-warn { color: var(--text-accent); }
+
+/* Node-line icons that carry their own tooltip need to be positioning
+   contexts, and to lift above the row while hovered. */
+.uq-sub-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+.uq-sub-wrap:hover { z-index: 100000; }
+/* The two XP-skill icons are clickable: they switch what this one task
+   trains, so they read as a control rather than a label. */
+.uq-xp-icon { cursor: pointer; }
+.uq-xp-icon:hover .uq-inline-icon-sub { filter: brightness(1.35) drop-shadow(1px 1px 0 #000); }
+
+/* Tooltip art matches the row art — full strength, same pixel
+   rendering and drop shadow, so an icon does not read as disabled
+   just because it is in a tooltip. */
+.uq-tooltip .uq-inline-icon,
+.global-tooltip .uq-inline-icon {
+    opacity: 1;
+    image-rendering: pixelated;
+    filter: drop-shadow(1px 1px 0 #000);
+}
+
+/* A hovered option floats its popout and tooltip above the window
+   controls (z-index 99999), which otherwise cover a tooltip opening
+   from the top row of the dock. Hover only: a PINNED popout stays at
+   the ordinary 60 so it can never sit on top of the close button. */
+.uq-panel .icon-container:hover {
+    z-index: 100000;
+}
+
+/* Keep an open popout level with the row it belongs to.
+   .icons-wrapper is anchored at top: 0 of its container, and opening it
+   adds 4px of padding and a 1px border — so the option tiles inside
+   land 5px BELOW the icon they replaced and the box hangs 5px past the
+   bottom of the row. On the taller current-task row that slack is
+   absorbed; on an ordinary 66px row it is not, and the popout visibly
+   dips into the row below. Pulling the box up by exactly that 5px puts
+   the tiles back where the closed icon sits, which on an ordinary row
+   makes the popout flush with the row to the pixel. */
+.uq-panel .icon-container:hover .icons-wrapper,
+.uq-panel .icon-container.tap-open .icons-wrapper {
+    top: -5px;
+}
+
+/* The control-row readouts carry hover tooltips now, so they need to
+   be positioning contexts and to sit above their neighbours on hover. */
+.uq-credits,
+.uq-toggle,
+.uq-lane-toggle { position: relative; }
+.uq-credits:hover,
+.uq-toggle:hover,
+.uq-lane-toggle:hover { z-index: 100000; }
+.uq-toggle.disabled { pointer-events: auto; }
+
+/* Auto Loadout walkthrough, shown when the toggle is right-clicked and
+   Settings opens on Combat Defaults. */
+.uq-callout {
+    position: relative;
+    margin: 0 0 10px 0;
+    padding: 10px 30px 10px 12px;
+    background: var(--bg-panel);
+    border: 2px solid var(--text-gold);
+    border-radius: 6px;
+    box-shadow: 0 0 18px rgba(255, 210, 74, 0.35);
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 18px;
+}
+.uq-callout-floating {
+    position: fixed;
+    left: 50%;
+    top: 22%;
+    transform: translateX(-50%);
+    z-index: 100002;
+    max-width: 420px;
+}
+.uq-callout-title {
+    color: var(--text-bright);
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+.uq-callout-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 3px 0;
+}
+.uq-callout-num {
+    flex: 0 0 auto;
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: var(--text-gold);
+    color: var(--bg-dark);
+    font-size: 11px;
+    line-height: 17px;
+    text-align: center;
+}
+.uq-callout-foot {
+    margin-top: 7px;
+    color: var(--text-accent);
+}
+.uq-callout-close {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 13px;
+}
+.uq-callout-close:hover { color: var(--text-bright); }
+
+/* Windowed mode tightens the row spacing to buy back the height the
+   titlebar takes, so the queue still shows every row it does docked.
+   Must match UnifiedQueuePanel.GAP_WINDOWED, which the panel's own
+   height maths uses. */
+/* Windowed spends another 24px on the titlebar, so both gaps tighten
+   again: nothing between the three stacked pieces, 1px between rows.
+   Must match OUTER_GAP_WINDOWED / GAP_WINDOWED. */
+body.panels-windowed .uq-panel { gap: 0; }
+body.panels-windowed .uq-panel .uq-col { gap: 1px; }
+
+/* Cost badge on reroll and skip: same slot and styling as a task
+   icon's tier label, so the price reads where the player already looks
+   for a number. Free reads green rather than just "0". */
+.uq-cost-badge { z-index: 5; }
+.uq-cost-badge.uq-cost-free { color: var(--bar-fill-progress); }
+
+/* A lucky row reads as lucky at a glance, not just on its icon — the
+   same bright border .queue-slot.lucky gave the old panels. */
+.uq-panel .uq-row.lucky {
+    border-color: var(--text-bright);
+}
+
+/* Drag-to-reorder. Mirrors the .queue-slot rules in style.css — the
+   row body is the grab surface, the popout keeps pointer semantics, and
+   the drop edge is an inset bar on whichever side the cursor is on. */
+.uq-row.queue-slot-draggable { cursor: grab; }
+.uq-row.queue-slot-draggable:active { cursor: grabbing; }
+.uq-row.queue-slot-draggable .icon-option,
+.uq-row.queue-slot-draggable .reroll-option { cursor: pointer; }
+body.is-touch .uq-row.queue-slot-draggable { touch-action: none; }
+body.is-touch .uq-row.queue-slot-draggable .icon-container { touch-action: manipulation; }
+/* ...except the lane stripe, which lives inside the popout but IS
+   the drag handle, so it needs the row's own touch-action back or
+   a drag off it is read as a pan. */
+body.is-touch .uq-row.queue-slot-draggable .uq-lane { touch-action: none; }
+.uq-row.qsdh-source { opacity: 0.4; cursor: grabbing; }
+.uq-row.qsdh-drop-above { box-shadow: inset 0 3px 0 0 var(--text-bright); }
+.uq-row.qsdh-drop-below { box-shadow: inset 0 -3px 0 0 var(--text-bright); }
+
+/* Badge strip (luck / quest / diary / scroll / teleport). At `full`
+   this panel is a 1:1 reproduction of the tasks panel, so the badges
+   inherit its 22px icons and 10px cascade step untouched. The denser
+   ladder steps shrink the whole strip rather than the icons alone,
+   because the step between them is set inline by the shared
+   _renderIndicatorRow — scaling the row keeps icon and step in
+   proportion without forking that function. */
+.uq-d-large .icon-scroll-row  { transform: scale(0.84); transform-origin: bottom left; }
+.uq-d-normal .icon-scroll-row { transform: scale(0.72); transform-origin: bottom left; }
+.uq-d-dense .icon-scroll-row,
+.uq-panel .uq-row.uq-r-dense .icon-scroll-row {
+    transform: scale(0.58);
+    transform-origin: bottom left;
+}
+
+/* Lane toggle — sits right of the master picker. Torch means every
+   reroll and every freshly rolled row is skilling; the slay icon means
+   both come from the selected master instead. The border says which,
+   using the same two colours the row stripes use. */
+.uq-lane-toggle {
+    position: relative;
+    width: 41px;
+    height: 41px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-secondary);
+    border-radius: 4px;
+    background: var(--bg-panel);
+    cursor: pointer;
+}
+.uq-lane-toggle:hover { background: var(--bg-hover); }
+.uq-lane-toggle img {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+.uq-lane-toggle.uq-lane-skills { border-color: var(--bar-fill-progress); }
+.uq-lane-toggle.uq-lane-slay   { border-color: var(--bar-fill-damage); }
+
+.uq-toggle {
+    flex-shrink: 0;
+    font-size: 11px;
+    line-height: 12px;
+    padding: 3px 7px;
+    border: 1px solid var(--border-primary);
+    border-radius: 3px;
+    background: var(--bg-panel);
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+}
+.uq-toggle.active { color: var(--text-gold); border-color: var(--border-secondary); }
+
+/* Row past the end of both queues — the depth the merged queue has
+   that the two separate panels cannot show. */
+.uq-pending {
+    font-style: italic;
+    padding-left: 10px;
+}
+
+/* ── Reroll + Skip buttons ────────────────────────────────────
+
+   Built to read as a task icon rather than a toolbar button: the same
+   56px cell and 44px artwork the option icons use, with the ↻ laid
+   over the middle of it at the same weight as a quantity badge. The
+   lane's icon says WHAT it will roll (torch = skilling, skull = slay);
+   the swirl says it is a roll. Stacking them instead of shrinking both
+   keeps the button the same size as everything else in the popout.
+   ────────────────────────────────────────────────────────────── */
+
+.uq-panel .uq-reroll {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+    overflow: visible;
+}
+/* Artwork sized by the density ladder, exactly like an option icon. */
+.uq-panel .uq-reroll > img {
+    image-rendering: pixelated;
+    display: block;
+    filter: drop-shadow(1px 1px 0 #000);
+    opacity: 0.9;
+}
+/* The swirl sits ON the icon, centred, big, and shadowed so it stays
+   legible over whatever artwork is underneath. */
+.uq-panel .uq-reroll-glyph {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-family: var(--game-font);
+    font-size: 40px;
+    line-height: 40px;
+    color: var(--text-bright);
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    pointer-events: none;
+}
+.uq-reroll[data-lane="skill"] {
+    border-color: #5a8a3a;
+    color: #a8d98a;
+}
+.uq-reroll[data-lane="slay"] {
+    border-color: #b8442d;
+    color: #ff9c86;
+}
+.uq-reroll[data-lane="skill"]:hover { background: rgba(90, 138, 58, 0.25); }
+.uq-reroll[data-lane="slay"]:hover  { background: rgba(184, 68, 45, 0.25); }
+.uq-reroll.disabled img { opacity: 0.35; }
+.uq-reroll.disabled .uq-reroll-glyph { opacity: 0.4; }
+
+/* Reroll-credit readout in the control row. */
+.uq-credits {
+    flex-shrink: 0;
+    font-size: 14px;
+    line-height: 15px;
+    color: var(--text-bright);
+    white-space: nowrap;
+}
+/* The readout's own line-height is sized for a 14px number in a tight
+   control row, and the tooltip is its CHILD, so it inherited a 15px
+   line box for 22 and 24px type: the lines overlapped and the whole
+   tooltip read as squashed. Every other tooltip in the panel hangs off
+   a control with no line-height of its own and gets `normal`, so this
+   restores that rather than inventing a spacing of its own. */
+.uq-tooltip,
+.uq-tooltip .tt-name,
+.uq-tooltip .tt-line { line-height: normal; }
+
+/* ═══════════════════════════════════════════════════════════════
+   Density ladder
+
+   One step moves icons AND type together, so a row never ends up with
+   big icons and unreadable text. `full` is not a guess — it is the
+   exact geometry .tasks-panel / .slay-tasks-panel use today (56px
+   icon-option, 44px glyph, 20px task name, 18px node line, 22px
+   quantity, 16px tier badge), so the merged queue can be read beside
+   the panels it replaces.
+
+   UnifiedQueuePanel._densityFor() picks the largest step whose panel
+   still fits the column; setRows(n, 'full') forces one.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── full ──────────────────────────────────────────────── */
+.uq-d-full .uq-row:not(.uq-current) .uq-icon-container,
+.uq-d-full .uq-row:not(.uq-current) .icon-option,
+.uq-d-full .uq-row:not(.uq-current) .uq-reroll { width: 56px; height: 56px; }
+.uq-d-full .uq-row:not(.uq-current) .icon-option > img { width: 44px; height: 44px; }
+.uq-d-full .uq-row:not(.uq-current) .uq-mob-sprite { width: 44px; height: 44px; }
+.uq-d-full .uq-row:not(.uq-current) .uq-reroll > img { width: 44px; height: 44px; }
+.uq-d-full .uq-row:not(.uq-current) .uq-reroll-glyph { font-size: 34px; line-height: 34px; }
+.uq-d-full .uq-row:not(.uq-current) .task-name { font-size: 20px; line-height: 22px; }
+.uq-d-full .uq-row:not(.uq-current) .task-node { font-size: 18px; line-height: 20px; }
+.uq-d-full .uq-row:not(.uq-current) .icon-qty { font-size: 22px; }
+.uq-d-full .uq-row:not(.uq-current) .task-tier-label { font-size: 16px; }
+.uq-d-full .uq-current .uq-icon-container,
+.uq-d-full .uq-current .icon-option { width: 56px; height: 56px; }
+.uq-d-full .uq-current .icon-option > img { width: 44px; height: 44px; }
+.uq-d-full .uq-current .uq-mob-sprite { width: 44px; height: 44px; }
+.uq-d-full .uq-current .task-name { font-size: 20px; line-height: 22px; }
+.uq-d-full .uq-current .task-node { font-size: 18px; line-height: 20px; }
+.uq-d-full .uq-current .icon-qty { font-size: 22px; }
+.uq-d-full .uq-current .task-tier-label { font-size: 16px; }
+.uq-d-full .uq-switch { width: 20px; height: 20px; top: -9px; }
+.uq-d-full .uq-switch img { width: 13px; height: 13px; }
+
+/* ── large ──────────────────────────────────────────────── */
+.uq-d-large .uq-row:not(.uq-current) .uq-icon-container,
+.uq-d-large .uq-row:not(.uq-current) .icon-option,
+.uq-d-large .uq-row:not(.uq-current) .uq-reroll { width: 46px; height: 46px; }
+.uq-d-large .uq-row:not(.uq-current) .icon-option > img { width: 36px; height: 36px; }
+.uq-d-large .uq-row:not(.uq-current) .uq-mob-sprite { width: 40px; height: 40px; }
+.uq-d-large .uq-row:not(.uq-current) .uq-reroll > img { width: 36px; height: 36px; }
+.uq-d-large .uq-row:not(.uq-current) .uq-reroll-glyph { font-size: 28px; line-height: 28px; }
+.uq-d-large .uq-row:not(.uq-current) .task-name { font-size: 17px; line-height: 19px; }
+.uq-d-large .uq-row:not(.uq-current) .task-node { font-size: 15px; line-height: 17px; }
+.uq-d-large .uq-row:not(.uq-current) .icon-qty { font-size: 18px; }
+.uq-d-large .uq-row:not(.uq-current) .task-tier-label { font-size: 13px; }
+.uq-d-large .uq-current .uq-icon-container,
+.uq-d-large .uq-current .icon-option { width: 54px; height: 54px; }
+.uq-d-large .uq-current .icon-option > img { width: 42px; height: 42px; }
+.uq-d-large .uq-current .uq-mob-sprite { width: 46px; height: 46px; }
+.uq-d-large .uq-current .task-name { font-size: 19px; line-height: 21px; }
+.uq-d-large .uq-current .task-node { font-size: 16px; line-height: 18px; }
+.uq-d-large .uq-current .icon-qty { font-size: 20px; }
+.uq-d-large .uq-current .task-tier-label { font-size: 14px; }
+.uq-d-large .uq-switch { width: 18px; height: 18px; top: -8px; }
+.uq-d-large .uq-switch img { width: 12px; height: 12px; }
+
+/* ── normal ──────────────────────────────────────────────── */
+.uq-d-normal .uq-row:not(.uq-current) .uq-icon-container,
+.uq-d-normal .uq-row:not(.uq-current) .icon-option,
+.uq-d-normal .uq-row:not(.uq-current) .uq-reroll { width: 38px; height: 38px; }
+.uq-d-normal .uq-row:not(.uq-current) .icon-option > img { width: 30px; height: 30px; }
+.uq-d-normal .uq-row:not(.uq-current) .uq-mob-sprite { width: 34px; height: 34px; }
+.uq-d-normal .uq-row:not(.uq-current) .uq-reroll > img { width: 30px; height: 30px; }
+.uq-d-normal .uq-row:not(.uq-current) .uq-reroll-glyph { font-size: 23px; line-height: 23px; }
+.uq-d-normal .uq-row:not(.uq-current) .task-name { font-size: 15px; line-height: 17px; }
+.uq-d-normal .uq-row:not(.uq-current) .task-node { font-size: 13px; line-height: 15px; }
+.uq-d-normal .uq-row:not(.uq-current) .icon-qty { font-size: 15px; }
+.uq-d-normal .uq-row:not(.uq-current) .task-tier-label { font-size: 11px; }
+.uq-d-normal .uq-current .uq-icon-container,
+.uq-d-normal .uq-current .icon-option { width: 46px; height: 46px; }
+.uq-d-normal .uq-current .icon-option > img { width: 36px; height: 36px; }
+.uq-d-normal .uq-current .uq-mob-sprite { width: 40px; height: 40px; }
+.uq-d-normal .uq-current .task-name { font-size: 17px; line-height: 19px; }
+.uq-d-normal .uq-current .task-node { font-size: 14px; line-height: 16px; }
+.uq-d-normal .uq-current .icon-qty { font-size: 18px; }
+.uq-d-normal .uq-current .task-tier-label { font-size: 12px; }
+.uq-d-normal .uq-switch { width: 17px; height: 17px; top: -8px; }
+.uq-d-normal .uq-switch img { width: 11px; height: 11px; }
+
+/* ── dense ──────────────────────────────────────────────── */
+.uq-d-dense .uq-row:not(.uq-current) .uq-icon-container,
+.uq-d-dense .uq-row:not(.uq-current) .icon-option,
+.uq-d-dense .uq-row:not(.uq-current) .uq-reroll { width: 28px; height: 28px; }
+.uq-d-dense .uq-row:not(.uq-current) .icon-option > img { width: 22px; height: 22px; }
+.uq-d-dense .uq-row:not(.uq-current) .uq-mob-sprite { width: 25px; height: 25px; }
+.uq-d-dense .uq-row:not(.uq-current) .uq-reroll > img { width: 22px; height: 22px; }
+.uq-d-dense .uq-row:not(.uq-current) .uq-reroll-glyph { font-size: 17px; line-height: 17px; }
+.uq-d-dense .uq-row:not(.uq-current) .task-name { font-size: 12px; line-height: 14px; }
+.uq-d-dense .uq-row:not(.uq-current) .task-node { font-size: 10px; line-height: 12px; }
+.uq-d-dense .uq-row:not(.uq-current) .icon-qty { font-size: 11px; }
+.uq-d-dense .uq-row:not(.uq-current) .task-tier-label { font-size: 8px; }
+.uq-d-dense .uq-current .uq-icon-container,
+.uq-d-dense .uq-current .icon-option { width: 38px; height: 38px; }
+.uq-d-dense .uq-current .icon-option > img { width: 30px; height: 30px; }
+.uq-d-dense .uq-current .uq-mob-sprite { width: 34px; height: 34px; }
+.uq-d-dense .uq-current .task-name { font-size: 15px; line-height: 17px; }
+.uq-d-dense .uq-current .task-node { font-size: 12px; line-height: 14px; }
+.uq-d-dense .uq-current .icon-qty { font-size: 15px; }
+.uq-d-dense .uq-current .task-tier-label { font-size: 10px; }
+.uq-d-dense .uq-switch { width: 14px; height: 14px; top: -7px; }
+.uq-d-dense .uq-switch img { width: 9px; height: 9px; }
+
+/* Row heights, matching UnifiedQueuePanel.DENSITIES so the panel's own
+   height maths and the rendered rows cannot drift apart. `full` is the
+   original panel's 66px row and 74px current slot. */
+.uq-d-full   .uq-row:not(.uq-current) { height: 66px; }
+.uq-d-large  .uq-row:not(.uq-current) { height: 54px; }
+.uq-d-normal .uq-row:not(.uq-current) { height: 46px; }
+.uq-d-dense  .uq-row:not(.uq-current) { height: 36px; }
+.uq-d-full   .uq-current { height: 74px; }
+.uq-d-large  .uq-current { height: 72px; }
+.uq-d-normal .uq-current { height: 64px; }
+.uq-d-dense  .uq-current { height: 54px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   Per-row density (the taper layout)
+
+   Same numbers as the panel-level ladder, keyed on the ROW instead of
+   the panel, so a single panel can hold full-size rows near the top
+   and smaller ones further down. Specificity matches the ladder and
+   these come later, so they win on the rows that carry the class.
+   ═══════════════════════════════════════════════════════════════ */
+
+.uq-panel .uq-row.uq-r-dense { height: 36px; }
+.uq-panel .uq-row.uq-r-dense .uq-icon-container,
+.uq-panel .uq-row.uq-r-dense .icon-option,
+.uq-panel .uq-row.uq-r-dense .uq-reroll { width: 28px; height: 28px; }
+.uq-panel .uq-row.uq-r-dense .icon-option > img { width: 22px; height: 22px; }
+.uq-panel .uq-row.uq-r-dense .uq-mob-sprite { width: 25px; height: 25px; }
+.uq-panel .uq-row.uq-r-dense .uq-reroll > img { width: 22px; height: 22px; }
+.uq-panel .uq-row.uq-r-dense .uq-reroll-glyph { font-size: 17px; line-height: 17px; }
+.uq-panel .uq-row.uq-r-dense .task-name { font-size: 12px; line-height: 14px; }
+.uq-panel .uq-row.uq-r-dense .task-node { font-size: 10px; line-height: 12px; }
+.uq-panel .uq-row.uq-r-dense .icon-qty { font-size: 11px; }
+.uq-panel .uq-row.uq-r-dense .task-tier-label { font-size: 8px; }
+.uq-panel .uq-row.uq-r-dense .uq-switch { width: 14px; height: 14px; top: -7px; }
+.uq-panel .uq-row.uq-r-dense .uq-switch img { width: 9px; height: 9px; }
+
+.uq-panel.uq-tapered .uq-row.uq-r-dense:first-of-type {
+    margin-top: 4px;
+    border-top: 1px solid var(--border-secondary);
+}
+
+/* ── Inline activity icon on the name line ────────────────────
+   Leads every row's name with the thing the task is about: the
+   activity's own item icon for skilling rows (the same image the
+   Skill Customization modal uses per activity), the combat symbol for
+   slay rows. Sized to the name line's cap height so it reads as part
+   of the sentence rather than a second icon column. */
+.uq-panel .task-name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.uq-inline-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+    filter: drop-shadow(1px 1px 0 #000);
+}
+.uq-name-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.uq-d-large  .uq-inline-icon { width: 18px; height: 18px; }
+.uq-d-normal .uq-inline-icon { width: 16px; height: 16px; }
+.uq-d-dense  .uq-inline-icon { width: 13px; height: 13px; }
+.uq-panel .uq-row.uq-r-dense .uq-inline-icon { width: 13px; height: 13px; }
+
+/* The node line gets its own lead image: the skill being trained for a
+   skilling row, the saved loadout's mainhand for a slay row. It matches
+   the name line's icon at full density and steps down below it on the
+   tighter ones. */
+.uq-panel .task-node {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+/* Slay rows carry three of these (weapon + the two XP skills), so they
+   sit tighter to each other than to the text that follows. 20px matches
+   .uq-inline-icon, so at full density the node line's art reads at the
+   name line's weight rather than as a footnote. */
+.uq-inline-icon-sub { width: 20px; height: 20px; }
+.uq-panel .task-node { gap: 3px; }
+.uq-panel .task-node .uq-name-text { margin-left: 3px; }
+.uq-d-large  .uq-inline-icon-sub { width: 15px; height: 15px; }
+.uq-d-normal .uq-inline-icon-sub { width: 14px; height: 14px; }
+.uq-d-dense  .uq-inline-icon-sub { width: 11px; height: 11px; }
+.uq-panel .uq-row.uq-r-dense .uq-inline-icon-sub { width: 11px; height: 11px; }
+
+/* ── Tutorial order badges ────────────────────────────────────
+
+   While the first tutorial runs, a row's tier badge is replaced by its
+   position in the queue: Now, 1, 2, 3 … Every task the tutorial rolls
+   is tier 0, so the tier badge would be twelve identical T0s; the
+   position is the thing those steps are actually teaching. Gold rather
+   than the tier badge's white so it reads as a different kind of mark,
+   and it deliberately does not carry .task-tier-label, so the "hide
+   tier labels" setting cannot blank it out mid-tutorial.
+   ────────────────────────────────────────────────────────────── */
+
+.uq-order-label {
+    z-index: 25;
+    font-size: 14px;
+    color: var(--text-gold);
+}
+
+/* Rows the tutorial has not rolled a task into yet still show the
+   queue's own torch, so an empty row reads as a skilling slot waiting
+   its turn rather than as nothing at all. */
+.uq-torch-option img {
+    width: 34px;
+    height: 34px;
+    image-rendering: pixelated;
+    opacity: 0.9;
+}
+/* Dim the torch itself, not the tile: the position badge sitting on it
+   is the part an empty row is there to show. */
+.uq-row.uq-empty .uq-torch-option img { opacity: 0.45; }
+
+/* Total route distance — sits in the space the control row holds open
+   to the right of Auto Loadout. Right-aligned so the number tracks the
+   panel's edge rather than drifting with its own width as it ticks
+   down. Own class, not a descendant selector, because TooltipManager
+   copies the tooltip's innerHTML into the global tooltip on <body>. */
+/* The spacer eats the width between Auto Loadout and the panel's right
+   edge; it is NOT the tooltip trigger, so the empty part of the control
+   row stays inert and the pin and collapse buttons in that corner stay
+   clickable. Top-aligned so the readout sits at the top of the row. */
+.uq-route-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    align-self: stretch;
+    overflow: visible;
+}
+/* The readout itself: the tooltip trigger, and only as big as its text. */
+.uq-route-total {
+    display: inline-flex;
+    align-items: flex-start;
+    position: relative;
+    overflow: visible;
+}
+/* Nothing to say and nothing to hover when there is no distance yet —
+   set by _paintRouteTotal, since the element always holds its text node
+   and tooltip and so is never :empty. */
+.uq-route-total.uq-route-hidden { display: none; }
+.uq-route-total-text {
+    font-size: 14px;
+    line-height: 15px;
+    color: var(--text-bright);
+    white-space: nowrap;
+}
+.uq-route-total:hover { z-index: 100000; }
+
+/* ── Collapse-to-icons ────────────────────────────────────────────
+   The panel folded down to the task icons alone. Everything that makes
+   a row work is kept: the popout still opens leftward on hover with its
+   options and reroll/skip button, drag-reorder still has the row to
+   grab, and the control row at the bottom is untouched. Only the text
+   column goes.
+
+   The width itself is set in _buildRowElements (the layout owns it), so
+   these rules only handle what happens inside the narrowed box. */
+.uq-panel.uq-collapsed .task-details {
+    display: none;
+}
+/* The icon is the whole row now, so stop the wrapper stretching for a
+   text column that is not there. */
+.uq-panel.uq-collapsed .uq-row {
+    justify-content: flex-start;
+    /* Room for the right-hand rail (5px + its 3px gap) and a tighter
+       left inset, since collapsed there is no text column to balance
+       against. COLLAPSED_W is sized to hold exactly this. */
+    padding: 3px 9px 3px 6px;
+}
+/* Popouts grow leftward out of the collapsed panel, which puts them over the
+   map. They already do this in the master picker; make sure nothing
+   clips them on the way. */
+.uq-panel.uq-collapsed .uq-icon-container,
+.uq-panel.uq-collapsed .uq-rows,
+.uq-panel.uq-collapsed .uq-col {
+    overflow: visible;
+}
+/* The control row does NOT fold with the rows above it. It keeps its
+   full width and everything on it, so the master picker, lane toggle,
+   credits, Auto Loadout and the route total all stay exactly where they
+   were — only the task rows narrow to icons. The panel is anchored to
+   the right edge of the dock, so the row reclaims its width leftward:
+   --uq-full-w is the layout width, set by _buildRowElements, and 100%
+   here is the collapsed panel. Nothing clips it, since .uq-panel does
+   not hide its overflow. */
+.uq-panel.uq-collapsed .uq-controls {
+    /* --uq-full-w is the panel's OUTER width; the row lives inside the
+       panel's padding and border, so take those off (5px padding + 2px
+       border, both sides = 14px) or the row juts 14px further left than
+       it sits when expanded. 100% is the collapsed content box, so the
+       negative margin is exactly the difference. */
+    width: calc(var(--uq-full-w, 376px) - 14px);
+    margin-left: calc(100% - (var(--uq-full-w, 376px) - 14px));
+}
+
+/* Collapse button — sits immediately left of the pin, same treatment so
+   the two read as a pair of corner controls. */
+.queue-collapse-btn {
+    position: absolute;
+    top: 4px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: var(--bg-cell);
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    color: var(--text-muted);
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 61;
+    transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.queue-collapse-btn:hover {
+    opacity: 1;
+    background: var(--bg-hover);
+    color: var(--text-light);
+}
+.queue-collapse-btn svg {
+    width: 13px;
+    height: 13px;
+    display: block;
+    fill: currentColor;
+}
+.queue-collapse-btn.active {
+    opacity: 1;
+    color: var(--text-gold);
+    border-color: var(--border-secondary);
+    background: var(--bg-hover);
+}
+/* Both buttons live on the control row, always — not the panel's
+   top-right corner. Collapsed that corner is task icons all the way
+   down, and expanded the corner sits over the first row's text, so the
+   control row is the one place that is theirs in every state. They
+   tuck under the route total at its right edge: `top: auto` hands
+   positioning to `bottom`, measured from the panel's bottom, which
+   clears the control row's lower padding and leaves the route text its
+   own line above them.
+
+   Scoped to .uq-panel because the two legacy queue panels still in the
+   DOM share the .queue-pin-btn class and keep their own corner pin. */
+.uq-panel .queue-pin-btn,
+.uq-panel .queue-collapse-btn {
+    top: auto;
+    bottom: 10px;
+}
+/* 12px, not the 4px a corner button uses: they line up with the route
+   text above them, which sits inside the control row's 6px padding.
+   Absolute offsets resolve against the panel's PADDING box, so its 2px
+   border is already excluded — 6 panel padding + 6 row padding. */
+.uq-panel .queue-pin-btn { right: 12px; }
+.uq-panel .queue-collapse-btn { right: 36px; }
+
+/* style.css drops the corner pin by 34px in windowed mode to clear the
+   titlebar. This panel's buttons are at the bottom, so that shift would
+   only drag them back up into the rows — and it outweighs the rule
+   above on specificity, hence this. */
+body.panels-windowed .uq-panel .queue-pin-btn,
+body.panels-windowed .uq-panel .queue-collapse-btn {
+    top: auto;
+}
+
+/* Collapsing is unavailable for the whole of tutorial 1, which teaches
+   the queue by pointing at the very lines the icons-only panel hides. */
+.queue-collapse-btn.disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+.queue-collapse-btn.disabled:hover {
+    background: var(--bg-cell);
+    color: var(--text-muted);
+    opacity: 0.3;
+}

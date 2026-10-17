@@ -1,0 +1,40 @@
+html.sw-mobile.sw-landscape
+  #ui-container
+  > :is(
+    .uq-panel,
+    .tasks-panel,
+    .slay-tasks-panel,
+    .skills-panel,
+    .inventory-panel,
+    .quests-panel,
+    .diary-panel,
+    .equipment-panel,
+    .friends-panel,
+    .barter-panel
+  ) {
+  top: calc(var(--sw-top) + 8px) !important;
+  bottom: var(--sw-bottom) !important;
+  left: var(--sw-pane-left) !important;
+  right: var(--sw-right) !important;
+  padding: 12px;
+}
+html.sw-mobile.sw-landscape .modal-overlay {
+  top: calc(var(--sw-top) + 8px) !important;
+  left: var(--sw-left) !important;
+  width: calc(var(--sw-width) - var(--sw-left) - var(--sw-right)) !important;
+  height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 8px) !important;
+}
+html.sw-mobile.sw-landscape .modal-container {
+  border-radius: 4px;
+}
+html.sw-mobile.sw-landscape .modal-header {
+  min-height: 48px;
+  padding: 4px 8px;
+}
+html.sw-mobile.sw-landscape .header-icon {
+  width: 28px;
+  height: 28px;
+}
+html.sw-mobile.sw-landscape .tab-content {
+  padding: 8px;
+}

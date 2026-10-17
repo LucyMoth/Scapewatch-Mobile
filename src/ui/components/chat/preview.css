@@ -1,0 +1,102 @@
+/* Recent chat stays passive on the world; the full conversation is in Chat. */
+#sw-mini-chat {
+  position: fixed;
+  left: var(--sw-left);
+  right: auto;
+  bottom: calc(var(--sw-bottom) + var(--sw-task-height) + var(--sw-combat-hud-height) + 22px);
+  width: min(440px, calc(var(--sw-width) * 0.78 - 8px));
+  height: auto;
+  max-height: 48px;
+  z-index: 1000;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--text-light, #cccccc);
+  font-family: var(--game-font, sans-serif);
+  text-align: left;
+  pointer-events: none;
+  user-select: none;
+  text-shadow:
+    1px 1px 1px #000,
+    -1px -1px 1px #000,
+    -1px 1px 1px #000,
+    1px -1px 1px #000;
+}
+#sw-mini-chat[hidden],
+html:not(.sw-mobile) #sw-mini-chat,
+html.sw-mobile:not(.sw-world) #sw-mini-chat,
+html.sw-mobile.sw-combat-details #sw-mini-chat {
+  display: none !important;
+}
+#sw-mini-messages {
+  display: block;
+  min-width: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 16px;
+}
+.sw-mini-line {
+  display: block;
+  height: 16px;
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.sw-mini-line:nth-last-child(n + 4) {
+  display: none;
+}
+.sw-mini-name {
+  font-weight: 600;
+  color: var(--text-gold, #ffd700);
+}
+.sw-mini-text {
+  color: var(--text-light, #cccccc);
+}
+#sw-mini-messages :is(.chat-message, .chat-msg) {
+  font-size: inherit !important;
+  line-height: inherit;
+}
+#sw-mini-messages img {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  vertical-align: -2px;
+  image-rendering: pixelated;
+}
+#sw-mini-messages :is(.chat-badge-slot, .sw-mini-badge) {
+  display: inline;
+  vertical-align: baseline;
+  margin-right: 2px;
+}
+html.sw-mobile body.modal-open #sw-mini-chat,
+html.sw-mobile body.login-active #sw-mini-chat,
+html.sw-mobile
+  body:has(.ledger-return-overlay:not([style*='display:none']):not([style*='display: none']))
+  #sw-mini-chat,
+html.sw-mobile
+  body:has(.ledger-night:not([style*='display:none']):not([style*='display: none']))
+  #sw-mini-chat {
+  display: none !important;
+}
+.sw-mini-setting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  margin: 10px 0;
+  padding: 8px 10px;
+  background: var(--bg-dark, #1c1c0e);
+  border: 1px solid var(--border-primary, #5c4a2a);
+  border-radius: 3px;
+  font-size: 14px;
+  color: var(--text-light, #cccccc);
+}
+#sw-mini-enabled {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  accent-color: var(--text-accent, #c8a83e);
+}

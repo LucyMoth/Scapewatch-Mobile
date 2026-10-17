@@ -1,0 +1,51 @@
+@media (max-height: 520px) {
+  html.sw-mobile {
+    --sw-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+    --sw-bottom: calc(58px + var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)));
+  }
+  #sw-nav button {
+    min-height: 48px;
+  }
+  html.sw-mobile .login-logo {
+    width: 100px !important;
+  }
+}
+
+@media (max-height: 560px) {
+  html.sw-mobile:not(.sw-landscape) {
+    --sw-combat-top: calc(
+      max(
+          calc(var(--sw-right-top) + 92px),
+          calc(var(--sw-potions-top) + var(--sw-potions-height))
+        ) +
+        4px
+    );
+    --sw-footer-reserve: calc(
+      var(--sw-task-height) + var(--sw-combat-hud-height) + var(--sw-mini-height) + 12px
+    );
+  }
+  html.sw-mobile:not(.sw-landscape) .floating-current-task {
+    bottom: calc(var(--sw-bottom) + 6px) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 68px;
+  }
+  html.sw-mobile:not(.sw-landscape) .float-task-inner {
+    padding: 4px 6px;
+  }
+  html.sw-mobile:not(.sw-landscape) :is(.float-combat-col, .float-toggle-pill) {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  html.sw-mobile:not(.sw-landscape) #ui-container .float-toggle-pill {
+    font-size: 12px;
+  }
+  html.sw-mobile:not(.sw-landscape) .combat-encounter .combat-hud {
+    bottom: calc(var(--sw-bottom) + var(--sw-task-height) + 10px);
+  }
+  html.sw-mobile:not(.sw-landscape) #sw-mini-chat {
+    width: calc(var(--sw-width) - var(--sw-left) - var(--sw-right) - 112px);
+  }
+  html.sw-mobile .active-potions-panel,
+  html.sw-mobile.sw-combat-details .active-potions-panel {
+    max-height: 64px;
+  }
+}

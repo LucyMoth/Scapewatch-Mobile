@@ -1,0 +1,84 @@
+/* Navigation uses the game's typeface and pixel icons. */
+#sw-shell {
+  font-family: var(--game-font, sans-serif);
+  color: var(--text-light, #cccccc);
+}
+#sw-shell * {
+  box-sizing: border-box;
+}
+#sw-shell button {
+  font-family: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+#sw-view-title {
+  color: var(--text-muted, #888888);
+  font-size: 12px;
+}
+#sw-layout-toggle,
+#sw-orientation-toggle {
+  background: var(--bg-panel, #2b2216);
+  color: var(--text-accent, #c8a83e);
+  border: 1px solid var(--border-secondary, #7a6a3a);
+  border-radius: 3px;
+  min-height: 36px;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+#sw-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: calc(var(--sw-height, 100dvh) - var(--sw-bottom, 68px));
+  z-index: 10000;
+  height: var(--sw-bottom, 68px);
+  padding: 4px calc(var(--sw-right, 8px) - 4px)
+    var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)) calc(var(--sw-left, 8px) - 4px);
+  background: var(--bg-dark, #1c1c0e);
+  border-top: 1px solid var(--border-primary, #5c4a2a);
+  display: flex;
+  gap: 0;
+}
+#sw-nav button {
+  flex: 1;
+  min-width: 44px;
+  min-height: 56px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--text-light, #cccccc);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+#sw-nav button[aria-current='page'] {
+  background: var(--bg-cell, #3a3226);
+  color: var(--text-bright, #ffff00);
+  border-color: var(--text-accent, #c8a83e);
+}
+#sw-nav button:active,
+#sw-layout-toggle:active,
+#sw-orientation-toggle:active {
+  background: var(--bg-hover);
+  color: var(--text-bright);
+  border-color: var(--text-accent);
+}
+.sw-nav-icon {
+  width: 26px;
+  height: 26px;
+  font-size: 21px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sw-nav-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}

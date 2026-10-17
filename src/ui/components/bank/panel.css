@@ -1,0 +1,212 @@
+html.sw-mobile #tab-bank .bank-toolbar {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 8px;
+  gap: 8px;
+}
+html.sw-mobile #tab-bank .bank-search {
+  width: 100%;
+  min-width: 0;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+html.sw-mobile .sw-bank-categories {
+  display: flex;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  gap: 6px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  scrollbar-width: thin;
+}
+html.sw-mobile .sw-bank-categories .bank-filter-btn {
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+html.sw-mobile .sw-bank-tools {
+  min-width: 0;
+  border-top: 1px solid var(--border-primary);
+}
+html.sw-mobile .sw-bank-tools > summary {
+  min-height: 44px;
+  padding: 10px 4px;
+  box-sizing: border-box;
+  color: var(--text-muted);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+html.sw-mobile .sw-bank-tools[open] > summary {
+  color: var(--text-bright);
+}
+html.sw-mobile .sw-bank-tools-body {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding-bottom: 8px;
+}
+html.sw-mobile .sw-bank-tools-body :is(.bank-filter-menu-btn, .bank-mode-btn:last-child) {
+  grid-column: 1 / -1;
+}
+html.sw-mobile #tab-bank :is(.bank-side, .equip-side) {
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  background: var(--bg-dark);
+}
+html.sw-mobile #tab-bank :is(.bank-grid-scroll, .bank-grid) {
+  max-height: none;
+  overflow: visible !important;
+}
+html.sw-mobile #tab-bank .bank-grid-scroll {
+  /* Manual ordering keeps native slot dragging; the side gutter scrolls. */
+  padding: 8px 44px 8px 8px;
+}
+html.sw-mobile
+  #tab-bank:has(.sw-bank-tools-body > .bank-mode-btn:first-child.active)
+  .bank-grid-scroll {
+  padding-right: 8px;
+}
+html.sw-mobile #tab-bank:has(.sw-bank-tools-body > .bank-mode-btn:first-child.active) .bank-slot {
+  touch-action: pan-y;
+}
+html.sw-mobile #tab-bank :is(.bank-grid, .bank-scrap-row) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)) !important;
+  gap: 6px;
+}
+html.sw-mobile #tab-bank :is(.bank-grid, .bank-scrap-row) .inv-slot {
+  width: 100%;
+  max-width: 64px;
+  height: 56px;
+  box-sizing: border-box;
+}
+html.sw-mobile :is(#tab-bank, .ledger-lootgrid) .inv-qty {
+  font-size: 12px;
+}
+html.sw-mobile #tab-bank .equip-display {
+  padding: 8px;
+}
+html.sw-mobile #tab-bank .equip-display > .cd-open-btn {
+  position: static;
+  align-self: stretch;
+  margin-bottom: 6px;
+}
+html.sw-mobile #tab-bank .loadout-sel {
+  padding: 8px;
+}
+html.sw-mobile #tab-bank .loadout-sel-slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+html.sw-mobile #tab-bank .loadout-sel-slot-label {
+  font-size: 12px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-bank .paperdoll {
+  grid-template-columns: repeat(3, minmax(44px, 80px));
+  grid-template-rows: repeat(5, 64px);
+  gap: 6px;
+}
+html.sw-mobile #tab-bank .paperdoll .inv-slot {
+  width: 64px;
+  height: 64px;
+}
+html.sw-mobile #tab-bank .paperdoll .inv-slot > img {
+  transform: scale(1.25);
+}
+html.sw-mobile #tab-bank .equip-title {
+  font-size: 18px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-bank :is(.stats-weapon-line, .stats-style-line) {
+  font-size: 15px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-bank .equip-stats-panel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(44px, 1fr));
+  gap: 6px;
+  padding: 8px;
+}
+html.sw-mobile
+  #tab-bank
+  .equip-stats-panel
+  > :is(.stats-weapon-line, .stats-style-line, .stats-table) {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+html.sw-mobile
+  #tab-bank
+  .equip-stats-panel
+  > :is(
+    .potion-stats-toggle-wrap,
+    .equip-compare-toggle-wrap,
+    .spirit-stats-toggle-wrap,
+    .gearcalc-launch-wrap
+  ) {
+  position: static;
+  width: 100%;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-cell);
+  border: 1px solid var(--border-primary);
+  border-radius: 3px;
+  touch-action: manipulation;
+}
+html.sw-mobile #tab-bank .stats-table {
+  table-layout: fixed;
+  font-size: 13px;
+}
+html.sw-mobile #tab-bank .stats-table :is(th, td) {
+  padding: 3px 2px;
+  width: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-bank .stats-table :is(th, td):first-child {
+  width: 31%;
+}
+html.sw-mobile .bank-filter-menu {
+  position: fixed;
+  left: var(--sw-left) !important;
+  right: auto !important;
+  top: calc(var(--sw-top) + 64px) !important;
+  width: min(500px, calc(var(--sw-width) - var(--sw-left) - var(--sw-right))) !important;
+  min-width: 0;
+  max-height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 72px) !important;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+html.sw-mobile .bank-filter-cols {
+  flex-direction: column;
+}
+html.sw-mobile .bank-filter-cols > div {
+  width: 100%;
+  min-width: 0;
+}
+html.sw-mobile .bank-filter-cols > div + div {
+  border-left: 0;
+  border-top: 1px solid var(--border-primary);
+}
+html.sw-mobile .bank-filter-row {
+  min-height: 44px;
+  padding: 6px 10px;
+  font-size: 15px;
+}
+html.sw-mobile :is(.bank-filter-label, .bank-filter-note) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile.sw-landscape #tab-bank .bank-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  align-items: start;
+}

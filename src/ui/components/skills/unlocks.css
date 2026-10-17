@@ -1,0 +1,24 @@
+/* JS supplies grid coordinates from the actual header count, transposing
+   the original reward table into one skill per row without reshuffling DOM. */
+html.sw-mobile .skill-custom-tab .unlocks-grid {
+  grid-template-columns: repeat(5, minmax(44px, 1fr));
+  grid-template-rows: none;
+  gap: 4px;
+  padding: 6px;
+  width: 100%;
+  min-width: 0;
+  justify-content: stretch;
+}
+html.sw-mobile .skill-custom-tab .unlocks-grid > * {
+  grid-column: var(--sw-unlock-column, auto);
+  grid-row: var(--sw-unlock-row, auto);
+  width: 100%;
+  height: 48px;
+  min-width: 0;
+}
+html.sw-mobile .skill-custom-tab .unlocks-grid :is(.grid-skill-header, .unlock-item) img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transform: none;
+}

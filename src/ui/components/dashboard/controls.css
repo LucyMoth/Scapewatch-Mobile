@@ -1,0 +1,74 @@
+html.sw-mobile .dashboard-panel button {
+  min-width: 44px;
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile
+  .dashboard-panel
+  :is(.dash-goal-form, .dash-loot-head, .dash-set-data, .dash-set-seg, .dash-barter-filter) {
+  gap: 6px;
+  flex-wrap: wrap;
+}
+html.sw-mobile .dashboard-panel .dash-goal-skill {
+  flex: 1 1 120px;
+}
+html.sw-mobile .dashboard-panel .dash-goal-target {
+  width: 64px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-drop-search, .dash-goal-skill, .dash-goal-target) {
+  min-width: 0;
+  padding: 8px;
+  box-sizing: border-box;
+}
+html.sw-mobile .dashboard-panel :is(.dash-loot-search, .dash-barter-search) {
+  flex: 1 1 160px;
+  margin-bottom: 0;
+}
+html.sw-mobile .dashboard-panel .dash-goal-del {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-set-toggle, .dash-set-slider) {
+  min-height: 44px;
+  padding: 10px;
+  font-size: 14px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-set-slider-top, .dash-set-slider-val, .dash-tabcfg-name) {
+  font-size: 14px;
+}
+html.sw-mobile .dashboard-panel .dash-set-toggle {
+  gap: 8px;
+  touch-action: manipulation;
+}
+html.sw-mobile .dashboard-panel .dash-set-slider input[type='range'] {
+  height: 44px;
+  border: 0;
+  background: linear-gradient(var(--border-secondary), var(--border-secondary)) center / 100% 5px
+    no-repeat;
+}
+html.sw-mobile .dashboard-panel .dash-set-slider input[type='range']::-webkit-slider-thumb {
+  width: 24px;
+  height: 24px;
+}
+html.sw-mobile .dashboard-panel .dash-tabcfg-row {
+  gap: 6px;
+  padding: 6px;
+}
+html.sw-mobile #ui-container .dashboard-panel .dash-tabcfg-btn {
+  font-size: 13px;
+  padding: 4px;
+}
+html.sw-mobile .dashboard-panel .dash-tabcfg-name {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .dashboard-panel .dash-raid-rank-toggle {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}

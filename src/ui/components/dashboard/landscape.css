@@ -1,0 +1,23 @@
+html.sw-mobile.sw-landscape.sw-dashboard .dashboard-panel {
+  top: calc(var(--sw-top) + 8px) !important;
+  bottom: var(--sw-bottom);
+}
+html.sw-mobile.sw-landscape .dashboard-content {
+  padding: 12px;
+}
+html.sw-mobile.sw-landscape.sw-dashboard .hp-bar {
+  display: none !important;
+}
+html.sw-mobile.sw-landscape
+  .dashboard-content
+  :is(.dash-skill-list, .dash-drop-results, .dash-drop-pinned, .dash-loot-groups) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+html.sw-mobile.sw-landscape .dashboard-content .dash-skill-row.total {
+  grid-column: 1 / -1;
+}
+html.sw-mobile.sw-landscape .dashboard-panel .dash-row {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}

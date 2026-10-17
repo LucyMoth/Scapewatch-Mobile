@@ -1,0 +1,121 @@
+html.sw-mobile .dashboard-panel .dash-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 12px;
+}
+html.sw-mobile .dashboard-panel .dash-cell {
+  min-width: 0;
+  padding: 10px 6px;
+}
+html.sw-mobile:not(.sw-landscape) .dashboard-panel .dash-cell:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+html.sw-mobile .dashboard-panel .dash-cell-val {
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .dashboard-panel :is(.dash-cell-label, .dash-subtle, .dash-set-label) {
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-skill-list, .dash-q-alts) {
+  gap: 8px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-skill-row, .dash-goal-row, .dash-pet-row) {
+  gap: 8px;
+  padding: 8px;
+  min-height: 64px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-skill-icon, .dash-pet-icon) {
+  width: 28px;
+  height: 28px;
+}
+html.sw-mobile
+  .dashboard-panel
+  :is(.dash-skill-name, .dash-q-name, .dash-pet-name, .dash-food-name) {
+  font-size: 14px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .dashboard-panel .dash-skill-top {
+  flex-wrap: wrap;
+  gap: 2px 6px;
+}
+html.sw-mobile .dashboard-panel .dash-skill-stats {
+  max-width: 38%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .dashboard-panel :is(.dash-skill-gained, .dash-q-xp) {
+  font-size: 14px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-skill-rate, .dash-skill-lv, .dash-pet-eta, .dash-pip) {
+  font-size: 12px;
+}
+html.sw-mobile .dashboard-panel .dash-bar {
+  height: 8px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-q-row, .dash-drop-card, .dash-slay-next) {
+  min-width: 0;
+  padding: 10px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-q-top, .dash-q-left, .dash-q-sub, .dash-q-rate) {
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-q-left, .dash-q-name, .dash-q-step-text) {
+  min-width: 0;
+}
+html.sw-mobile
+  .dashboard-panel
+  :is(.dash-q-sub, .dash-q-rate, .dash-q-info, .dash-q-alt, .dash-slay-stats) {
+  font-size: 13px;
+}
+html.sw-mobile
+  .dashboard-panel
+  :is(.dash-q-sub span, .dash-q-alt-name, .dash-slay-name, .dash-log-text) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile
+  .dashboard-panel
+  :is(.dash-near, .dash-warn, .dash-drop-src, .dash-drop-more, .dash-slay-next) {
+  font-size: 14px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-tag, .dash-q-insert) {
+  font-size: 11px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-food-row, .dash-slay-master, .dash-log-row) {
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  font-size: 14px;
+}
+html.sw-mobile
+  .dashboard-panel
+  :is(.dash-food-avg, .dash-slay-who, .dash-slay-range, .dash-log-ago) {
+  font-size: 12px;
+}
+html.sw-mobile .dashboard-panel .dash-loot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+}
+html.sw-mobile .dashboard-panel .dash-loot-cell {
+  width: auto;
+  min-width: 0;
+  min-height: 64px;
+}
+html.sw-mobile .dashboard-panel :is(.dash-loot-qty, .dash-loot-group-head) {
+  font-size: 13px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .dashboard-panel .dash-drop-chart {
+  max-width: 100%;
+}
+html.sw-mobile .dashboard-placeholder-sub {
+  font-size: 14px;
+  letter-spacing: 0;
+  white-space: normal;
+}

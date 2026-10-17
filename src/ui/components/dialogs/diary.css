@@ -1,0 +1,60 @@
+html.sw-mobile .diary-modal-summary {
+  margin-bottom: 12px;
+}
+html.sw-mobile .diary-modal-title {
+  font-size: 20px !important;
+}
+html.sw-mobile .diary-modal-help {
+  font-size: 14px !important;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+html.sw-mobile .diary-modal-search {
+  margin-top: 12px;
+  padding: 8px;
+  min-height: 44px;
+  font-size: 16px;
+}
+html.sw-mobile #ui-container .diary-modal-sub {
+  font-size: 14px;
+}
+html.sw-mobile .diary-modal-grid {
+  gap: 10px;
+}
+html.sw-mobile .diary-modal-card {
+  padding: 12px;
+}
+html.sw-mobile .diary-modal-card :is(.diary-bank-name, .diary-bank-count) {
+  font-size: 16px;
+}
+html.sw-mobile .diary-modal-card .diary-bar,
+html.sw-mobile .diary-modal-summary .diary-all-bar {
+  height: 14px;
+}
+html.sw-mobile .diary-modal-card :is(.diary-tier-badge, .diary-tier-reward) {
+  font-size: 14px;
+  white-space: normal;
+}
+html.sw-mobile .diary-modal-bulk {
+  margin-top: 10px;
+  padding-top: 10px;
+  gap: 6px;
+}
+html.sw-mobile #ui-container :is(.diary-bulk-label, .diary-bulk-avgdist, .diary-bulk-val) {
+  font-size: 14px;
+}
+html.sw-mobile .diary-bulk-stepper {
+  gap: 6px;
+}
+html.sw-mobile :is(.diary-bulk-btn, .diary-bulk-reset) {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 18px;
+}
+html.sw-mobile #ui-container .diary-modal-card .diary-step {
+  font-size: 14px;
+  gap: 6px;
+}
+html.sw-mobile.sw-landscape .diary-modal-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}

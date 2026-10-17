@@ -1,0 +1,29 @@
+{
+  "appId": "com.scapewatch.mobile",
+  "appName": "Scapewatch Mobile",
+  "webDir": "dist",
+  "server": {
+    "url": "https://play.scapewatch.com",
+    "cleartext": false,
+    "errorPath": "index.html",
+    "allowNavigation": [
+      "alt.play.scapewatch.com",
+      "steamcommunity.com",
+      "*.steamcommunity.com",
+      "login.steampowered.com",
+      "store.steampowered.com",
+      "help.steampowered.com",
+      "*.steampowered.com"
+    ]
+  },
+  "android": {
+    "backgroundColor": "#000000"
+  },
+  "plugins": {
+    "SystemBars": {
+      "hidden": true,
+      "insetsHandling": "css",
+      "initialViewportFitValueHint": "cover"
+    }
+  }
+}

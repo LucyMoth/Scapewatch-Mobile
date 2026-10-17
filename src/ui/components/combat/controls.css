@@ -1,0 +1,104 @@
+/* The selected combat sheet already names the subject. Remove the repeated
+   world HUD behind its selector, while leaving HP and potion controls intact. */
+html.sw-mobile:is(.sw-combat-player, .sw-combat-opponent) :is(.ingame-hud, .tutorial-checklist) {
+  display: none !important;
+}
+html.sw-mobile .combat-encounter .btn-end-combat {
+  min-height: 44px;
+  font-size: 16px;
+  padding: 8px 18px;
+  box-shadow: none;
+}
+#sw-combat-tabs {
+  position: fixed;
+  top: var(--sw-right-top);
+  left: var(--sw-left);
+  right: calc(var(--sw-right) + 112px);
+  z-index: 700;
+  display: flex;
+  gap: 4px;
+  height: 44px;
+  min-height: 44px;
+  font-family: var(--game-font, sans-serif);
+  pointer-events: auto;
+}
+#sw-combat-tabs[hidden],
+html.sw-mobile:not(.sw-world) #sw-combat-tabs,
+html:not(.sw-mobile) #sw-combat-tabs {
+  display: none !important;
+}
+#sw-combat-tabs button {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 4px;
+  background: var(--bg-panel, #2b2216);
+  border: 1px solid var(--border-secondary, #7a6a3a);
+  color: var(--text-light, #cccccc);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.2;
+}
+#sw-combat-tabs button[aria-selected='true'] {
+  color: var(--text-accent, #c8a83e);
+  border-color: var(--text-accent, #c8a83e);
+  background: var(--bg-cell, #3a3226);
+}
+#sw-combat-tabs #sw-combat-close {
+  flex: 0 0 44px;
+  min-width: 44px;
+  font-size: 20px;
+}
+#sw-combat-toggle {
+  position: fixed;
+  top: var(--sw-right-top);
+  left: var(--sw-left);
+  right: calc(var(--sw-right) + 112px);
+  z-index: 700;
+  width: auto;
+  min-height: 44px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--border-secondary, #7a6a3a);
+  border-radius: 6px;
+  background: var(--bg-panel, #2b2216);
+  color: var(--text-accent, #c8a83e);
+  font: 14px var(--game-font, sans-serif);
+  touch-action: manipulation;
+}
+#sw-combat-toggle img {
+  width: 18px;
+  height: 18px;
+  image-rendering: pixelated;
+}
+#sw-combat-toggle[hidden],
+html:not(.sw-mobile) #sw-combat-toggle,
+html.sw-mobile:not(.sw-world) #sw-combat-toggle {
+  display: none !important;
+}
+html.sw-mobile:not(.sw-landscape) .combat-encounter .combat-hud {
+  left: var(--sw-left);
+  right: var(--sw-right);
+  width: auto;
+  max-width: none;
+  min-height: 44px;
+  transform: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+html.sw-mobile:not(.sw-landscape) .combat-encounter .ce-kill-count {
+  min-width: 0;
+  font-size: 14px;
+}
+html.sw-mobile:not(.sw-landscape) .combat-encounter .btn-end-combat {
+  flex-shrink: 0;
+  min-height: 44px;
+  font-size: 14px;
+}

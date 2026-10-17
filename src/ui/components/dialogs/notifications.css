@@ -1,0 +1,60 @@
+html.sw-mobile .celebration-container {
+  position: fixed;
+  top: calc(var(--sw-top) + var(--sw-hp-height) + var(--sw-camera-height) + 16px);
+  left: var(--sw-left);
+  right: var(--sw-right);
+  width: auto;
+  height: auto;
+  min-height: 0;
+  pointer-events: none;
+}
+html.sw-mobile .celebration-container > [class^='celeb-'] {
+  max-width: min(280px, calc(100% - 48px));
+  padding: 8px 12px;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+html.sw-mobile body.hide-notif-bg .celebration-container > [class^='celeb-'] {
+  padding: 0;
+}
+html.sw-mobile .celebration-container .celeb-skill-row {
+  max-width: 100%;
+  gap: 6px;
+}
+html.sw-mobile .celebration-container .celeb-skill-row > span {
+  min-width: 0;
+  white-space: normal;
+}
+html.sw-mobile
+  .celebration-container
+  :is(
+    [class$='-title'],
+    [class$='-text'],
+    [class*='-text-'],
+    .celeb-title,
+    .celeb-congrats,
+    .celeb-congrats-big
+  ) {
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+html.sw-mobile .celebration-container :is([class$='-sub'], .celeb-lucky-tag) {
+  font-size: 14px;
+  line-height: 1.3;
+  margin-bottom: 0;
+}
+html.sw-mobile .celebration-container img {
+  width: 28px;
+  height: 28px;
+  max-width: 28px;
+  max-height: 28px;
+  flex: 0 0 28px;
+  object-fit: contain;
+}
+html.sw-mobile .celebration-container :is(.celeb-collection, .celeb-pet, .celeb-cape) {
+  gap: 4px;
+}
+html.sw-mobile.sw-landscape .celebration-container {
+  top: calc(var(--sw-top) + 60px);
+}

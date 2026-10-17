@@ -1,0 +1,35 @@
+html.sw-mobile.sw-landscape.sw-chat #chat-panel {
+  top: calc(var(--sw-top) + 8px) !important;
+  bottom: var(--sw-bottom) !important;
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+}
+html.sw-mobile.sw-landscape .chat-filter-bar {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  flex-wrap: nowrap;
+  gap: 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+html.sw-mobile.sw-landscape #chat-panel .chat-filter-btn {
+  width: auto;
+  flex: 0 0 auto;
+  min-width: 52px;
+  padding: 0 8px;
+  font-size: 14px;
+}
+html.sw-mobile.sw-landscape .chat-font-group {
+  flex: 0 0 auto;
+}
+html.sw-mobile.sw-landscape .chat-toggle-btn {
+  flex: 0 0 44px;
+  width: 44px;
+}
+html.sw-mobile.sw-landscape .chat-input-row {
+  flex-wrap: nowrap;
+}
+html.sw-mobile.sw-landscape .chat-input-wrap {
+  flex: 1 1 auto;
+}

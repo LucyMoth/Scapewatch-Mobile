@@ -1,0 +1,70 @@
+/* Keep popups reachable when legacy position calculations use desktop units. */
+html.sw-mobile
+  :is(
+    .bank-filter-menu,
+    .potions-filter-menu,
+    .player-ctx-menu,
+    .world-switcher,
+    .chat-category-menu,
+    .bank-consume-menu
+  ) {
+  position: fixed !important;
+  left: 12px !important;
+  right: 12px !important;
+  top: calc(var(--sw-top) + 40px) !important;
+  bottom: auto !important;
+  width: auto !important;
+  max-width: calc(100% - 24px) !important;
+  max-height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 60px) !important;
+  overflow: auto !important;
+  transform: none !important;
+}
+html.sw-mobile
+  :is(
+    .ctx-confirm-overlay,
+    .chat-rules-overlay,
+    .steam-prompt-overlay,
+    .cc-credits-overlay,
+    .gc-modal-overlay,
+    .reconnect-overlay,
+    .chest-overlay,
+    .ledger-return-overlay,
+    .lamp-overlay,
+    .cd-popup-overlay,
+    .chat-extlink-overlay
+  ) {
+  left: 0 !important;
+  top: var(--sw-top) !important;
+  width: 100% !important;
+  height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom)) !important;
+  padding: 12px !important;
+  overflow: auto;
+}
+html.sw-mobile
+  :is(
+    .ctx-confirm-dialog,
+    .chat-rules-dialog,
+    .steam-prompt-card,
+    .cc-credits-panel,
+    .gc-modal-panel,
+    .chest-panel,
+    .ledger-card,
+    .lamp-panel,
+    .chat-extlink-dialog,
+    .cd-popup
+  ) {
+  max-width: 100% !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-height: 100% !important;
+  overflow: auto !important;
+  padding: 14px;
+}
+html.sw-mobile .tooltip {
+  max-width: min(300px, 80vw);
+}
+html.sw-mobile #tutorial-picker {
+  max-width: 90vw;
+  max-height: 80dvh;
+  overflow: auto;
+}

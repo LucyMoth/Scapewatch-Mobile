@@ -1,0 +1,52 @@
+/* The adapter mirrors only the currently previewed queue tooltip here.
+   Original option/reroll nodes and their two-tap handlers stay in place. */
+html.sw-mobile
+  :is(.uq-row, .task-row, .queue-slot, .current-task-slot).sw-preview-inline
+  .icon-tooltip {
+  display: none !important;
+}
+html.sw-mobile .task-row.sw-preview-inline {
+  flex-wrap: wrap;
+  height: auto !important;
+}
+.sw-task-preview {
+  display: none;
+}
+html.sw-mobile .sw-task-preview {
+  display: block;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-secondary);
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--text-light);
+  pointer-events: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .sw-task-preview .tt-name {
+  font-size: 16px;
+  color: var(--text-bright);
+  white-space: normal;
+}
+html.sw-mobile .sw-task-preview .tt-line {
+  font-size: 14px;
+  white-space: normal;
+}
+html.sw-mobile .global-tooltip {
+  left: 8px !important;
+  right: 8px !important;
+  top: auto !important;
+  bottom: calc(var(--sw-bottom) + 8px) !important;
+  width: auto;
+  max-width: calc(var(--sw-width) - 16px);
+  max-height: 140px;
+  overflow: auto;
+  transform: none !important;
+  pointer-events: none;
+}

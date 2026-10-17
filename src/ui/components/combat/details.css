@@ -1,0 +1,224 @@
+/* Only one original combat subject is shown at a time. Subject switching
+   is presentation state; original player Stats/Equipment and mob Stats/Loot
+   tabs, panel-hidden and inline display:none still govern their contents. */
+html.sw-mobile .combat-encounter {
+  inset: 0 !important;
+  width: var(--sw-width);
+  height: var(--sw-height);
+}
+html.sw-mobile .combat-encounter .panel-wrapper {
+  position: absolute !important;
+  top: var(--sw-combat-top) !important;
+  bottom: calc(var(--sw-bottom) + var(--sw-footer-reserve)) !important;
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  transform: none !important;
+  width: auto !important;
+  max-width: none;
+  min-height: 0;
+  box-sizing: border-box;
+}
+html.sw-mobile:not(.sw-combat-details) .combat-encounter .panel-wrapper,
+html.sw-mobile:not(.sw-combat-opponent) .combat-encounter .panel-wrapper.mob-side,
+html.sw-mobile.sw-combat-opponent .combat-encounter .panel-wrapper.player-side,
+html.sw-mobile:not(.sw-world) .combat-encounter .panel-wrapper {
+  display: none !important;
+}
+html.sw-mobile .combat-encounter .panel-tab-bar {
+  position: fixed;
+  top: calc(var(--sw-right-top) + 48px) !important;
+  left: var(--sw-left) !important;
+  right: calc(var(--sw-right) + 112px) !important;
+  transform: none;
+  flex-direction: row;
+  width: auto;
+  height: 44px;
+  min-height: 44px;
+  gap: 6px;
+}
+html.sw-mobile .combat-encounter .panel-tab {
+  min-width: 44px;
+  height: 44px;
+  border-radius: 3px;
+  box-shadow: none;
+}
+html.sw-mobile .combat-encounter .combat-panel {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: none;
+  transition: none;
+}
+html.sw-mobile .combat-encounter .combat-panel:not(.panel-hidden) {
+  flex: 1 1 auto;
+  height: 100% !important;
+  max-height: 100%;
+  padding: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+html.sw-mobile .combat-encounter .combat-panel.panel-hidden {
+  flex: 0 0 0;
+  height: 0;
+  padding: 0 10px;
+  border-width: 0;
+}
+html.sw-mobile .combat-encounter .panel-content.active {
+  flex: 0 0 auto;
+}
+html.sw-mobile .combat-encounter .panel-content > .equip-stats-panel {
+  margin-top: 8px;
+}
+html.sw-mobile .combat-encounter .panel-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-bottom: 6px;
+}
+html.sw-mobile .combat-encounter .panel-name {
+  font-size: 16px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .combat-encounter .panel-level {
+  font-size: 13px;
+}
+html.sw-mobile .combat-encounter .derived-grid {
+  gap: 4px;
+  margin-bottom: 6px;
+}
+html.sw-mobile .combat-encounter .derived-item {
+  min-width: 0;
+  padding: 4px 2px;
+}
+html.sw-mobile .combat-encounter .derived-label {
+  font-size: 11px;
+  line-height: 1.15;
+  letter-spacing: 0;
+  margin-bottom: 2px;
+}
+html.sw-mobile .combat-encounter .derived-value {
+  font-size: 15px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .combat-encounter .section-header {
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  margin: 8px 0 4px;
+}
+html.sw-mobile .combat-encounter .skill-grid {
+  gap: 3px 6px;
+}
+html.sw-mobile .combat-encounter .skill-row.selectable {
+  min-height: 44px;
+}
+html.sw-mobile .combat-encounter .skill-icon {
+  width: 26px;
+  height: 26px;
+}
+html.sw-mobile .combat-encounter .skill-name {
+  min-width: 0;
+  white-space: normal;
+}
+html.sw-mobile .combat-encounter .skill-val {
+  font-size: 14px;
+  min-width: 20px;
+}
+html.sw-mobile .combat-encounter .skill-row {
+  min-height: 40px;
+}
+html.sw-mobile .combat-encounter .skill-name {
+  font-size: 14px;
+}
+/* Stats utility icons used to float over the weapon name. A dedicated
+   row keeps their original handlers reachable without covering any text. */
+html.sw-mobile .combat-encounter .equip-stats-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(44px, 1fr));
+  gap: 6px;
+  padding: 6px 2px;
+  min-width: 0;
+}
+html.sw-mobile
+  .combat-encounter
+  .equip-stats-panel
+  > :is(.stats-weapon-line, .stats-style-line, .stats-table) {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+html.sw-mobile .combat-encounter .equip-stats-panel :is(.stats-weapon-line, .stats-style-line) {
+  font-size: 13px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile
+  .combat-encounter
+  .equip-stats-panel
+  > :is(.potion-stats-toggle-wrap, .spirit-stats-toggle-wrap, .gearcalc-launch-wrap) {
+  position: static;
+  width: 100%;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-cell);
+  border: 1px solid var(--border-primary);
+  border-radius: 3px;
+  touch-action: manipulation;
+}
+html.sw-mobile .combat-encounter .equip-stats-panel .stats-table {
+  table-layout: fixed;
+  font-size: 12px;
+}
+html.sw-mobile .combat-encounter .equip-stats-panel .stats-table :is(th, td) {
+  padding: 3px 2px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .combat-encounter .equip-stats-panel .stats-table :is(th, td):first-child {
+  width: 23%;
+}
+html.sw-mobile .combat-encounter .loadout-dropdown-trigger {
+  min-height: 44px;
+  font-size: 14px;
+}
+/* A loadout menu expands in its scrollable sheet instead of dropping below
+   the panel's clipping boundary. Its original open/closed state is intact. */
+html.sw-mobile .combat-encounter .loadout-dropdown-menu {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+  box-shadow: none;
+}
+html.sw-mobile .combat-encounter .loadout-dropdown-menu .loadout-sel {
+  width: 100%;
+}
+html.sw-mobile .combat-encounter .loadout-sel-families,
+html.sw-mobile .combat-encounter .loadout-sel-slots {
+  flex-wrap: wrap;
+}
+html.sw-mobile .combat-encounter .loot-grid {
+  grid-template-columns: repeat(auto-fit, 48px);
+}
+html.sw-mobile .combat-encounter .combat-hud {
+  position: fixed;
+  bottom: calc(var(--sw-bottom) + var(--sw-task-height) + 14px);
+  left: 50%;
+  max-width: calc(var(--sw-width) - 16px);
+  gap: 4px;
+}
+html.sw-mobile .combat-encounter .ce-kill-count {
+  font-size: 16px;
+}

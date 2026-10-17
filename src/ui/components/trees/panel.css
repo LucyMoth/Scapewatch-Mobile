@@ -1,0 +1,140 @@
+html.sw-mobile #tab-unlocks.active:has(> .rtv-wrap:not([style*='display: none']) > .sw-tree-root) {
+  min-height: 0;
+  height: 100%;
+  padding: 0;
+  overflow: hidden !important;
+}
+html.sw-mobile .rtv-root.sw-tree-root {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+html.sw-mobile .sw-tree-root .rtv-hud {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  padding: 8px;
+  margin: 0;
+}
+html.sw-mobile .sw-tree-root .rtv-title {
+  min-width: 0;
+}
+html.sw-mobile .sw-tree-root .rtv-title h3 {
+  font-size: 16px;
+}
+html.sw-mobile .sw-tree-root .rtv-title span {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+html.sw-mobile .sw-tree-root .rtv-meters {
+  justify-content: space-between;
+  min-width: 0;
+}
+html.sw-mobile .sw-tree-root .rtv-meter .l {
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+html.sw-mobile .sw-tree-root .rtv-hint {
+  display: none;
+}
+html.sw-mobile .sw-tree-controls {
+  display: grid;
+  grid-template-columns: 44px 44px 52px minmax(0, 1fr);
+  flex: 0 0 auto;
+  align-items: start;
+  gap: 6px;
+  padding: 0 8px 8px;
+}
+html.sw-mobile .sw-tree-controls > button {
+  min-height: 44px;
+  padding: 4px;
+  font-family: var(--game-font);
+  font-size: 16px;
+  color: var(--text-light);
+  background: var(--bg-cell);
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  touch-action: manipulation;
+}
+html.sw-mobile .sw-tree-controls > button:disabled {
+  opacity: 0.45;
+}
+html.sw-mobile .sw-tree-bonuses {
+  position: relative;
+  min-width: 0;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  background: var(--bg-cell);
+}
+html.sw-mobile .sw-tree-bonuses > summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 4px;
+  box-sizing: border-box;
+  color: var(--text-light);
+  font-size: 13px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+html.sw-mobile .sw-tree-bonuses .rtv-legend {
+  position: absolute !important;
+  top: calc(100% + 6px) !important;
+  right: 0 !important;
+  left: auto !important;
+  width: min(300px, calc(var(--sw-width) - var(--sw-left) - var(--sw-right) - 32px));
+  padding: 8px;
+  box-sizing: border-box;
+  max-height: min(160px, var(--sw-tree-legend-height));
+  background: var(--bg-dark);
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  z-index: 10;
+  overflow: auto;
+  font-size: 13px;
+  pointer-events: auto;
+  touch-action: pan-y;
+}
+html.sw-mobile .sw-tree-root .rtv-stage {
+  display: block;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: none;
+  scrollbar-width: thin;
+}
+html.sw-mobile .sw-tree-root .rtv-fit {
+  width: var(--sw-tree-width) !important;
+  height: var(--sw-tree-height) !important;
+  max-width: none !important;
+  margin: var(--sw-tree-pad-y, 0px) auto 0;
+}
+html.sw-mobile .sw-tree-root .rtv-tip {
+  position: fixed !important;
+  left: var(--sw-tree-tip-left) !important;
+  top: var(--sw-tree-tip-top) !important;
+  transform: none !important;
+  box-sizing: border-box;
+  min-width: 0;
+  width: min(300px, var(--sw-tree-tip-width));
+  max-width: var(--sw-tree-tip-width);
+  max-height: var(--sw-tree-tip-height);
+  overflow: auto;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  z-index: 100001;
+}
+html.sw-mobile .sw-tree-root .rtv-tip .d {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile.sw-landscape .sw-tree-root .rtv-hud {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  padding: 4px 8px;
+}
+html.sw-mobile.sw-landscape .sw-tree-root .rtv-meters {
+  gap: 16px;
+}

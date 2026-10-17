@@ -1,0 +1,206 @@
+html.sw-mobile #tab-raid .raid-lobby-grid {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+html.sw-mobile #tab-raid :is(.raid-lobby-col, .raid-ctrl-grid, .raid-ctrl-col-right) {
+  display: contents;
+}
+html.sw-mobile #tab-raid .raid-diff-section {
+  grid-row: 1;
+}
+html.sw-mobile #tab-raid .raid-name-row {
+  grid-row: 2;
+  min-width: 0;
+  margin: 0;
+}
+html.sw-mobile #tab-raid .raid-action-row {
+  grid-row: 3;
+  margin: 0;
+  gap: 6px;
+}
+html.sw-mobile #tab-raid .raid-party-section {
+  grid-row: 4;
+}
+html.sw-mobile #tab-raid .raid-ctrl-col-left {
+  grid-row: 5;
+  height: auto;
+}
+html.sw-mobile #tab-raid .raid-droptable {
+  grid-row: 6;
+  overflow: visible;
+}
+html.sw-mobile #tab-raid .raid-diff-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+html.sw-mobile #tab-raid .raid-diff-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px;
+}
+html.sw-mobile #tab-raid .raid-diff-btn:only-child {
+  grid-column: 1 / -1;
+}
+html.sw-mobile #tab-raid .raid-diff-master {
+  width: 28px;
+  height: 28px;
+}
+html.sw-mobile #tab-raid .raid-diff-name {
+  font-size: 14px;
+}
+html.sw-mobile #tab-raid .raid-diff-req {
+  font-size: 12px;
+  white-space: normal;
+}
+html.sw-mobile #tab-raid :is(.raid-section-label, .raid-row-equip-style) {
+  font-size: 16px;
+}
+html.sw-mobile #tab-raid :is(.raid-name-input, .raid-invite-input) {
+  min-width: 0;
+  min-height: 44px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+html.sw-mobile
+  #tab-raid
+  :is(.clan-action-btn, .raid-invite-listrow, .raid-clone-add-btn, .raid-rare-tier-btn) {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+html.sw-mobile #tab-raid :is(.raid-end-btn, .raid-leave-btn) {
+  min-width: 88px;
+}
+html.sw-mobile #tab-raid .raid-minlvl-btn {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+html.sw-mobile #tab-raid .raid-invite-lists {
+  flex: 0 0 auto;
+  overflow: visible;
+}
+html.sw-mobile #tab-raid .raid-invite-listrow {
+  justify-content: space-between;
+}
+html.sw-mobile #tab-raid .raid-party-row-item {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  height: auto;
+  overflow: visible;
+  min-width: 0;
+  gap: 10px;
+  padding: 10px;
+}
+html.sw-mobile #tab-raid .raid-party-row-item.empty {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  min-height: 60px;
+}
+html.sw-mobile #tab-raid .raid-row-info {
+  grid-column: 1 / -1;
+  width: auto;
+  min-width: 0;
+  gap: 5px;
+}
+html.sw-mobile #tab-raid .raid-party-row-item:has(.raid-party-kick) .raid-row-name {
+  padding-right: 64px;
+}
+html.sw-mobile #tab-raid .raid-row-info-line {
+  font-size: 14px;
+  flex-wrap: wrap;
+  white-space: normal;
+}
+html.sw-mobile #tab-raid .raid-row-sprite {
+  width: 100px;
+  height: 104px;
+}
+html.sw-mobile #tab-raid :is(.raid-row-stats, .raid-row-skill-grid) {
+  min-width: 0;
+  width: 100%;
+}
+html.sw-mobile #tab-raid .raid-row-skill-cell {
+  min-width: 0;
+  font-size: 14px;
+  padding: 3px 2px;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+html.sw-mobile #tab-raid .raid-row-skill-cell img {
+  width: 18px;
+  height: 18px;
+}
+html.sw-mobile #tab-raid .raid-skill-talent-bonus {
+  font-size: 12px;
+}
+html.sw-mobile #tab-raid .raid-row-paperdoll.paperdoll {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+html.sw-mobile #tab-raid .raid-row-equip-stats {
+  grid-column: 1 / -1;
+  min-width: 0;
+  font-size: 13px;
+}
+html.sw-mobile #tab-raid .raid-row-equip-table :is(th, td) {
+  padding: 4px;
+  white-space: nowrap;
+}
+html.sw-mobile #tab-raid .raid-row-equip-table td {
+  font-size: 12px;
+}
+html.sw-mobile #tab-raid .raid-party-kick {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 6px;
+  right: 6px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+html.sw-mobile #tab-raid .raid-role-skill-row {
+  min-width: 0;
+  min-height: 44px;
+  grid-template-columns: 14px minmax(0, 1fr) minmax(0, 1fr);
+}
+html.sw-mobile
+  #tab-raid
+  :is(.raid-row-gauntlet-preview, .raid-row-gauntlet-strengths, .raid-row-unpicked) {
+  grid-column: 1 / -1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-raid .raid-row-gauntlet-strengths {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+  gap: 8px;
+}
+html.sw-mobile #tab-raid .raid-row-unpicked {
+  position: static;
+}
+html.sw-mobile.sw-landscape #tab-raid .raid-diff-row {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+@media (min-width: 700px) {
+  html.sw-mobile.sw-landscape #tab-raid .raid-row-paperdoll.paperdoll {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  html.sw-mobile.sw-landscape #tab-raid .raid-row-equip-stats {
+    grid-column: 2;
+    grid-row: 3;
+  }
+}

@@ -1,0 +1,19 @@
+.gradle/
+.idea/
+build/
+local.properties
+*.iml
+*.jks
+*.keystore
+*.apk
+*.aab
+.externalNativeBuild/
+.cxx/
+captures/
+
+# Capacitor regenerates plugin integration and copies the web build on sync.
+capacitor-cordova-android-plugins/
+app/src/main/assets/public/
+app/src/main/assets/capacitor.config.json
+app/src/main/assets/capacitor.plugins.json
+app/src/main/res/xml/config.xml

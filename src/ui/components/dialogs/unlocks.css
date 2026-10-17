@@ -1,0 +1,31 @@
+html.sw-mobile #tab-unlocks .sw-unlocks-grid {
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: repeat(var(--sw-unlock-columns, 5), minmax(44px, 1fr)) !important;
+  gap: 4px;
+  padding: 6px;
+}
+html.sw-mobile #tab-unlocks .sw-unlocks-grid > * {
+  grid-column: var(--sw-unlock-column);
+  grid-row: var(--sw-unlock-row) / span var(--sw-unlock-span, 1);
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+}
+html.sw-mobile #tab-unlocks .sw-unlocks-grid > .grid-skill-header {
+  height: 100%;
+  min-height: 44px;
+  align-items: flex-start;
+  padding-top: 6px;
+  border-bottom: 1px solid var(--border-primary);
+}
+html.sw-mobile #tab-unlocks .sw-unlocks-grid :is(.grid-skill-header, .unlock-item) > img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transform: none;
+}
+html.sw-mobile #tab-unlocks .sw-unlocks-grid .unlock-item img.unlock-pack-icon {
+  width: 36px;
+  height: 36px;
+}

@@ -1,0 +1,54 @@
+<span id="sw-view-title" hidden>World</span>
+<div id="sw-layout-actions">
+  <button type="button" id="sw-orientation-toggle" hidden>Landscape</button>
+  <button type="button" id="sw-layout-toggle">Original UI</button>
+</div>
+<nav id="sw-nav" aria-label="Mobile navigation"></nav>
+<header id="sw-secondary-header" hidden>
+  <span id="sw-secondary-title"></span>
+  <button type="button" id="sw-secondary-close" aria-label="Back to world">×</button>
+</header>
+<button type="button" id="sw-combat-toggle" hidden>
+  <img src="/assets/icons/ui/combat.png" alt="" />Combat details
+</button>
+<nav id="sw-combat-tabs" aria-label="Combat subject" hidden>
+  <button type="button" data-sw-combat="player" aria-label="Your character">You</button
+  ><button type="button" data-sw-combat="opponent" aria-label="Opponent">Enemy</button
+  ><button type="button" id="sw-combat-close" aria-label="Close combat details">×</button>
+</nav>
+<aside id="sw-mini-chat" aria-label="Recent community chat" hidden>
+  <div id="sw-mini-messages"></div>
+</aside>
+<section id="sw-menu" aria-label="Game menu" hidden>
+  <div id="sw-menu-header">
+    <h2>Menu</h2>
+    <nav class="sw-menu-tabs" aria-label="Menu sections">
+      <button type="button" data-sw-menu-section="character" aria-pressed="true">Character</button>
+      <button type="button" data-sw-menu-section="display" aria-pressed="false">Settings</button>
+      <button type="button" data-sw-menu-section="about" aria-pressed="false">About</button>
+    </nav>
+  </div>
+  <p id="sw-menu-empty">Game menus appear after you sign in.</p>
+  <section data-sw-menu-panel="character" aria-label="Character and activity">
+    <div id="sw-character-grid"></div>
+    <div id="sw-game-grid"></div>
+  </section>
+  <section data-sw-menu-panel="display" aria-label="Display settings" hidden>
+    <div id="sw-settings-grid"></div>
+    <h3 class="sw-menu-heading">App</h3>
+    <label class="sw-render-setting">
+      World graphics
+      <select id="sw-render-mode">
+        <option value="balanced">Balanced</option>
+        <option value="high">High quality</option>
+        <option value="battery">Low memory</option>
+        <option value="original">Original resolution</option>
+      </select>
+    </label>
+    <label class="sw-mini-setting">
+      <input type="checkbox" id="sw-mini-enabled" /> Compact chat preview
+    </label>
+    <button type="button" id="sw-notes-toggle" class="sw-menu-item">Patch notes</button>
+  </section>
+</section>
+<div id="sw-toast" role="status" hidden></div>

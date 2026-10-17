@@ -1,0 +1,64 @@
+/* Queue options open inside their row, not leftward over the world.
+   Normal-flow wrapping keeps reroll/skip/master controls inside both the
+   viewport and the queue's scroll area without moving event-bearing nodes. */
+html.sw-mobile #ui-container > .uq-panel {
+  overflow: hidden !important;
+}
+html.sw-mobile :is(.uq-row, .current-task-slot, .queue-slot) {
+  flex-wrap: wrap;
+}
+html.sw-mobile
+  :is(.uq-row, .current-task-slot, .queue-slot, .uq-controls, .slay-master-row)
+  .icon-container.tap-open {
+  flex: 0 0 100%;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 52px;
+}
+html.sw-mobile
+  :is(.uq-panel, .tasks-panel, .slay-tasks-panel)
+  .icon-container.tap-open
+  > .icons-wrapper {
+  position: relative;
+  top: 0 !important;
+  left: 0;
+  right: auto;
+  width: 100%;
+  max-width: 100%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 5px;
+  gap: 6px;
+  border: 1px solid var(--border-secondary);
+  border-radius: 3px;
+  box-shadow: none;
+  transform: none;
+}
+html.sw-mobile
+  :is(.uq-panel, .tasks-panel, .slay-tasks-panel)
+  :is(.icons-wrapper, .icon-option, .reroll-option) {
+  transition: none;
+}
+html.sw-mobile
+  :is(.uq-panel, .tasks-panel, .slay-tasks-panel)
+  :is(.icon-option, .reroll-option):hover {
+  transform: none;
+}
+html.sw-mobile
+  :is(.uq-panel, .tasks-panel, .slay-tasks-panel)
+  .icon-container.tap-open
+  :is(.icon-option, .reroll-option, .master-tile) {
+  min-width: 48px;
+  min-height: 48px;
+}
+/* Ancestor filters capture fixed-position descendants; dim just the held
+   row's text/art so its preview can remain in the viewport. */
+html.sw-mobile .uq-row.uq-row-held {
+  filter: none;
+}
+html.sw-mobile .uq-row.uq-row-held > .task-details {
+  opacity: 0.72;
+}
+html.sw-mobile .uq-row.uq-row-held .icon-option > :is(img, canvas) {
+  opacity: 0.72;
+}

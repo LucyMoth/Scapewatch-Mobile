@@ -1,0 +1,58 @@
+#sw-secondary-header {
+  position: fixed;
+  z-index: 1200;
+  left: var(--sw-left);
+  right: var(--sw-right);
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 8px);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px 2px 12px;
+  background: var(--bg-panel, #2b2216);
+  border: 1px solid var(--border-primary, #5c4a2a);
+  border-radius: 4px 4px 0 0;
+  color: var(--text-accent, #c8a83e);
+  font-size: 16px;
+}
+#sw-secondary-header[hidden] {
+  display: none;
+}
+#sw-secondary-close {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--text-light, #cccccc);
+  font-size: 24px;
+}
+html.sw-mobile.sw-secondary-panel
+  #ui-container
+  > :is(
+    .skills-panel,
+    .quests-panel,
+    .diary-panel,
+    .equipment-panel,
+    .friends-panel,
+    .barter-panel
+  ) {
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 56px) !important;
+  border-top: 0;
+  border-radius: 0 0 4px 4px !important;
+}
+html.sw-mobile.sw-landscape #sw-secondary-header {
+  left: var(--sw-pane-left);
+  top: calc(var(--sw-top) + 8px);
+}
+html.sw-mobile.sw-landscape.sw-secondary-panel
+  #ui-container
+  > :is(
+    .skills-panel,
+    .quests-panel,
+    .diary-panel,
+    .equipment-panel,
+    .friends-panel,
+    .barter-panel
+  ) {
+  top: calc(var(--sw-top) + 56px) !important;
+}

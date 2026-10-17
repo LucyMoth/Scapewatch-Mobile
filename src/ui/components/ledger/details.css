@@ -1,0 +1,71 @@
+html.sw-mobile .ledger-lootgrid.bank-grid {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  max-height: none;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)) !important;
+  gap: 6px;
+}
+html.sw-mobile .ledger-lootgrid .inv-slot {
+  width: 100%;
+  max-width: 64px;
+  height: 56px;
+}
+html.sw-mobile .ledger-lootgrid .inv-qty {
+  top: 2px;
+  left: 2px;
+}
+html.sw-mobile .ledger-lootgrid .inv-slot img {
+  max-width: 100%;
+}
+html.sw-mobile .ledger-group-h {
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .ledger-loot-bar {
+  min-width: 0;
+}
+html.sw-mobile .ledger-loot-bar .bank-search {
+  flex: 1 1 130px;
+  min-width: 0;
+  max-width: 100%;
+}
+html.sw-mobile .ledger-card-foot {
+  position: static;
+  flex-shrink: 0;
+  background: var(--bg-panel);
+  flex-wrap: wrap;
+  padding: 10px 0 2px;
+  gap: 6px;
+}
+html.sw-mobile .ledger-card-foot .ledger-btn {
+  flex: 1 1 110px;
+  min-height: 44px;
+}
+html.sw-mobile .ledger-night {
+  top: var(--sw-top) !important;
+  left: 0;
+  width: 100%;
+  height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom)) !important;
+  padding: 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+html.sw-mobile .ledger-night-body {
+  position: static !important;
+  inset: auto !important;
+  flex: 0 0 auto;
+}
+html.sw-mobile .ledger-night-title {
+  font-size: 19px;
+}
+html.sw-mobile .ledger-night-actions {
+  position: sticky;
+  top: auto !important;
+  bottom: 0;
+  left: auto !important;
+  transform: none !important;
+  padding: 8px;
+  background: var(--bg-darkest);
+  z-index: 3;
+}

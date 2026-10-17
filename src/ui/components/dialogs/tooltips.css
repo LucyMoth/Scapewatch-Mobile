@@ -1,0 +1,46 @@
+html.sw-mobile .icon-tooltip {
+  position: fixed !important;
+  top: calc(var(--sw-top) + 36px) !important;
+  bottom: auto !important;
+  left: 8px !important;
+  right: 8px !important;
+  width: auto;
+  max-width: calc(var(--sw-width) - 16px);
+  max-height: min(220px, 32dvh);
+  overflow: auto;
+  transform: none !important;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding: 10px;
+  z-index: 5000;
+}
+html.sw-mobile :is(.icon-tooltip, .global-tooltip) .tt-name {
+  font-size: 18px;
+  white-space: normal;
+}
+html.sw-mobile :is(.icon-tooltip, .global-tooltip) .tt-line {
+  font-size: 15px;
+  white-space: normal;
+}
+html.sw-mobile .global-tooltip {
+  max-width: calc(var(--sw-width) - 16px);
+  max-height: 40dvh;
+  overflow: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  transform: none !important;
+}
+html.sw-mobile .ctrl-global-tooltip {
+  left: 8px !important;
+  right: 8px !important;
+  top: calc(var(--sw-top) + 8px) !important;
+  width: auto;
+  max-width: calc(var(--sw-width) - 16px);
+  max-height: 28dvh;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  transform: none !important;
+  font-size: 15px;
+  box-shadow: none;
+  overflow: auto;
+}

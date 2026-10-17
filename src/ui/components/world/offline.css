@@ -1,0 +1,16 @@
+html.sw-mobile .ingame-hud-offline-pop {
+  position: fixed;
+  top: calc(var(--sw-top) + 24px) !important;
+  left: 8px !important;
+  right: 8px !important;
+  width: auto;
+  max-width: calc(var(--sw-width) - 16px);
+  max-height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 40px);
+  overflow: auto;
+  white-space: normal;
+}
+html.sw-mobile .ingame-hud-offline-pop button.tt-tier {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+}

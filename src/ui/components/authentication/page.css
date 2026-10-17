@@ -1,0 +1,150 @@
+/* Keep the original sign-in controls and supporting information in one scroll. */
+html.sw-mobile .login-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 16px;
+  height: calc(var(--sw-height) - var(--sw-bottom));
+  padding: calc(var(--sw-top) + 16px)
+    calc(var(--safe-area-inset-right, env(safe-area-inset-right, 0px)) + 16px) 16px
+    calc(var(--safe-area-inset-left, env(safe-area-inset-left, 0px)) + 16px);
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+html.sw-mobile .login-area {
+  order: 1;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 0;
+  justify-content: flex-start;
+  gap: 16px;
+}
+html.sw-mobile .login-logo {
+  width: min(200px, 50vw) !important;
+  height: auto !important;
+}
+html.sw-mobile :is(.login-hero, .login-box, .login-form, .login-signup) {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+html.sw-mobile .login-box {
+  max-width: 420px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+html.sw-mobile .login-signup-input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+html.sw-mobile #ui-container .login-screen .login-btn {
+  width: 100%;
+  min-width: 0 !important;
+  min-height: 56px;
+  padding: 12px 16px;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.35;
+  box-sizing: border-box;
+}
+html.sw-mobile .login-social {
+  order: 2;
+  position: static;
+  flex: 0 0 auto;
+  align-self: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+  transform: none !important;
+}
+html.sw-mobile .login-social-link {
+  min-height: 44px;
+  align-items: center;
+  font-size: 13px;
+}
+html.sw-mobile .login-version-block {
+  order: 3;
+  position: static;
+  flex: 0 0 auto;
+  align-self: center;
+  max-width: 100%;
+  font-size: 12px;
+  line-height: 1.4;
+  transform: none !important;
+}
+html.sw-mobile .login-online {
+  order: 0;
+  position: static;
+  flex: 0 0 auto;
+  align-self: flex-end;
+  max-width: 100%;
+  font-size: 12px;
+  transform: none !important;
+}
+html.sw-mobile .login-world-picker {
+  width: 100%;
+  max-width: 100%;
+}
+html.sw-mobile .login-world-row {
+  width: 100%;
+  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+html.sw-mobile #ui-container .login-screen .login-world-btn {
+  flex: 1 1 88px;
+  min-width: 88px;
+  max-width: 112px;
+  min-height: 52px;
+  box-sizing: border-box;
+}
+html.sw-mobile .login-screen > .screen-tip {
+  order: 4;
+  position: static;
+  flex: 0 0 auto;
+  align-self: center;
+  width: 100%;
+  max-width: 640px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  animation: none;
+  transform: none !important;
+  opacity: 1 !important;
+}
+html.sw-mobile .patch-notes-panel {
+  left: 12px !important;
+  right: 12px !important;
+  top: calc(var(--sw-top) + 8px) !important;
+  width: auto !important;
+  max-height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 16px);
+  z-index: 3100;
+  overflow: auto;
+}
+html.sw-mobile:not(.sw-notes) .patch-notes-panel {
+  display: none !important;
+}
+html.sw-mobile .loading-screen {
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+}

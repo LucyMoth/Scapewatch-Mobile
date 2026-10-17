@@ -1,0 +1,84 @@
+html.sw-mobile.sw-landscape .hp-bar {
+  left: var(--sw-left) !important;
+  right: auto !important;
+  width: min(240px, var(--sw-world-width)) !important;
+}
+html.sw-mobile.sw-landscape .recenter-camera-btn {
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 8px) !important;
+  right: var(--sw-right) !important;
+}
+html.sw-mobile.sw-landscape :is(.active-potions-panel, .active-potions-pill) {
+  top: calc(
+    var(--sw-top) + var(--sw-hp-height) + max(44px, var(--sw-camera-height)) + 16px
+  ) !important;
+  right: var(--sw-right) !important;
+  max-width: 112px;
+}
+html.sw-mobile.sw-landscape .active-potions-panel {
+  width: 112px;
+  max-height: min(
+    160px,
+    calc(
+      var(--sw-height) - var(--sw-top) - var(--sw-hp-height) - max(44px, var(--sw-camera-height)) -
+        var(--sw-bottom) - 16px
+    )
+  );
+}
+html.sw-mobile.sw-landscape.sw-combat-details .recenter-camera-btn {
+  left: var(--sw-left) !important;
+  right: auto !important;
+  width: 96px;
+  max-width: 96px;
+}
+html.sw-mobile.sw-landscape.sw-combat-details :is(.active-potions-panel, .active-potions-pill) {
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 8px) !important;
+  right: calc(var(--sw-width) - var(--sw-left) - var(--sw-world-width)) !important;
+  max-width: min(112px, calc(var(--sw-world-width) - 104px));
+}
+html.sw-mobile.sw-landscape.sw-combat-details .active-potions-panel {
+  width: min(112px, calc(var(--sw-world-width) - 104px));
+  max-height: min(
+    128px,
+    calc(
+      var(--sw-height) - var(--sw-top) - var(--sw-hp-height) - var(--sw-task-height) -
+        var(--sw-bottom) - 24px
+    )
+  );
+}
+html.sw-mobile.sw-landscape.sw-world .ingame-hud {
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 8px) !important;
+  left: var(--sw-left) !important;
+  width: min(280px, var(--sw-world-width));
+  max-width: min(280px, var(--sw-world-width));
+  max-height: max(
+    44px,
+    calc(
+      var(--sw-height) - var(--sw-top) - var(--sw-hp-height) - var(--sw-task-height) -
+        var(--sw-mini-height) - var(--sw-bottom) - 40px
+    )
+  );
+  padding: 0 8px;
+  border-width: 1px;
+}
+html.sw-mobile.sw-landscape .ingame-hud-name {
+  max-width: none;
+}
+html.sw-mobile.sw-landscape .tutorial-checklist {
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 8px) !important;
+  left: var(--sw-pane-left) !important;
+  right: calc(var(--sw-right) + 128px) !important;
+  width: auto;
+  max-width: none;
+  max-height: min(
+    144px,
+    calc(
+      var(--sw-height) - var(--sw-top) - var(--sw-hp-height) - var(--sw-bottom) -
+        var(--sw-combat-hud-height) - 24px
+    )
+  );
+}
+html.sw-mobile.sw-landscape .ingame-hud-offline-pop {
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  max-width: none;
+}

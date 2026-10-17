@@ -1,0 +1,150 @@
+html.sw-mobile .character-creator :is(.cc-slot-label, .cc-badge-cat-title) {
+  font-size: 16px;
+}
+html.sw-mobile .character-creator :is(.cc-slot-row, .cc-variant-row) {
+  min-width: 0;
+  width: 100%;
+}
+html.sw-mobile .character-creator :is(.cc-slot-row, .cc-variant-row) select {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  flex: 1 1 0;
+  font-size: 16px;
+}
+html.sw-mobile .character-creator :is(.cc-slot-arrow, .cc-slot-clear) {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px;
+}
+html.sw-mobile .character-creator .cc-variant-row {
+  flex-wrap: wrap;
+}
+html.sw-mobile .character-creator .cc-variant-label {
+  flex: 1 1 100%;
+  font-size: 13px;
+}
+html.sw-mobile .character-creator .cc-badge-row {
+  flex-wrap: wrap;
+  min-width: 0;
+}
+html.sw-mobile .character-creator :is(.cc-badge-name, .cc-creator-input) {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .character-creator .cc-sleep-row {
+  flex-wrap: wrap;
+}
+html.sw-mobile .character-creator .cc-anim-group {
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+html.sw-mobile .character-creator .cc-pack-card {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  flex: 0 0 auto;
+  height: auto;
+  min-height: 88px;
+  padding: 8px;
+  gap: 8px;
+}
+html.sw-mobile .character-creator .cc-pack-banner {
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+html.sw-mobile .character-creator .cc-pack-text {
+  align-self: center;
+  padding: 0;
+}
+html.sw-mobile .character-creator .cc-pack-title {
+  padding-right: 0;
+  font-size: 15px;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .character-creator .cc-pack-status {
+  position: static;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .character-creator .cc-pack-blurb {
+  font-size: 12px;
+  line-height: 1.4;
+}
+html.sw-mobile .character-creator .cc-pack-cue {
+  position: static;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 88px;
+  padding: 4px 6px;
+  font-size: 12px;
+  white-space: normal;
+  line-height: 1.3;
+}
+html.sw-mobile :is(.cc-header-controls, .cc-outfit-controls) {
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+html.sw-mobile .modal-header:has(.cc-header-controls:not([style*='display: none'])) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 4px 8px;
+}
+html.sw-mobile .modal-header:has(.cc-header-controls:not([style*='display: none'])) .header-left {
+  grid-column: 1;
+  grid-row: 1;
+}
+html.sw-mobile .modal-header:has(.cc-header-controls:not([style*='display: none'])) .modal-close {
+  grid-column: 2;
+  grid-row: 1;
+}
+html.sw-mobile .modal-header .cc-header-controls {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  gap: 2px;
+}
+html.sw-mobile .cc-header-controls label {
+  font-size: 15px;
+}
+html.sw-mobile :is(.cc-body-select, .cc-outfit-select) {
+  min-width: 0;
+  max-width: 100%;
+  flex: 1 1 130px;
+}
+html.sw-mobile .cc-outfit-controls label {
+  flex: 0 0 auto;
+  font-size: 13px;
+}
+html.sw-mobile .cc-outfit-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+html.sw-mobile .cc-lpc-credit {
+  margin-left: 0;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 12px;
+  white-space: normal;
+}
+html.sw-mobile.sw-landscape .modal-header:has(.cc-header-controls:not([style*='display: none'])) {
+  grid-template-columns: minmax(110px, 160px) minmax(0, 1fr) 44px;
+}
+html.sw-mobile.sw-landscape .modal-header .cc-header-controls {
+  grid-column: 2;
+  grid-row: 1;
+}
+html.sw-mobile.sw-landscape
+  .modal-header:has(.cc-header-controls:not([style*='display: none']))
+  .modal-close {
+  grid-column: 3;
+}

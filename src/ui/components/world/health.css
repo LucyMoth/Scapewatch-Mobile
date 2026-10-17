@@ -1,0 +1,20 @@
+html.sw-mobile .hp-bar {
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  top: var(--sw-top) !important;
+  bottom: auto !important;
+  width: auto !important;
+  height: 44px !important;
+  min-height: 44px;
+  box-sizing: border-box;
+  border: 1px solid var(--border-secondary);
+  border-radius: 6px;
+  box-shadow: none;
+}
+html.sw-mobile:is(.sw-menu-open, .sw-chat) .hp-bar,
+html.sw-mobile body.modal-open .hp-bar {
+  display: none !important;
+}
+html.sw-mobile .hp-bar-text {
+  font-size: 14px;
+}

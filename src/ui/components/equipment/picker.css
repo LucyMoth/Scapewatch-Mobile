@@ -1,0 +1,124 @@
+html.sw-mobile .equipment-panel .equip-panel-tabs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 6px;
+  padding-bottom: 6px;
+}
+html.sw-mobile .equipment-panel .equip-panel-tabs .loadout-sel {
+  display: contents;
+}
+html.sw-mobile .equipment-panel .loadout-sel-families {
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+html.sw-mobile .equipment-panel .loadout-sel-family {
+  min-width: 0;
+  min-height: 44px;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+}
+html.sw-mobile .equipment-panel .loadout-sel-family-icon {
+  width: 20px;
+  height: 20px;
+}
+html.sw-mobile .equipment-panel .equip-panel-view-toggle {
+  grid-column: 2;
+  grid-row: 1;
+  width: 44px;
+  min-height: 44px;
+}
+html.sw-mobile .equipment-panel .loadout-sel-slots {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  padding-bottom: 4px;
+}
+html.sw-mobile .equipment-panel .loadout-sel-slot {
+  flex: 1 0 60px;
+  min-width: 60px;
+  min-height: 52px;
+}
+html.sw-mobile .equipment-panel .equip-panel-paperdoll {
+  flex: 1 0 348px;
+  min-height: 348px;
+}
+html.sw-mobile .equip-panel-paperdoll .inv-slot {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+html.sw-mobile .equip-panel-paperdoll .inv-slot:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+html.sw-mobile
+  .sw-equipment-picker-open
+  .modal-header
+  > :not(.sw-equipment-picker-title, .modal-close) {
+  display: none !important;
+}
+html.sw-mobile .sw-equipment-picker-title {
+  flex: 1;
+  min-width: 0;
+  color: var(--text-accent);
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-bank.sw-equipment-picker .bank-layout {
+  display: block;
+}
+html.sw-mobile #tab-bank.sw-equipment-picker .equip-side,
+html.sw-mobile #tab-bank.sw-equipment-picker .bank-scrap-row,
+html.sw-mobile #tab-bank.sw-equipment-picker .bank-toolbar > :not(.bank-search),
+html.sw-mobile #tab-bank.sw-equipment-picker .bank-slot:is(.empty, .bank-placeholder) {
+  display: none !important;
+}
+html.sw-mobile #tab-bank.sw-equipment-picker .bank-grid-scroll {
+  padding: 8px;
+}
+html.sw-mobile #tab-bank.sw-equipment-picker .bank-grid {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)) !important;
+}
+html.sw-mobile #tab-bank.sw-equipment-picker .bank-slot {
+  position: relative;
+  max-width: none;
+  height: 104px;
+  padding: 8px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  touch-action: pan-y;
+}
+html.sw-mobile #tab-bank.sw-equipment-picker .bank-slot > img {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  object-fit: contain;
+  transform: none;
+}
+html.sw-mobile .sw-equipment-option-name {
+  width: 100%;
+  color: var(--text-light);
+  font-size: 12px;
+  line-height: 16px;
+  overflow-wrap: anywhere;
+  text-align: center;
+  max-height: 48px;
+  overflow: hidden;
+}
+html.sw-mobile .sw-equipment-picker-empty {
+  margin: 20px 8px;
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.5;
+}
+html.sw-mobile .sw-equipment-picker-empty[hidden] {
+  display: none;
+}

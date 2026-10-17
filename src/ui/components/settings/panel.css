@@ -1,0 +1,181 @@
+html.sw-mobile #tab-settings.active {
+  display: block;
+  padding: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+html.sw-mobile
+  #tab-settings
+  .settings-toggle-row:has(.settings-map-quality-row:not(.settings-scaling-btn)) {
+  display: none !important;
+}
+html.sw-mobile #tab-settings .settings-section {
+  width: 100%;
+  margin: 0 0 16px;
+  padding: 12px !important;
+  scroll-margin-top: 108px;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+}
+html.sw-mobile #tab-settings .settings-search-bar {
+  top: -8px;
+  width: auto;
+  margin: -8px -8px 12px;
+  padding: 6px 8px;
+  gap: 6px;
+}
+html.sw-mobile #tab-settings .settings-header-nav {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  min-width: 0;
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+html.sw-mobile #tab-settings .settings-nav-btn {
+  flex: 0 0 auto;
+  min-height: 44px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+html.sw-mobile #tab-settings .settings-search-wrap {
+  min-width: 0;
+  max-width: 100%;
+}
+html.sw-mobile #tab-settings .settings-search-input {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  font-size: 16px;
+  padding-right: 44px;
+}
+html.sw-mobile #tab-settings .settings-search-clear {
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+html.sw-mobile #tab-settings :is(.settings-section-header, .settings-subheading) {
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-settings .settings-subheading {
+  font-size: 17px;
+  margin-top: 16px;
+}
+html.sw-mobile #tab-settings .settings-toggle-row {
+  min-height: 56px;
+  align-items: center;
+  gap: 8px;
+}
+html.sw-mobile #tab-settings .settings-toggle-text {
+  min-width: 0;
+  flex: 1 1 140px;
+  margin: 0;
+}
+html.sw-mobile #tab-settings .settings-toggle-label {
+  font-size: 15px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-settings .settings-toggle-desc {
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-settings .settings-switch {
+  height: 28px;
+  margin: 8px 0;
+}
+html.sw-mobile #tab-settings .settings-switch::before {
+  position: absolute;
+  inset: -8px 0;
+  content: '';
+}
+html.sw-mobile #tab-settings .settings-switch-knob {
+  top: 4px;
+}
+html.sw-mobile
+  #tab-settings
+  :is(.settings-quality-control, .settings-sound-controls, .settings-icon-size-control) {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+html.sw-mobile #tab-settings .settings-quality-control {
+  flex: 1 1 150px;
+}
+html.sw-mobile #tab-settings .settings-volume-control {
+  max-width: 100%;
+}
+html.sw-mobile #tab-settings .settings-quality-slider {
+  min-width: 60px;
+  width: 120px;
+  flex: 1 1 80px;
+  height: 44px;
+  margin: 0;
+  background: linear-gradient(var(--bg-cell), var(--bg-cell)) center / 100% 6px no-repeat;
+}
+html.sw-mobile
+  #tab-settings
+  :is(.settings-sound-preview, .settings-icon-size-btn, .settings-quality-badge) {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+html.sw-mobile #tab-settings .settings-theme-select {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  font-size: 15px;
+}
+html.sw-mobile #tab-settings .settings-color-picker {
+  width: 44px;
+  height: 44px;
+}
+html.sw-mobile #tab-settings .settings-hotkey-row {
+  display: grid;
+  grid-template-columns: 44px 28px minmax(0, 1fr) 44px;
+}
+html.sw-mobile #tab-settings .settings-hotkey-grip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0;
+}
+html.sw-mobile #tab-settings .settings-hotkey-icon {
+  margin-right: 0;
+}
+html.sw-mobile #tab-settings .settings-account-row {
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+html.sw-mobile #tab-settings :is(.settings-account-label, .settings-account-value) {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-settings :is(.settings-reset-btn, .settings-logout-btn) {
+  min-height: 44px;
+  max-width: 100%;
+  padding: 8px 12px;
+  font-size: 15px;
+  white-space: normal;
+}
+html.sw-mobile.sw-landscape #tab-settings .settings-section {
+  max-width: 680px !important;
+  margin-inline: auto;
+}

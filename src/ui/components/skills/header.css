@@ -1,0 +1,117 @@
+/* Skill customization has one active section and one page scroll. Every
+   row puts its original credit controls below its name instead of forcing
+   desktop columns into a phone width. Hidden/locked game rows stay hidden. */
+html.sw-mobile .skill-custom-tab {
+  height: auto;
+  min-height: 100%;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+}
+html.sw-mobile .skill-custom-tab .skill-custom-navbar {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 64px 6px 6px;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+html.sw-mobile .skill-custom-tab .skill-custom-nav-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+}
+html.sw-mobile .skill-custom-tab .skill-custom-nav-icon img {
+  width: 32px;
+  height: 32px;
+}
+html.sw-mobile .skill-custom-tab .modal-header {
+  padding: 8px 54px 8px 8px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+html.sw-mobile .skill-custom-tab .header-left {
+  flex: 1 1 100%;
+  min-width: 0;
+  gap: 8px;
+}
+html.sw-mobile .skill-custom-tab .header-icon {
+  width: 44px;
+  height: 44px;
+}
+html.sw-mobile .skill-custom-tab .header-icon img {
+  width: 34px;
+  height: 34px;
+}
+html.sw-mobile .skill-custom-tab .header-info {
+  min-width: 0;
+}
+html.sw-mobile .skill-custom-tab .header-name {
+  font-size: 18px;
+  white-space: normal;
+  line-height: 1.15;
+}
+html.sw-mobile .skill-custom-tab .header-stats {
+  font-size: 13px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+html.sw-mobile .skill-custom-tab :is(.header-mid-left, .header-mid-right) {
+  flex: 1 1 100%;
+  min-width: 0;
+  max-width: 100%;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+html.sw-mobile .skill-custom-tab .header-right {
+  margin-right: 0;
+  align-items: flex-start;
+  flex: 1 1 auto;
+}
+html.sw-mobile .skill-custom-tab :is(.cred-display, .tasks-completed-text, .skill-weight-label) {
+  font-size: 15px;
+}
+html.sw-mobile .skill-custom-tab .header-reset-btn {
+  min-width: 44px;
+  min-height: 44px;
+  margin-left: 0;
+}
+html.sw-mobile .skill-custom-tab .header-mid-left {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px 52px;
+  gap: 4px 6px;
+}
+html.sw-mobile .skill-custom-tab .header-mid-left .skill-weight-label {
+  grid-column: 1 / -1;
+}
+html.sw-mobile .skill-custom-tab .lever-control {
+  width: 100%;
+  min-width: 0;
+  flex-wrap: nowrap;
+  gap: 3px;
+}
+html.sw-mobile .skill-custom-tab .lever-track {
+  flex: 1 1 50px;
+  min-width: 20px;
+  max-width: 115px;
+}
+html.sw-mobile .skill-custom-tab .lever-pip {
+  width: 7px;
+  height: 10px;
+  flex: 1;
+}
+html.sw-mobile .skill-custom-tab .lever-pip.center {
+  width: 9px;
+  height: 12px;
+}
+html.sw-mobile .skill-custom-tab .lever-value {
+  width: 24px;
+  font-size: 16px;
+}
+html.sw-mobile .skill-custom-tab .lever-mult {
+  width: auto;
+  font-size: 15px;
+  margin-left: 0;
+}

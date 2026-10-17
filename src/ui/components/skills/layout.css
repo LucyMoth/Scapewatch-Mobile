@@ -1,0 +1,23 @@
+html.sw-mobile .skill-custom-tab {
+  height: auto;
+  min-height: 100%;
+  overflow: visible;
+}
+html.sw-mobile .skill-custom-tab .skill-custom-navbar {
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+html.sw-mobile .skill-custom-tab .header-right {
+  flex-wrap: wrap;
+}
+html.sw-mobile
+  :is(
+    .hiscores-table-wrap,
+    .ledger-table-wrap,
+    .proc-recipes,
+    .mob-cards-scroll,
+    .horizontal-scroll
+  ) {
+  overflow: auto;
+  max-width: 100%;
+}

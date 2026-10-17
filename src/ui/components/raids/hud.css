@@ -1,0 +1,188 @@
+html.sw-mobile {
+  --sw-raid-height: 0px;
+}
+html.sw-mobile.sw-world:not(.sw-combat-details):has(
+    :is(.raid-contrib-hud, .gauntlet-hud):not([style*='display: none']):not([style*='display:none'])
+  ) {
+  --sw-right-top: calc(var(--sw-top) + var(--sw-hp-height) + var(--sw-raid-height) + 12px);
+}
+html.sw-mobile :is(.raid-contrib-hud, .gauntlet-hud) {
+  top: calc(var(--sw-top) + var(--sw-hp-height) + 6px) !important;
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  transform: none !important;
+  width: auto !important;
+  max-width: none;
+  max-height: min(300px, calc((var(--sw-height) - var(--sw-top) - var(--sw-bottom)) * 0.45));
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 4px 6px;
+  border-width: 1px;
+  border-radius: 5px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 4px;
+}
+html.sw-mobile :is(.raid-contrib-hud, .gauntlet-hud) > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+html.sw-mobile:not(.sw-world) :is(.raid-contrib-hud, .gauntlet-hud, .gauntlet-leave-btn),
+html.sw-mobile.sw-combat-details .raid-contrib-hud,
+html.sw-mobile body.modal-open :is(.raid-contrib-hud, .gauntlet-hud, .gauntlet-leave-btn) {
+  display: none !important;
+}
+html.sw-mobile :is(.raid-contrib-hud, .gauntlet-hud) > .hud-collapse-btn {
+  position: static;
+  grid-column: 2;
+  grid-row: 1;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+}
+html.sw-mobile .raid-contrib-tabs {
+  position: static;
+  grid-column: 1;
+  grid-row: 1;
+  flex-direction: row;
+  gap: 4px;
+}
+html.sw-mobile #ui-container .raid-contrib-tab {
+  flex: 1;
+  width: auto;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 2px;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+  white-space: normal;
+}
+html.sw-mobile .raid-contrib-barwrap {
+  height: 26px;
+  box-sizing: border-box;
+}
+html.sw-mobile .raid-contrib-label {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 4px;
+  padding: 0 5px;
+  font-size: 12px;
+}
+html.sw-mobile .raid-contrib-name {
+  width: auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+html.sw-mobile .raid-contrib-dmg {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html.sw-mobile .raid-contrib-specials {
+  gap: 3px;
+  margin: 2px 0;
+}
+html.sw-mobile .raid-contrib-spec-pill {
+  padding: 1px 3px;
+}
+html.sw-mobile .raid-recap-cols {
+  flex-direction: column;
+  gap: 8px;
+}
+html.sw-mobile .raid-recap-col-loot {
+  min-width: 0;
+}
+html.sw-mobile .gauntlet-hud-header {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .gauntlet-hud-chargewrap {
+  margin: 0;
+}
+html.sw-mobile .gauntlet-hud-row {
+  grid-template-columns: minmax(0, 1fr) 78px minmax(0, 1fr);
+  gap: 3px;
+  margin: 0;
+}
+html.sw-mobile :is(.gauntlet-hud-statlabel, .gauntlet-hud-barval) {
+  font-size: 11px;
+}
+html.sw-mobile .gauntlet-hud-barval {
+  padding: 0 3px;
+}
+html.sw-mobile .gauntlet-hud-footer {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(44px, 1fr));
+  gap: 3px;
+  margin: 0;
+}
+html.sw-mobile .gauntlet-foot-col {
+  min-width: 0;
+}
+html.sw-mobile .gauntlet-foot-pill {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  padding: 2px;
+  touch-action: manipulation;
+}
+html.sw-mobile .gauntlet-foot-pill-icon {
+  width: 16px;
+  height: 16px;
+}
+html.sw-mobile .gauntlet-foot-roster {
+  max-width: 100%;
+}
+html.sw-mobile .gauntlet-leave-btn {
+  left: auto;
+  right: var(--sw-right);
+  bottom: calc(var(--sw-bottom) + 8px);
+  transform: none;
+  max-width: calc(var(--sw-width) - var(--sw-left) - var(--sw-right));
+  min-height: 44px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+html.sw-mobile.sw-landscape :is(.raid-contrib-hud, .gauntlet-hud) {
+  top: calc(var(--sw-top) + 8px) !important;
+  left: var(--sw-pane-left) !important;
+  max-height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 72px);
+}
+html.sw-mobile.sw-landscape:has(
+    :is(.raid-contrib-hud, .gauntlet-hud):not([style*='display: none']):not([style*='display:none'])
+  )
+  #sw-combat-toggle {
+  top: calc(var(--sw-top) + var(--sw-raid-height) + 16px);
+}
+html.sw-mobile.sw-landscape:has(
+    :is(.raid-contrib-hud, .gauntlet-hud):not([style*='display: none']):not([style*='display:none'])
+  )
+  :is(.active-potions-panel, .active-potions-pill) {
+  right: calc(var(--sw-width) - var(--sw-left) - var(--sw-world-width)) !important;
+}
+html.sw-mobile.sw-landscape:has(
+    :is(.raid-contrib-hud, .gauntlet-hud):not([style*='display: none']):not([style*='display:none'])
+  )
+  .recenter-camera-btn {
+  top: max(
+    calc(var(--sw-top) + var(--sw-hp-height) + 8px),
+    calc(var(--sw-hud-bottom) + 8px)
+  ) !important;
+  left: var(--sw-left) !important;
+  right: auto !important;
+}

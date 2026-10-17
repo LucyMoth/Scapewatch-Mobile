@@ -1,0 +1,48 @@
+html.sw-mobile #sw-layout-actions {
+  display: none;
+}
+html.sw-mobile.sw-menu-open #sw-layout-actions {
+  display: flex;
+  gap: 6px;
+  position: fixed;
+  top: calc(var(--sw-top) + 8px);
+  right: calc(var(--sw-right, 8px) + 8px);
+  z-index: 10001;
+}
+#sw-layout-actions button {
+  min-height: 44px;
+}
+html #sw-orientation-toggle[hidden] {
+  display: none !important;
+}
+html.sw-mobile #sw-menu h2 {
+  min-height: 44px;
+  padding-right: 174px;
+}
+html:not(.sw-mobile) #sw-layout-actions {
+  display: flex;
+  gap: 6px;
+  position: fixed;
+  top: calc(8px + var(--safe-area-inset-top, env(safe-area-inset-top, 0px)));
+  right: calc(8px + var(--safe-area-inset-right, env(safe-area-inset-right, 0px)));
+  z-index: 10001;
+}
+html:not(.sw-mobile) #sw-nav,
+html:not(.sw-mobile) #sw-menu {
+  display: none !important;
+}
+html:not(.sw-mobile) #sw-layout-toggle {
+  background: var(--bg-dark, #1c1c0e);
+}
+body.login-active #sw-nav > button:not([data-sw-view='menu']) {
+  opacity: 0.45;
+}
+@media (max-width: 350px) {
+  #sw-view-title {
+    display: none;
+  }
+  html.sw-mobile .modal-tabs .tab-btn {
+    width: 62px;
+    flex-basis: 62px;
+  }
+}

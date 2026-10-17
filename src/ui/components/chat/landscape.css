@@ -1,0 +1,6 @@
+html.sw-mobile.sw-landscape #sw-mini-chat {
+  left: var(--sw-left);
+  bottom: calc(var(--sw-bottom) + var(--sw-task-height) + 14px);
+  width: var(--sw-world-width);
+  max-height: 48px;
+}

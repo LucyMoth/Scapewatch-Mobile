@@ -1,0 +1,139 @@
+html.sw-mobile .global-tooltip.sw-item-details {
+  left: var(--sw-left) !important;
+  right: auto !important;
+  top: var(--sw-item-top, calc(var(--sw-top) + var(--sw-hp-height) + 8px)) !important;
+  bottom: auto !important;
+  width: min(440px, calc(var(--sw-width) - var(--sw-left) - var(--sw-right)));
+  max-width: none;
+  max-height: var(
+    --sw-item-max-height,
+    min(
+      400px,
+      calc(var(--sw-height) - var(--sw-top) - var(--sw-hp-height) - var(--sw-bottom) - 24px)
+    )
+  );
+  box-sizing: border-box;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  pointer-events: auto;
+  z-index: 100001;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+html.sw-mobile .global-tooltip.sw-item-details :is(.tt-line, .tt-special-desc, .tt-wrap) {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .global-tooltip.sw-item-details :is(.tt-food-boost, .tt-potion-boost) {
+  flex-wrap: wrap;
+}
+html.sw-mobile .global-tooltip.sw-item-details .tt-equip-table {
+  width: 100%;
+  table-layout: fixed;
+  font-size: 13px;
+}
+html.sw-mobile .global-tooltip.sw-item-details .tt-equip-table :is(th, td) {
+  width: auto;
+  padding: 3px 2px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .global-tooltip.sw-item-details .tt-equip-table :is(th, td):first-child {
+  width: 31%;
+}
+html.sw-mobile .global-tooltip.sw-item-details .tt-compare-hint {
+  font-size: 13px;
+  white-space: normal;
+}
+html.sw-mobile .sw-item-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-secondary);
+}
+html.sw-mobile .sw-item-actions button {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-secondary);
+  border-radius: 4px;
+  background: var(--bg-cell);
+  color: var(--text-light);
+  font: inherit;
+}
+html.sw-mobile .sw-item-action {
+  color: var(--text-gold);
+  border-color: var(--text-gold);
+}
+html:not(.sw-mobile) .sw-item-actions {
+  display: none;
+}
+html.sw-mobile .global-tooltip .potion-tt-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+html.sw-mobile .global-tooltip .potion-tt-line {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-secondary);
+  font-size: 14px;
+}
+html.sw-mobile .global-tooltip .potion-tt-icon {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  width: 32px;
+  height: 32px;
+}
+html.sw-mobile .global-tooltip .potion-tt-name {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 15px;
+}
+html.sw-mobile .global-tooltip .potion-tt-tier {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: 13px;
+}
+html.sw-mobile .global-tooltip .potion-tt-stat {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  flex-wrap: wrap;
+}
+html.sw-mobile .global-tooltip .potion-tt-count {
+  grid-column: 2 / -1;
+  grid-row: 3;
+  font-size: 13px;
+}
+html.sw-mobile .global-tooltip :is(.potion-tt-name, .potion-tt-stat-val, .potion-tt-count) {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .global-tooltip .potion-tt-stat-val {
+  font-size: 14px;
+}
+html.sw-mobile .global-tooltip .potion-tt-total {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin-bottom: 0;
+}
+html.sw-mobile .global-tooltip .potion-tt-total-label {
+  grid-column: 1 / -1;
+  font-size: 16px;
+  white-space: normal;
+}
+html.sw-mobile .global-tooltip .potion-tt-total .potion-tt-stat {
+  grid-column: 1;
+}
+html.sw-mobile .global-tooltip .potion-tt-total .potion-tt-count {
+  grid-column: 2;
+  grid-row: 2;
+}

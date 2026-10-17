@@ -1,0 +1,49 @@
+html.sw-mobile.sw-landscape #sw-combat-toggle {
+  top: calc(var(--sw-top) + 8px);
+  left: auto;
+  right: var(--sw-right);
+  width: 144px;
+  min-height: 44px;
+}
+html.sw-mobile.sw-landscape #sw-combat-tabs {
+  top: calc(var(--sw-top) + 8px);
+  left: var(--sw-pane-left);
+  right: var(--sw-right);
+}
+html.sw-mobile.sw-landscape .combat-encounter .panel-tab-bar {
+  top: calc(var(--sw-top) + 56px) !important;
+  left: var(--sw-pane-left) !important;
+  right: var(--sw-right) !important;
+}
+html.sw-mobile.sw-landscape .combat-encounter .panel-wrapper {
+  top: calc(var(--sw-top) + 104px) !important;
+  bottom: calc(var(--sw-bottom) + var(--sw-combat-hud-height) + 8px) !important;
+  left: var(--sw-pane-left) !important;
+  right: var(--sw-right) !important;
+}
+html.sw-mobile.sw-landscape .combat-encounter .combat-panel:not(.panel-hidden) {
+  padding: 12px;
+}
+html.sw-mobile.sw-landscape .combat-encounter .combat-hud {
+  left: var(--sw-pane-left);
+  right: var(--sw-right);
+  bottom: var(--sw-bottom);
+  width: auto;
+  max-width: none;
+  min-height: 44px;
+  transform: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+html.sw-mobile.sw-landscape .combat-encounter .ce-kill-count {
+  min-width: 0;
+  font-size: 14px;
+}
+html.sw-mobile.sw-landscape .combat-encounter .btn-end-combat {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  font-size: 14px;
+}

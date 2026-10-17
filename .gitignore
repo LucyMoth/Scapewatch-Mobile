@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+test-results/
+__pycache__/
+*.pyc
+.env
+.env.*
+*.apk
+*.aab
+*.zip
+*.keystore
+*.jks
+*password*.txt
+.aws/
+tools/
+playwright-report/

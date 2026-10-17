@@ -1,0 +1,16 @@
+html.sw-mobile .gauntlet-leave-btn {
+  bottom: calc(var(--sw-bottom) + 10px);
+}
+html.sw-mobile .map-overlay {
+  top: var(--sw-top);
+  height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom));
+}
+html.sw-mobile :is(.map-filter-panel, .map-legend-panel) {
+  max-width: calc(100% - 24px);
+  max-height: 40dvh;
+  overflow: auto;
+}
+html.sw-mobile .raid-browse-columns {
+  grid-template-columns: 1fr;
+  overflow: auto;
+}

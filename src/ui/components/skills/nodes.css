@@ -1,0 +1,66 @@
+html.sw-mobile .skill-custom-tab .node-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 52px;
+  gap: 4px 6px;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+}
+html.sw-mobile .skill-custom-tab .node-name-wrap {
+  grid-column: 1;
+  grid-row: 1;
+  overflow: visible;
+}
+html.sw-mobile .skill-custom-tab .node-name {
+  font-size: 16px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .skill-custom-tab .node-bank {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 14px;
+  width: auto;
+  white-space: normal;
+}
+html.sw-mobile .skill-custom-tab .node-bank::before {
+  content: 'Bank: ';
+  color: var(--text-muted);
+}
+html.sw-mobile .skill-custom-tab .node-dist {
+  grid-column: 2;
+  grid-row: 2;
+  width: auto;
+  font-size: 14px;
+}
+html.sw-mobile .skill-custom-tab .node-chance {
+  grid-column: 2;
+  grid-row: 1;
+  width: auto;
+  font-size: 14px;
+}
+/* Slay master's original portrait row uses inline flex and has no weight
+   buttons; preserve that interaction while downsizing its 128px portrait. */
+html.sw-mobile .skill-custom-tab .node-info[style] {
+  flex-wrap: wrap;
+  min-width: 0;
+}
+html.sw-mobile .skill-custom-tab .node-info[style] > img {
+  width: 52px !important;
+  height: 52px !important;
+}
+html.sw-mobile .skill-custom-tab .node-info[style] .node-name {
+  flex: 1;
+  min-width: 100px;
+}
+html.sw-mobile .skill-custom-tab .node-info[style] .node-bank::before {
+  content: none;
+}
+html.sw-mobile
+  .skill-custom-tab
+  :is(.skill-columns-section, .skill-columns-grid, .skill-col, .skill-col-body) {
+  min-width: 0;
+  height: auto;
+  overflow: visible;
+  flex: 0 0 auto;
+}

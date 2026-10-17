@@ -1,0 +1,114 @@
+html.sw-mobile {
+  --sw-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+  --sw-bottom: calc(68px + var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)));
+  --sw-height: 100dvh;
+  --sw-width: 100vw;
+  --sw-left: calc(8px + var(--safe-area-inset-left, env(safe-area-inset-left, 0px)));
+  --sw-right: calc(8px + var(--safe-area-inset-right, env(safe-area-inset-right, 0px)));
+  --sw-accent: var(--text-accent, #c8a83e);
+  /* ResizeObserver supplies actual visible heights; these are first-frame
+     fallbacks, never measurements of gameplay state. */
+  --sw-hp-height: 44px;
+  --sw-camera-height: 44px;
+  --sw-potions-height: 44px;
+  --sw-task-height: 132px;
+  --sw-combat-hud-height: 0px;
+  --sw-mini-height: 0px;
+  --sw-hud-bottom: calc(var(--sw-top) + 120px);
+  --sw-right-top: calc(var(--sw-top) + var(--sw-hp-height) + 6px);
+  --sw-potions-top: calc(var(--sw-right-top) + var(--sw-camera-height) + 4px);
+  --sw-combat-top: calc(
+    max(calc(var(--sw-right-top) + 92px), calc(var(--sw-potions-top) + var(--sw-potions-height))) +
+      8px
+  );
+  --sw-footer-reserve: calc(
+    var(--sw-task-height) + var(--sw-combat-hud-height) + var(--sw-mini-height) + 30px
+  );
+}
+html.sw-mobile body {
+  background: var(--bg-darkest, #1a1a1a);
+}
+html.sw-mobile #ui-container {
+  zoom: 1 !important;
+  transform: none !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: var(--sw-width) !important;
+  height: var(--sw-height) !important;
+  --panel-width: calc(var(--sw-width) - 16px);
+  --playable-center-x: 50% !important;
+}
+html.sw-mobile #game-container {
+  left: 0 !important;
+  top: 0 !important;
+  transform: none !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+html.sw-mobile #ui-container :is(button, input, select, textarea) {
+  font-size: 16px;
+}
+html.sw-mobile #ui-container :is(button, input:not([type='range']), select) {
+  min-height: 44px;
+}
+html.sw-mobile #ui-container :is(button, [role='button']) {
+  touch-action: manipulation;
+}
+html.sw-mobile #ui-container :is(input, textarea) {
+  user-select: text;
+  -webkit-user-select: text;
+}
+html.sw-mobile
+  #ui-container
+  :is(
+    .ctrl-btn,
+    .lever-btn,
+    .modal-close,
+    .ctx-confirm-btn,
+    .loadout-btn,
+    .window-control-btn,
+    .chat-filter-btn,
+    .chat-channel-label,
+    .settings-toggle-switch,
+    .equip-compare-toggle,
+    .panel-titlebar-btn
+  ) {
+  min-width: 44px;
+  min-height: 44px;
+}
+html.sw-mobile #ui-container :is(.header-name, .diary-modal-title) {
+  font-size: 24px;
+}
+html.sw-mobile
+  #ui-container
+  :is(
+    .header-stats,
+    .diary-modal-sub,
+    .diary-modal-help,
+    .diary-modal-card .diary-bank-name,
+    .diary-modal-card .diary-bank-count,
+    .diary-modal-card .diary-row-meta,
+    .diary-modal-card .diary-step,
+    .diary-bulk-label,
+    .diary-step-lv-val
+  ) {
+  font-size: 16px;
+}
+html.sw-mobile
+  #ui-container
+  :is(
+    .panel-tab-hotkey,
+    .floating-tab-hotkey,
+    .modal-tab-hotkey,
+    .window-controls,
+    .chat-resize-handle,
+    .chat-resize-handle-right,
+    .panel-resize-handle,
+    .panel-drag-handle
+  ) {
+  display: none !important;
+}
+html.sw-mobile #ui-container > .panel-tab-bar,
+html.sw-mobile #ui-container > .floating-tab-strip {
+  display: none !important;
+}

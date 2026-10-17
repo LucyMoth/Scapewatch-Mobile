@@ -1,0 +1,35 @@
+html.sw-mobile #game-container {
+  overflow: clip;
+  background: var(--bg-darkest);
+}
+
+html.sw-mobile:not(.sw-map)
+  body:not(.login-active):not(:has(.recenter-camera-btn.combat-active))
+  #game-canvas {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  width: 200% !important;
+  height: 200% !important;
+}
+html.sw-mobile:not(.sw-map)
+  body:not(.login-active):has(.recenter-camera-btn.combat-active):has(
+    .raid-contrib-hud:not([style*='display: none']):not([style*='display:none'])
+  )
+  #game-canvas {
+  position: absolute;
+  left: -37.5%;
+  top: -37.5%;
+  width: 175% !important;
+  height: 175% !important;
+}
+html.sw-mobile.sw-landscape:not(.sw-map)
+  body:not(.login-active):has(.recenter-camera-btn.combat-active):has(
+    .raid-contrib-hud:not([style*='display: none']):not([style*='display:none'])
+  )
+  #game-canvas {
+  left: calc(var(--sw-left) + var(--sw-world-width) / 2 - 60%);
+  top: -10%;
+  width: 120% !important;
+  height: 120% !important;
+}

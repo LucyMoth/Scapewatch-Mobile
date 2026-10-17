@@ -1,0 +1,239 @@
+html.sw-mobile :is(#tab-smith, #tab-craft, #tab-imbue).active {
+  display: block;
+  height: 100%;
+  padding: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+html.sw-mobile .proc-layout {
+  min-width: 0;
+  overflow: visible;
+}
+html.sw-mobile .proc-main-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 0;
+  gap: 8px;
+}
+html.sw-mobile .proc-tier-sidebar-title {
+  padding: 5px 8px;
+  font-size: 13px;
+  text-align: left;
+}
+html.sw-mobile .proc-tier-sidebar-scroll {
+  display: flex;
+  flex: none;
+  gap: 4px;
+  padding: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+}
+html.sw-mobile .proc-tier-row {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  grid-template-rows: 18px 18px 18px;
+  gap: 0 4px;
+  flex: 0 0 126px;
+  min-height: 62px;
+  padding: 4px;
+  border: 1px solid var(--border-primary);
+}
+html.sw-mobile .proc-tier-badge {
+  grid-area: 1 / 1;
+  width: auto;
+  font-size: 12px;
+}
+html.sw-mobile .proc-tier-mat-icon.inv-slot {
+  grid-area: 2 / 1 / 4;
+  width: 32px !important;
+  height: 32px !important;
+}
+html.sw-mobile :is(.proc-tier-mat-icon, .proc-mat-slot).inv-slot img {
+  width: 24px;
+  height: 24px;
+  transform: none;
+  object-fit: contain;
+}
+html.sw-mobile .proc-tier-mat-icon .inv-tier-label {
+  display: none;
+}
+html.sw-mobile .proc-tier-info {
+  grid-area: 1 / 2 / 3;
+}
+html.sw-mobile .proc-tier-mat-name {
+  font-size: 12px;
+  line-height: 18px;
+}
+html.sw-mobile .proc-tier-level {
+  font-size: 11px;
+  line-height: 18px;
+}
+html.sw-mobile .proc-tier-bank-qty {
+  grid-area: 3 / 2;
+  min-width: 0;
+  font-size: 12px;
+  text-align: left;
+}
+html.sw-mobile .proc-recipes-area {
+  min-width: 0;
+  overflow: visible;
+}
+html.sw-mobile .proc-recipes-header {
+  flex-wrap: wrap;
+  padding: 6px;
+  gap: 6px;
+}
+html.sw-mobile .proc-recipes-material-display {
+  min-width: 0;
+  max-width: 100%;
+  height: 44px;
+  padding: 2px 6px;
+}
+html.sw-mobile .proc-mat-slot.inv-slot {
+  width: 36px !important;
+  height: 36px !important;
+}
+html.sw-mobile .proc-recipes-material-display :is(.proc-mat-label, .proc-mat-bank) {
+  min-width: 0;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .proc-amount-control {
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 4px;
+  background: none;
+  border: none;
+}
+html.sw-mobile .proc-amount-label {
+  font-size: 13px;
+}
+html.sw-mobile #ui-container .proc-amount-input {
+  width: 56px !important;
+  min-width: 44px;
+  max-width: 100%;
+  height: 44px;
+  margin: 0;
+  padding: 4px;
+  font-size: 16px;
+}
+html.sw-mobile #ui-container :is(.proc-amount-max-btn, .proc-amount-reset-btn) {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 6px;
+  font-size: 12px;
+}
+html.sw-mobile .proc-recipes-grid-scroll {
+  flex: none;
+  overflow: visible;
+  padding: 8px;
+}
+html.sw-mobile .proc-recipes-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(224px, 100%), 1fr));
+  gap: 8px;
+}
+html.sw-mobile .proc-recipe-card {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 8px;
+}
+html.sw-mobile .proc-recipe-card-top {
+  padding-right: 44px;
+  min-height: 44px;
+}
+html.sw-mobile .proc-recipe-item-name {
+  font-size: 16px;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .proc-recipe-slot-label {
+  font-size: 12px;
+}
+html.sw-mobile .proc-recipe-detail-row {
+  font-size: 14px;
+}
+html.sw-mobile .proc-recipe-info-btn {
+  width: 44px;
+  height: 44px;
+  line-height: 42px;
+  top: 4px;
+  right: 4px;
+}
+html.sw-mobile #ui-container .proc-craft-btn {
+  margin-top: auto;
+  min-height: 44px;
+  font-size: 15px;
+  white-space: normal;
+}
+html.sw-mobile .proc-recipe-info-pop {
+  position: fixed !important;
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  top: auto !important;
+  bottom: calc(var(--sw-bottom) + 8px) !important;
+  width: auto;
+  min-width: 0;
+  max-width: 480px;
+  max-height: min(420px, 55dvh, calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 116px));
+  margin-inline: auto;
+  padding: 12px;
+  overflow: auto;
+  touch-action: pan-y;
+}
+html.sw-mobile .proc-recipe-info-title {
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile :is(.proc-recipe-info-line, .proc-recipe-info-name, .proc-recipe-info-qty) {
+  min-width: 0;
+  font-size: 14px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .proc-recipe-info-row {
+  min-height: 44px;
+  gap: 8px;
+  white-space: normal;
+}
+html.sw-mobile.sw-landscape :is(#tab-smith, #tab-craft, #tab-imbue).active {
+  overflow: hidden;
+}
+html.sw-mobile.sw-landscape .proc-layout {
+  height: 100%;
+  overflow: hidden;
+}
+html.sw-mobile.sw-landscape .proc-main-layout {
+  grid-template-columns: 138px minmax(0, 1fr);
+  height: 100% !important;
+  overflow: hidden !important;
+}
+html.sw-mobile.sw-landscape .proc-tier-sidebar {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+html.sw-mobile.sw-landscape .proc-tier-sidebar-scroll {
+  display: block;
+  min-height: 0;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+html.sw-mobile.sw-landscape .proc-tier-row {
+  margin-bottom: 4px;
+}
+html.sw-mobile.sw-landscape .proc-recipes-area {
+  min-height: 0;
+  overflow: hidden;
+}
+html.sw-mobile.sw-landscape .proc-recipes-grid-scroll {
+  min-height: 0;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

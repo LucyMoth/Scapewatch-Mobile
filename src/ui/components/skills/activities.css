@@ -1,0 +1,92 @@
+html.sw-mobile .skill-custom-tab :is(.activity-row, .node-row):not(.hidden) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  padding: 9px 6px;
+}
+html.sw-mobile .skill-custom-tab .activity-info {
+  display: grid;
+  grid-template-columns: 40px 26px minmax(0, 1fr) 46px;
+  gap: 4px 6px;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+}
+html.sw-mobile .skill-custom-tab .activity-level {
+  grid-column: 1;
+  grid-row: 1;
+  width: auto;
+  font-size: 14px;
+}
+html.sw-mobile .skill-custom-tab :is(.activity-item-icon, .slay-mob-sprite) {
+  grid-column: 2;
+  grid-row: 1;
+  width: 26px;
+  height: 26px;
+}
+html.sw-mobile .skill-custom-tab .activity-name {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: 16px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .skill-custom-tab .activity-chance {
+  grid-column: 4;
+  grid-row: 1;
+  width: auto;
+  font-size: 14px;
+}
+html.sw-mobile .skill-custom-tab .activity-qty-range {
+  grid-column: 3 / 5;
+  grid-row: 2;
+  width: auto;
+  font-size: 14px;
+  text-align: left;
+}
+html.sw-mobile .skill-custom-tab .activity-qty-range::before {
+  content: 'Qty ';
+  color: var(--text-muted);
+}
+html.sw-mobile .skill-custom-tab .activity-info .lock-icon {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: end;
+  font-size: 12px;
+}
+html.sw-mobile .skill-custom-tab .activity-info .req-inline {
+  grid-column: 1 / 5;
+  grid-row: 3;
+  flex-wrap: wrap;
+}
+html.sw-mobile .skill-custom-tab .row-controls {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+html.sw-mobile .skill-custom-tab .control-group {
+  margin-left: 0;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(44px, 1fr));
+  gap: 3px;
+}
+html.sw-mobile .skill-custom-tab .control-group::before {
+  content: 'Weight';
+  grid-column: 1 / -1;
+  font-size: 13px;
+  color: var(--text-accent);
+}
+html.sw-mobile .skill-custom-tab .control-group:nth-child(2)::before {
+  content: 'Quantity';
+}
+html.sw-mobile .skill-custom-tab .control-group .control-emoji {
+  display: none;
+}
+html.sw-mobile .skill-custom-tab .control-group .ctrl-btn {
+  width: 100%;
+  height: 44px;
+  font-size: 20px;
+}

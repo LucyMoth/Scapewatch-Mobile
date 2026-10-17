@@ -1,0 +1,92 @@
+html.sw-mobile .skill-custom-tab .skill-columns-grid {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 4px;
+}
+html.sw-mobile .skill-custom-tab :is(.skill-columns-title, .unlocks-grid-title) {
+  font-size: 20px;
+}
+html.sw-mobile .skill-custom-tab .skill-columns-subtitle {
+  font-size: 13px;
+}
+html.sw-mobile .skill-custom-tab .skill-col-header {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 50px;
+  gap: 4px;
+  font-size: 13px;
+}
+html.sw-mobile .skill-custom-tab :is(.sch-lv, .sch-pct) {
+  width: auto;
+  margin: 0;
+}
+html.sw-mobile .skill-custom-tab .sch-weight {
+  display: none;
+}
+html.sw-mobile .skill-custom-tab .skill-weight-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 50px;
+  gap: 5px;
+  padding: 7px 6px;
+}
+html.sw-mobile .skill-custom-tab .swr-level {
+  width: auto;
+  font-size: 18px;
+}
+html.sw-mobile .skill-custom-tab .swr-skill {
+  width: auto !important;
+  min-width: 0;
+}
+html.sw-mobile .skill-custom-tab .swr-skill-icon {
+  width: 28px;
+  height: 28px;
+}
+html.sw-mobile .skill-custom-tab .swr-skill-name {
+  font-size: 16px;
+  white-space: normal;
+}
+html.sw-mobile .skill-custom-tab .swr-pct {
+  width: auto;
+  margin: 0;
+  font-size: 16px;
+}
+html.sw-mobile .skill-custom-tab .swr-weight {
+  grid-column: 2 / 4;
+  width: auto;
+  justify-content: flex-end;
+  gap: 4px;
+}
+html.sw-mobile .skill-custom-tab .swr-weight .ctrl-btn {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 20px;
+}
+html.sw-mobile .skill-custom-tab .swr-automater-row {
+  width: 100% !important;
+  min-width: 0;
+  height: auto !important;
+  margin-top: 8px !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+html.sw-mobile .skill-custom-tab .swr-automater-cells {
+  width: 100%;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin-left: 0;
+  gap: 8px;
+  white-space: normal;
+}
+html.sw-mobile .skill-custom-tab .swr-automater-cell {
+  max-width: 100%;
+}
+html.sw-mobile .skill-custom-tab .swr-automater-label {
+  white-space: normal;
+  font-size: 12px;
+}
+html.sw-mobile
+  .skill-custom-tab
+  .automater-pair-group
+  :is(.unlock-item.perk-icon-cell, .automater-icon-cell) {
+  width: 44px;
+  height: 44px;
+}

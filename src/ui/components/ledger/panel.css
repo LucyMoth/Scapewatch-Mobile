@@ -1,0 +1,126 @@
+html.sw-mobile .modal-header .ledger-header-slot:empty {
+  display: none !important;
+}
+html.sw-mobile #tab-ledger {
+  overflow: visible;
+}
+html.sw-mobile #tab-ledger .ledger {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  gap: 12px;
+}
+html.sw-mobile #tab-ledger .ledger-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  background: var(--bg-dark);
+  gap: 8px;
+}
+html.sw-mobile #tab-ledger .ledger-top-left {
+  display: grid;
+  gap: 4px;
+}
+html.sw-mobile #tab-ledger .ledger-title {
+  font-size: 18px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile #tab-ledger .ledger-sub {
+  font-size: 13px;
+  line-height: 1.35;
+  overflow: visible;
+}
+html.sw-mobile #tab-ledger .ledger-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  gap: 6px;
+}
+html.sw-mobile #tab-ledger .ledger-opens {
+  display: flex;
+  grid-column: 1 / -1;
+  margin: 0;
+  gap: 4px 12px;
+}
+html.sw-mobile #tab-ledger .ledger-toggle {
+  min-height: 44px;
+  min-width: 0;
+  line-height: 1.3;
+  font-size: 12px;
+  touch-action: manipulation;
+}
+html.sw-mobile #tab-ledger .ledger-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: center;
+  overflow-wrap: anywhere;
+  touch-action: manipulation;
+}
+html.sw-mobile #tab-ledger .ledger-body {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+}
+html.sw-mobile :is(.ledger-col, .ledger-compact-left, .ledger-compact-right) > .ledger-sec {
+  flex: 0 0 auto;
+}
+html.sw-mobile .ledger-sec > .ledger-sec-body {
+  flex: 0 0 auto;
+}
+html.sw-mobile .ledger-hero .ledger-sec-body {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 4px 10px;
+  justify-items: start;
+  padding: 0;
+}
+html.sw-mobile .ledger-hero .ledger-portrait {
+  width: 64px;
+  height: 64px;
+  grid-row: 1 / 3;
+}
+html.sw-mobile .ledger-hero .ledger-portrait-canvas {
+  width: 64px;
+  height: 64px;
+}
+html.sw-mobile .ledger-hero .ledger-name {
+  width: 100%;
+  font-size: 18px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .ledger-hero .ledger-badges {
+  margin: 0;
+}
+html.sw-mobile .ledger-skills .ledger-sec-h {
+  align-items: flex-start;
+}
+html.sw-mobile .ledger-skills .ledger-sec-right {
+  justify-content: flex-end;
+  font-size: 12px;
+}
+html.sw-mobile .ledger-sec .ledger-toggle {
+  min-height: 44px;
+}
+html.sw-mobile .ledger-sec .ledger-cnt {
+  font-size: 12px;
+}
+html.sw-mobile .ledger-loot-bar .bank-search {
+  flex: 1 1 100%;
+}
+html.sw-mobile .ledger-lootgrid.bank-grid {
+  overflow: visible !important;
+}
+html.sw-mobile.sw-landscape #tab-ledger .ledger-tabs {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}

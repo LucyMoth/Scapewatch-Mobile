@@ -1,0 +1,20 @@
+html.sw-mobile.sw-landscape .login-screen {
+  gap: 12px;
+  padding: calc(var(--sw-top) + 8px) var(--sw-right) var(--sw-bottom) var(--sw-left);
+}
+html.sw-mobile.sw-landscape .login-area {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  max-width: 760px;
+}
+html.sw-mobile.sw-landscape .login-logo {
+  width: 180px !important;
+}
+html.sw-mobile.sw-landscape .login-box {
+  max-width: none;
+}
+html.sw-mobile.sw-landscape .login-screen > .screen-tip {
+  max-width: 760px;
+}

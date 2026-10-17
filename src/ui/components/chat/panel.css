@@ -1,0 +1,119 @@
+html.sw-mobile:not(.sw-chat) #chat-panel,
+html.sw-mobile body.modal-open #chat-panel {
+  display: none !important;
+}
+html.sw-mobile.sw-chat #chat-panel {
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  top: calc(var(--sw-top) + 8px) !important;
+  bottom: calc(var(--sw-bottom) + 8px) !important;
+  width: auto !important;
+  height: auto !important;
+  transform: none !important;
+  z-index: 2100 !important;
+  border: 1px solid var(--border-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+html.sw-mobile .chat-message-area {
+  font-size: 16px;
+  line-height: 1.45;
+  padding: 10px;
+  gap: 3px;
+}
+html.sw-mobile #chat-panel .chat-message {
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+html.sw-mobile #chat-panel .chat-timestamp {
+  width: auto;
+  margin-right: 0.5em;
+  font-size: 0.75em;
+  font-variant-numeric: tabular-nums;
+}
+html.sw-mobile #chat-panel .chat-badge-slot {
+  width: 1.2em;
+}
+html.sw-mobile #chat-panel .chat-staff-crown {
+  width: 1.2em;
+  height: 1.2em;
+}
+html.sw-mobile .chat-filter-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: visible;
+  min-height: 92px;
+  gap: 4px;
+  padding: 4px;
+  border-top-width: 1px;
+}
+html.sw-mobile #chat-panel .chat-filter-btn {
+  min-width: 0;
+  width: 100%;
+  height: 44px;
+  padding: 0 2px;
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 1;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  opacity: 0.75;
+}
+html.sw-mobile #chat-panel .chat-filter-btn.active {
+  border-color: var(--border-secondary);
+  background: var(--bg-hover);
+  opacity: 1;
+}
+html.sw-mobile .chat-font-group {
+  min-width: 0;
+  grid-column: span 2;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--bg-cell);
+}
+html.sw-mobile #chat-panel .chat-font-btn {
+  width: 44px;
+  min-width: 44px;
+  font-size: 13px;
+}
+html.sw-mobile .chat-toggle-btn {
+  display: none !important;
+}
+html.sw-mobile .chat-room-pill {
+  min-height: 44px;
+}
+html.sw-mobile .chat-input-wrap {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+html.sw-mobile .chat-channel-label {
+  font-size: 13px !important;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  max-width: 25%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+html.sw-mobile .chat-input-row {
+  flex-wrap: nowrap;
+  padding: 8px;
+  gap: 6px;
+  border-top-width: 1px;
+}
+html.sw-mobile .chat-input {
+  min-width: 0;
+  width: 100%;
+  flex: 1;
+  font-size: 16px !important;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+html.sw-mobile .chat-font-btn,
+html.sw-mobile .chat-toggle-btn {
+  min-width: 36px;
+  min-height: 44px;
+}

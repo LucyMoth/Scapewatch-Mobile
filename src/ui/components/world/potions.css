@@ -1,0 +1,111 @@
+/* Potions occupy the other HUD column below Recenter; opening the original
+   panel never sends a280px row across the player/status module. */
+html.sw-mobile {
+  --sw-potions-top: calc(var(--sw-right-top) + max(44px, var(--sw-camera-height)) + 4px);
+}
+html.sw-mobile :is(.active-potions-panel, .active-potions-pill) {
+  right: var(--sw-right) !important;
+  left: auto !important;
+  top: var(--sw-potions-top) !important;
+  max-width: 104px;
+  z-index: 280;
+}
+html.sw-mobile #ui-container .recenter-camera-btn.combat-active {
+  font-size: 14px;
+  line-height: 16px;
+  padding: 4px 6px;
+  opacity: 1;
+}
+html.sw-mobile:not(.sw-world) :is(.active-potions-panel, .active-potions-pill) {
+  display: none !important;
+}
+html.sw-mobile .active-potions-pill {
+  min-height: 44px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid var(--border-secondary);
+  border-radius: 6px;
+  box-shadow: none;
+}
+html.sw-mobile .active-potions-panel {
+  width: 104px;
+  min-height: 44px;
+  padding: 4px;
+  max-height: min(128px, 30dvh);
+  overflow: auto;
+  box-sizing: border-box;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-secondary);
+  border-radius: 6px;
+}
+/* An explicitly opened combat sheet keeps its right-hand potion list
+   compact; the original rows remain available through that list's scroll. */
+html.sw-mobile.sw-combat-details .active-potions-panel {
+  max-height: 88px;
+}
+html.sw-mobile .potion-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 4px;
+  width: 100%;
+  height: auto;
+  min-height: 56px;
+  padding: 4px;
+  border-radius: 6px;
+}
+html.sw-mobile .potion-row-icon-wrap {
+  grid-column: 1;
+  grid-row: 1;
+  width: 28px;
+  height: 28px;
+}
+html.sw-mobile .potion-row-icon {
+  width: 28px;
+  height: 28px;
+  transform: none;
+}
+html.sw-mobile .potion-row-stat {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+html.sw-mobile :is(.potion-row-stat-val, .potion-row-stat-name) {
+  font-size: 12px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .potion-row-stat-icon {
+  width: 14px;
+  height: 14px;
+}
+html.sw-mobile .potion-row-count {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-width: 0;
+  margin-left: 0;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+html.sw-mobile .potion-row-count-num {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .potion-row-count-unit {
+  font-size: 12px;
+  white-space: normal;
+}
+html.sw-mobile .potions-filter-cols {
+  grid-template-columns: minmax(0, 1fr);
+}
+html.sw-mobile .potions-filter-col + .potions-filter-col {
+  border-left: 0;
+  border-top: 1px solid var(--border-primary);
+}
+html.sw-mobile .potions-filter-row {
+  min-height: 44px;
+}
+html.sw-mobile .potions-filter-header {
+  flex-wrap: wrap;
+}

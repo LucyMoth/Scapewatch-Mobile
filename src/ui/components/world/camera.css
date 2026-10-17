@@ -1,0 +1,110 @@
+/* Map gestures stay on the world canvas. Every app control remains at
+   device scale; the official idle rule would otherwise permit page pinch. */
+html.sw-mobile,
+html.sw-mobile body {
+  touch-action: pan-x pan-y;
+}
+html.sw-mobile #game-canvas,
+html.sw-mobile body.roam-idle #game-canvas {
+  touch-action: none !important;
+}
+html.sw-mobile .recenter-camera-btn {
+  top: var(--sw-right-top) !important;
+  bottom: auto !important;
+  right: var(--sw-right) !important;
+  left: auto !important;
+  transform: none !important;
+  box-sizing: border-box;
+  min-width: 96px;
+  min-height: 44px;
+  max-width: 104px;
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid var(--border-secondary);
+  border-radius: 6px;
+  box-shadow: none;
+  z-index: 300;
+}
+html.sw-mobile:not(.sw-world) .recenter-camera-btn {
+  display: none !important;
+}
+html.sw-mobile.sw-world .ingame-hud {
+  top: var(--sw-right-top) !important;
+  left: var(--sw-left) !important;
+  width: calc(var(--sw-width) - var(--sw-left) - var(--sw-right) - 112px);
+  max-width: calc(var(--sw-width) - var(--sw-left) - var(--sw-right) - 112px);
+  max-height: max(
+    48px,
+    calc(
+      var(--sw-height) - var(--sw-bottom) - var(--sw-task-height) - var(--sw-combat-hud-height) -
+        var(--sw-mini-height) - var(--sw-right-top) - 30px
+    )
+  );
+  box-sizing: border-box;
+  padding: 0 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+html.sw-mobile .ingame-hud-row {
+  font-size: 14px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .ingame-hud-online {
+  flex-wrap: wrap;
+  margin: 6px -8px 0;
+  padding: 6px 8px 0;
+  gap: 4px;
+  font-size: 13px;
+}
+html.sw-mobile :is(.ingame-hud-world, .ingame-hud-offline) {
+  font-size: 13px;
+  min-height: 44px;
+  padding: 4px 6px;
+}
+
+html.sw-mobile .ingame-hud-info {
+  min-width: 0;
+  min-height: 44px;
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  align-content: center;
+  align-items: center;
+  column-gap: 4px;
+}
+html.sw-mobile .ingame-hud-caret {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  margin-right: 0;
+}
+html.sw-mobile .ingame-hud-name {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+html.sw-mobile .ingame-hud-state {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  min-width: 0;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+html.sw-mobile .ingame-hud-sep {
+  display: none;
+}
+html.sw-mobile .ingame-hud-f2p {
+  grid-column: 3;
+  grid-row: 1;
+  margin-left: 0;
+  white-space: nowrap;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+html.sw-mobile.sw-panel-open :is(.ingame-hud, .tutorial-checklist) {
+  display: none !important;
+}
