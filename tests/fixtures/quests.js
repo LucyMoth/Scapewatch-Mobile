@@ -4,6 +4,7 @@
   state.questSelections = [];
   state.questActions = [];
   let selectedQuest;
+  let activeFilter = 'all';
   const tab = document.querySelector('#tab-quests');
   const source = document.querySelector('.panel-tab-btn img').src;
   function node(cls, text, tag = 'div') {
@@ -18,8 +19,24 @@
   const search = node('quest-search', '', 'input');
   search.placeholder = 'Search quests...';
   toolbar.append(search);
-  for (const text of ['All', 'Available', 'In Progress', 'Completed', 'Locked'])
-    toolbar.append(node('quest-filter-btn', text, 'button'));
+  for (const [filter, text] of [
+    ['all', 'All'],
+    ['available', 'Available'],
+    ['progress', 'In Progress'],
+    ['completed', 'Completed'],
+    ['locked', 'Locked'],
+  ]) {
+    const button = node('quest-filter-btn' + (filter === 'all' ? ' active' : ''), text, 'button');
+    button.dataset.filter = filter;
+    button.addEventListener('click', () => {
+      activeFilter = filter;
+      toolbar
+        .querySelectorAll('.quest-filter-btn')
+        .forEach((option) => option.classList.toggle('active', option.dataset.filter === filter));
+      renderRows(selectedQuest);
+    });
+    toolbar.append(button);
+  }
   const sort = node('quest-sort-row');
   sort.append(node('quest-sort-label', 'Sort:'));
   for (const text of ['Level Req', 'Steps', 'Name A-Z'])
@@ -101,7 +118,15 @@
   function renderRows(selected) {
     scroll.replaceChildren();
     for (let i = 0; i < 30; i++) {
-      const row = node('quest-row status-available' + (i === selected ? ' selected' : ''));
+      const status = window.fixtureQuestStatuses?.[i] || 'available';
+      if (
+        activeFilter !== 'all' &&
+        (activeFilter === 'progress'
+          ? !['active', 'claimable'].includes(status)
+          : activeFilter !== status)
+      )
+        continue;
+      const row = node('quest-row status-' + status + (i === selected ? ' selected' : ''));
       row.dataset.questId = String(i);
       const info = node('quest-row-info');
       info.append(node('quest-row-name', 'Sandscale Burnt Supper ' + i));
@@ -117,6 +142,7 @@
     }
   }
   renderRows();
+  window.fixtureQuestRows = () => renderRows(selectedQuest);
   window.fixtureQuestLayout = layout;
   window.fixtureQuestLink = function (index) {
     showDetail(index);

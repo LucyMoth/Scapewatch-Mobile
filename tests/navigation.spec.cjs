@@ -327,6 +327,7 @@ test('reversible layout and presentation-only changes', async ({ page }) => {
             'sw_mobile_chat',
             'sw_mobile_orientation',
             'sw_mobile_map_defaults',
+            'sw_mobile_quest_filter',
           ].includes(call[1]),
     ),
     'only presentation preferences and the native desktop layout preference accessed',

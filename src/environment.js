@@ -6,6 +6,7 @@ export const PREFERENCE_KEYS = {
   chat: 'sw_mobile_chat',
   orientation: 'sw_mobile_orientation',
   mapDefaults: 'sw_mobile_map_defaults',
+  questFilter: 'sw_mobile_quest_filter',
 };
 
 export function isGamePage() {

@@ -75,6 +75,23 @@ html.sw-mobile .quest-list-scroll {
   overflow-x: hidden;
   overscroll-behavior-y: contain;
 }
+html.sw-mobile
+  .sw-quest-continue
+  .quest-row:not(:is(.status-active, .status-claimable, .status-available)) {
+  display: none;
+}
+html.sw-mobile .sw-quest-empty {
+  display: none;
+  padding: 12px;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+html.sw-mobile
+  .sw-quest-continue:not(:has(.quest-row:is(.status-active, .status-claimable, .status-available)))
+  .sw-quest-empty {
+  display: block;
+}
 html.sw-mobile .quest-row {
   min-height: 64px;
   padding: 8px;
