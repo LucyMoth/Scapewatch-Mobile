@@ -45,6 +45,11 @@ export function createBackNavigation({
       credits.click();
       return true;
     }
+    const combatDefaults = $('.cd-popup-overlay .cd-popup-close');
+    if (displayed(combatDefaults)) {
+      combatDefaults.click();
+      return true;
+    }
     const popup = all(
       '.world-switcher, .player-ctx-menu, .chat-room-menu, .chat-category-menu, .ingame-hud-offline-pop, .bank-consume-menu, .bank-filter-menu, .potions-filter-menu',
     ).find(displayed);

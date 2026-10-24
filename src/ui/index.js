@@ -140,6 +140,7 @@ export function initializeMobileUi(css) {
 
     function updatePanels() {
       navigation.update();
+      menu.updateSleep();
       bank.update();
       equipment.update();
       ledger.update();

@@ -16,6 +16,7 @@
   font-size: 12px;
 }
 #sw-layout-toggle,
+#sw-sleep-toggle,
 #sw-orientation-toggle {
   background: var(--bg-panel, #2b2216);
   color: var(--text-accent, #c8a83e);
@@ -24,6 +25,16 @@
   min-height: 36px;
   padding: 6px 8px;
   font-size: 12px;
+}
+#sw-sleep-toggle {
+  width: 44px;
+  padding: 8px;
+}
+#sw-sleep-toggle svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
 }
 #sw-nav {
   position: fixed;
@@ -62,6 +73,7 @@
 }
 #sw-nav button:active,
 #sw-layout-toggle:active,
+#sw-sleep-toggle:active,
 #sw-orientation-toggle:active {
   background: var(--bg-hover);
   color: var(--text-bright);

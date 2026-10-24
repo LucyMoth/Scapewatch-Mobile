@@ -23,7 +23,7 @@ export function blockingOverlay() {
     document.body.classList.contains('login-active') ||
     document.body.classList.contains('modal-open') ||
     all(
-      '.ledger-return-overlay, .ledger-night, .sleep-overlay, .gc-modal-overlay, .cc-overlay, .chest-overlay',
+      '.ledger-return-overlay, .ledger-night, .sleep-overlay, .gc-modal-overlay, .cc-overlay, .chest-overlay, .cd-popup-overlay, .steam-prompt-overlay',
     ).some(visible)
   );
 }

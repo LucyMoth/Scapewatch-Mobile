@@ -12,12 +12,15 @@ html.sw-mobile.sw-menu-open #sw-layout-actions {
 #sw-layout-actions button {
   min-height: 44px;
 }
-html #sw-orientation-toggle[hidden] {
+html :is(#sw-orientation-toggle, #sw-sleep-toggle)[hidden] {
   display: none !important;
 }
 html.sw-mobile #sw-menu h2 {
   min-height: 44px;
-  padding-right: 174px;
+  padding-right: 224px;
+}
+html:not(.sw-mobile) #sw-sleep-toggle {
+  display: none;
 }
 html:not(.sw-mobile) #sw-layout-actions {
   display: flex;
@@ -38,6 +41,18 @@ body.login-active #sw-nav > button:not([data-sw-view='menu']) {
   opacity: 0.45;
 }
 @media (max-width: 350px) {
+  html.sw-mobile:has(#sw-sleep-toggle:not([hidden])):has(#sw-orientation-toggle:not([hidden]))
+    #sw-menu
+    h2 {
+    min-height: 72px;
+    padding-right: 0;
+  }
+  html.sw-mobile.sw-menu-open:has(#sw-sleep-toggle:not([hidden])):has(
+      #sw-orientation-toggle:not([hidden])
+    )
+    #sw-layout-actions {
+    top: calc(var(--sw-top) + 48px);
+  }
   #sw-view-title {
     display: none;
   }

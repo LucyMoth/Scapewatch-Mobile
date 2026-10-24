@@ -15,13 +15,50 @@ export function createMenu({
   closeModal,
 }) {
   let menuSignature = '';
+  let sleepControl;
+  let sleepName;
+  const sleepObserver = new MutationObserver(syncSleep);
   const assets = createMenuAssets({ state });
+  function syncSleep() {
+    const original = $('.window-control-btn-sleep');
+    const name = $('.ingame-hud-name');
+    if (original !== sleepControl || name !== sleepName) {
+      sleepObserver.disconnect();
+      sleepControl = original;
+      sleepName = name;
+      if (original)
+        sleepObserver.observe(original, { attributes: true, attributeFilter: ['disabled'] });
+      if (name)
+        sleepObserver.observe(name, { childList: true, characterData: true, subtree: true });
+      sleepObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    }
+    const button = $('#sw-sleep-toggle');
+    button.hidden =
+      !original || document.body.classList.contains('login-active') || !name?.textContent.trim();
+    button.disabled = !!original?.disabled;
+  }
   function originalAction(kind, tab) {
     if (document.body.classList.contains('login-active')) {
       toast('Sign in to Scapewatch first.');
       return;
     }
     setFlag('sw-notes', false);
+    if (kind === 'action' && tab === 'sleep') {
+      const original = $('.window-control-btn-sleep');
+      if (!original || original.disabled) {
+        toast('Sleep is unavailable right now.');
+        return;
+      }
+      closeModal();
+      dashboard.close();
+      fullMap.close();
+      state.view = 'world';
+      state.returnView = 'world';
+      render();
+      original.click();
+      scheduleSync();
+      return;
+    }
     if (tab === 'dashboard') {
       dashboard.open();
       if (state.view === 'dashboard') state.returnView = 'menu';
@@ -77,6 +114,7 @@ export function createMenu({
     return section;
   }
   function syncMenus() {
+    syncSleep();
     const gameItems = all(menuSelector).filter((button) => button.dataset.tab !== 'bank');
     const dockItems = all(dockSelector).filter(
       (button) =>
@@ -117,9 +155,19 @@ export function createMenu({
     assets.schedule();
   }
   function bindControls() {
-    $('#sw-nav [data-sw-view=menu]').addEventListener('click', assets.schedule);
+    $('#sw-sleep-toggle').addEventListener('click', () => originalAction('action', 'sleep'));
+    $('#sw-nav [data-sw-view=menu]').addEventListener('click', () => {
+      syncSleep();
+      assets.schedule();
+    });
     window.addEventListener('pagehide', assets.suspend);
     window.addEventListener('pageshow', assets.schedule);
+    window.addEventListener('pagehide', () => {
+      sleepObserver.disconnect();
+      sleepControl = null;
+      sleepName = null;
+    });
+    window.addEventListener('pageshow', syncSleep);
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) assets.suspend();
       else assets.schedule();
@@ -183,5 +231,5 @@ export function createMenu({
       }
     });
   }
-  return { sync: syncMenus, bindControls };
+  return { sync: syncMenus, bindControls, updateSleep: syncSleep };
 }

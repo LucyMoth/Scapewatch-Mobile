@@ -43,29 +43,71 @@ html.sw-mobile .ledger-card-foot .ledger-btn {
   min-height: 44px;
 }
 html.sw-mobile .ledger-night {
+  position: fixed;
   top: var(--sw-top) !important;
-  left: 0;
-  width: 100%;
+  left: var(--sw-left);
+  right: var(--sw-right);
+  width: auto;
   height: calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom)) !important;
   padding: 12px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  gap: 10px;
+  overflow: hidden;
 }
 html.sw-mobile .ledger-night-body {
   position: static !important;
   inset: auto !important;
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 html.sw-mobile .ledger-night-title {
   font-size: 19px;
 }
 html.sw-mobile .ledger-night-actions {
-  position: sticky;
+  position: static;
   top: auto !important;
-  bottom: 0;
   left: auto !important;
   transform: none !important;
-  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  flex: 0 0 auto;
+  width: min(480px, 100%);
+  margin: 0 auto;
+  padding: 8px 0 0;
+  gap: 6px;
   background: var(--bg-darkest);
   z-index: 3;
+}
+html.sw-mobile .ledger-night-actions .sleep-wake-btn {
+  grid-column: 1 / -1;
+}
+html.sw-mobile .ledger-night-open {
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px;
+  color: var(--text-light);
+  font-size: 14px;
+  white-space: normal;
+}
+html.sw-mobile .ledger-night.ledger-night-leaving .ledger-night-actions {
+  transform: translateY(14px) !important;
+}
+html.sw-mobile.sw-landscape .ledger-night-actions {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+html.sw-mobile.sw-landscape .ledger-night-actions .sleep-wake-btn {
+  grid-column: auto;
+}
+html.sw-mobile.sw-landscape .ledger-night-body {
+  grid-template-columns: minmax(190px, 0.8fr) minmax(0, 1.2fr) !important;
+  align-items: start;
+}
+html.sw-mobile.sw-landscape .ledger-night-col-left {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+html.sw-mobile.sw-landscape :is(.ledger-night-col-mid, .ledger-night-col-right) {
+  grid-column: 2;
 }

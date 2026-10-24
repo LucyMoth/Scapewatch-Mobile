@@ -1,6 +1,6 @@
 'use strict';
 
-const { test, expect, settle } = require('../support/game.cjs');
+const { test, expect, settle, read } = require('../support/game.cjs');
 const { loadNativeOrientation } = require('../support/orientation.cjs');
 const {
   expectReachable,
@@ -8,6 +8,12 @@ const {
   nativeSnapshot,
   safeInsets,
 } = require('../support/responsive.cjs');
+
+async function loadHeader(page, orientation, insets) {
+  await loadNativeOrientation(page, orientation, insets);
+  await page.addScriptTag({ content: read('tests/fixtures/client-actions.js') });
+  await settle(page);
+}
 
 for (const viewport of [
   { width: 320, height: 700 },
@@ -20,16 +26,21 @@ for (const viewport of [
     page,
   }) => {
     await page.setViewportSize(viewport);
-    await loadNativeOrientation(page, 'portrait', safeInsets);
+    await loadHeader(page, 'portrait', safeInsets);
     const before = await nativeSnapshot(page);
     await page.locator('#sw-nav [data-sw-view=menu]').tap();
     await settle(page);
     await expectNavigation(page, viewport.width > viewport.height, safeInsets);
+    const sleep = page.locator('#sw-sleep-toggle');
     const orientation = page.locator('#sw-orientation-toggle');
+    await expectReachable(page, sleep, { insets: safeInsets });
     const original = page.locator('#sw-layout-toggle');
     await expectReachable(page, orientation, { insets: safeInsets });
     await expectReachable(page, original, { insets: safeInsets });
+    const moon = await sleep.boundingBox();
     const turn = await orientation.boundingBox();
+    expect(moon.y).toBe(turn.y);
+    expect(moon.x + moon.width).toBeLessThanOrEqual(turn.x - 4);
     const layout = await original.boundingBox();
     expect(turn.y, 'Both choices share one header row').toBe(layout.y);
     expect(turn.x + turn.width, 'The controls have a clear gap').toBeLessThanOrEqual(layout.x - 4);
@@ -39,9 +50,14 @@ for (const viewport of [
       const rect = range.getBoundingClientRect();
       return { right: rect.right, bottom: rect.bottom };
     });
-    expect(title.right, 'Header choices leave the Menu title readable').toBeLessThanOrEqual(
-      turn.x - 4,
-    );
+    if (viewport.width <= 350)
+      expect(title.bottom, 'Narrow screens place the actions beneath Menu').toBeLessThanOrEqual(
+        moon.y - 4,
+      );
+    else
+      expect(title.right, 'Header choices leave the Menu title readable').toBeLessThanOrEqual(
+        moon.x - 4,
+      );
     for (const tab of await page.locator('.sw-menu-tabs button').all()) {
       await expectReachable(page, tab, { insets: safeInsets });
       const rect = await tab.boundingBox();
@@ -60,7 +76,7 @@ test('scrolling a short landscape Menu keeps header controls and section tabs un
   page,
 }) => {
   await page.setViewportSize({ width: 640, height: 300 });
-  await loadNativeOrientation(page, 'portrait', safeInsets);
+  await loadHeader(page, 'portrait', safeInsets);
   const before = await nativeSnapshot(page);
   await page.locator('#sw-nav [data-sw-view=menu]').tap();
   await page.locator('#sw-menu').evaluate((element) => {
@@ -93,13 +109,14 @@ for (const viewport of [
     page,
   }) => {
     await page.setViewportSize(viewport);
-    await loadNativeOrientation(page, 'landscape', safeInsets);
+    await loadHeader(page, 'landscape', safeInsets);
     const before = await nativeSnapshot(page);
     await page.locator('#sw-nav [data-sw-view=menu]').tap();
     await page.locator('#sw-layout-toggle').tap();
     await settle(page);
     await expect(page.locator('html')).not.toHaveClass(/\bsw-mobile\b/);
     await expect(page.locator('#sw-menu')).toBeHidden();
+    await expect(page.locator('#sw-sleep-toggle')).toBeHidden();
     await expect(page.locator('#sw-layout-toggle')).toHaveText('Mobile UI');
     await expectReachable(page, page.locator('#sw-layout-toggle'), { insets: safeInsets });
     await expectReachable(page, page.locator('#sw-orientation-toggle'), { insets: safeInsets });
