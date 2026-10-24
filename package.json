@@ -10,6 +10,7 @@
     "build": "node build.mjs",
     "build:release": "node build.mjs --release",
     "dev": "node build.mjs --watch",
+    "dev:browser": "npm run build && node dev-browser.mjs",
     "test": "npm run build && playwright test",
     "test:ui": "npm run build && playwright test --ui",
     "test:gestures": "npm run build && playwright test --project gestures",

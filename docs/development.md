@@ -25,6 +25,27 @@ Watch mode rebuilds imported JavaScript, HTML and CSS into `dist/mobile-ui.js`.
 The build uses esbuild and includes a source map. Changing the connection retry
 page, `src/index.html`, requires a fresh `npm run build`.
 
+For live layout checks without rebuilding Android, open a separate browser:
+
+```sh
+npx playwright install chromium
+npm run dev:browser
+```
+
+Sign in normally in that browser. Keep `npm run dev` running in another terminal;
+reload the game after an edit to use the latest local UI. Reloading replaces the
+whole UI so event handlers from an older bundle cannot accumulate. Browser menus
+and game actions still use the live account.
+If sign-in opens a new game tab, reload that tab once after returning to the game
+to apply the local UI.
+
+The browser starts at 412 × 915 with touch enabled. It keeps its login in a
+separate temporary profile, outside the repository. Set `SW_TEST_PROFILE` to an
+external folder to choose a persistent profile. The Playwright VS Code extension
+can run the fixture tests; other local tools can attach to the live browser at
+`http://127.0.0.1:9226` with `chromium.connectOverCDP`. Set `SW_DEBUG_PORT` if that
+port is occupied. Close the browser or press Ctrl+C to stop it.
+
 To put a change in the Android app:
 
 ```sh
@@ -68,6 +89,8 @@ works. [Testing](testing.md) covers browser and device checks.
 `capacitor.config.json` sets the game URL and allowed navigation. The Android
 package is `com.scapewatch.mobile`. Presentation preferences use the
 `sw_mobile_*` keys in `src/environment.js`.
+The wrapper selects the native game's `scapewatch_layout=desktop` preference
+before startup, so only one mobile layout manages the original game controls.
 
 The Landscape/Portrait control is beside Original UI in Menu. Its Android
 implementation and current alternate-world limitation are documented in
