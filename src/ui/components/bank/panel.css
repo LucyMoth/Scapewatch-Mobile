@@ -210,3 +210,74 @@ html.sw-mobile.sw-landscape #tab-bank .bank-layout {
   grid-template-columns: minmax(0, 1fr) 240px;
   align-items: start;
 }
+html.sw-mobile .sw-bank-scrap {
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-primary);
+}
+html.sw-mobile .sw-bank-scrap:has(> .bank-scrap-row[style*='display: none']),
+html.sw-mobile .sw-equipment-picker .sw-bank-scrap {
+  display: none;
+}
+html.sw-mobile .sw-bank-scrap > summary {
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 12px 4px;
+  color: var(--text-light);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+html.sw-mobile .sw-bank-scrap > p {
+  margin: 0 4px 10px;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+html.sw-mobile .sw-bank-categories {
+  scrollbar-color: var(--text-accent) var(--bg-dark);
+  padding-bottom: 4px;
+}
+html.sw-mobile .sw-bank-categories .bank-filter-btn.active {
+  border-color: var(--text-accent);
+  color: var(--text-bright);
+}
+html.sw-mobile :is(#ui-container, #hud-layer) > .inventory-panel:has(.sw-bag-summary) {
+  grid-template-rows: none;
+  grid-auto-rows: min-content;
+  gap: 8px;
+}
+html.sw-mobile #bag-panel:has(.sw-bag-summary) > .inv-slot {
+  grid-row: auto !important;
+  grid-column: auto !important;
+  transform: none !important;
+  width: 100%;
+  max-width: 64px;
+  height: 60px;
+}
+html.sw-mobile :is(.sw-bag-summary, .sw-bag-guide) {
+  grid-column: 1 / -1;
+  justify-self: stretch;
+}
+html.sw-mobile .sw-bag-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-primary);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+html.sw-mobile .sw-bag-summary h2 {
+  margin: 0;
+  color: var(--text-accent);
+  font-size: 20px;
+  font-weight: normal;
+}
+html.sw-mobile .sw-bag-guide {
+  order: 1;
+  margin: 8px 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}

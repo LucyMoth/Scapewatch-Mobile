@@ -22,6 +22,45 @@ export function createEquipmentPicker({ state, render, toast }) {
   let picker;
   let observer;
   let selectedLoadout;
+  let overview;
+  let overviewObserver;
+  let overviewLabel;
+
+  function updateOverviewLabel() {
+    if (!overview) return;
+    const active = overview.querySelector('.loadout-sel-slot.active');
+    const label = active?.querySelector('.loadout-sel-slot-label')?.textContent.trim();
+    overviewLabel.hidden = !label;
+    const text = label ? `Selected loadout: ${label}` : '';
+    if (overviewLabel.textContent !== text) overviewLabel.textContent = text;
+  }
+
+  function restoreOverview() {
+    overviewObserver?.disconnect();
+    overviewObserver = null;
+    overviewLabel?.remove();
+    overviewLabel = null;
+    overview = null;
+  }
+
+  function updateOverview() {
+    const next = document.querySelector('.equipment-panel .loadout-sel');
+    if (next !== overview) restoreOverview();
+    if (!next || overview) return;
+    overview = next;
+    overviewLabel = document.createElement('div');
+    overviewLabel.className = 'sw-equipment-loadout-name';
+    next.closest('.equip-panel-tabs')?.append(overviewLabel);
+    updateOverviewLabel();
+    overviewObserver = new MutationObserver(updateOverviewLabel);
+    overviewObserver.observe(next, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  }
 
   function saveAttribute(node, name, value) {
     let saved = attributes.get(node);
@@ -196,10 +235,12 @@ export function createEquipmentPicker({ state, render, toast }) {
   function update() {
     if (!state.enabled || state.suspended || document.body.classList.contains('login-active')) {
       restore(true);
+      restoreOverview();
       if (!state.enabled || document.body.classList.contains('login-active'))
         selectedLoadout = null;
       return;
     }
+    updateOverview();
     for (const node of attributes.keys()) {
       if (!node.isConnected) attributes.delete(node);
     }
@@ -270,5 +311,13 @@ export function createEquipmentPicker({ state, render, toast }) {
     return open;
   }
 
-  return { update, bind, back, suspend: () => restore(true) };
+  return {
+    update,
+    bind,
+    back,
+    suspend: () => {
+      restore(true);
+      restoreOverview();
+    },
+  };
 }

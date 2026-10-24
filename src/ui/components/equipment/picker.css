@@ -44,8 +44,10 @@ html.sw-mobile .equipment-panel .loadout-sel-slot {
   min-height: 52px;
 }
 html.sw-mobile .equipment-panel .equip-panel-paperdoll {
-  flex: 1 0 348px;
+  flex: 0 0 auto;
   min-height: 348px;
+  align-content: start;
+  padding-top: 8px;
 }
 html.sw-mobile .equip-panel-paperdoll .inv-slot {
   cursor: pointer;
@@ -121,4 +123,20 @@ html.sw-mobile .sw-equipment-picker-empty {
 }
 html.sw-mobile .sw-equipment-picker-empty[hidden] {
   display: none;
+}
+
+html.sw-mobile .sw-equipment-loadout-name {
+  grid-column: 1 / -1;
+  min-width: 0;
+  padding: 6px 4px;
+  color: var(--text-light);
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .equipment-panel .loadout-sel-slot-label {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.25;
 }
