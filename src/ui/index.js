@@ -28,6 +28,7 @@ import { createQuestLayout } from './components/quests/index.js';
 import { createBackNavigation } from './components/navigation/back.js';
 import { createPlayerStatus } from './components/world/player-status.js';
 import { createSettingsLayout } from './components/settings/index.js';
+import { createMobSelectionLayout } from './components/combat/selection.js';
 import { createDialogLayout } from './components/dialogs/controls.js';
 import { createHiscoresLayout } from './components/hiscores/index.js';
 import { createPvpLayout } from './components/combat/pvp.js';
@@ -77,6 +78,7 @@ export function initializeMobileUi(css) {
     const trees = createTreeLayout({ state });
     const quests = createQuestLayout({ state });
     const settings = createSettingsLayout({ state });
+    const mobSelection = createMobSelectionLayout({ state });
     const hiscores = createHiscoresLayout({ state });
     const playerStatus = createPlayerStatus({ state });
     const combat = createCombatDetails({ state, setFlag, scheduleGeometry: geometry.schedule });
@@ -135,6 +137,7 @@ export function initializeMobileUi(css) {
       itemDetails,
       equipment,
       quests,
+      mobSelection,
     });
     const lifecycle = createUiLifecycle({
       state,
@@ -158,6 +161,7 @@ export function initializeMobileUi(css) {
       trees.update();
       quests.update();
       settings.update();
+      mobSelection.update();
       hiscores.update();
       pvp.update();
       playerStatus.update();
@@ -231,6 +235,7 @@ export function initializeMobileUi(css) {
       dashboard.bind();
       trees.bind();
       quests.bind();
+      mobSelection.bind();
       about.bind();
       backNavigation.bind();
 
@@ -254,6 +259,7 @@ export function initializeMobileUi(css) {
         trees.suspend();
         quests.suspend();
         settings.suspend();
+        mobSelection.suspend();
         playerStatus.suspend();
         hiscores.suspend();
         pvp.suspend();

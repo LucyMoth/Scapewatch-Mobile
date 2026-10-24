@@ -11,6 +11,7 @@ export function createBackNavigation({
   itemDetails,
   equipment,
   quests,
+  mobSelection,
 }) {
   let navigating = false;
 
@@ -77,7 +78,7 @@ export function createBackNavigation({
       calculator.click();
       return true;
     }
-    if (quests.back() || equipment.back()) return true;
+    if (quests.back() || mobSelection.back() || equipment.back()) return true;
     const close = $('.modal-overlay .modal-close');
     if (displayed(close)) {
       const view = state.view === 'world' ? state.returnView : state.view;
