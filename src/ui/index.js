@@ -27,6 +27,7 @@ import { createEquipmentPicker } from './components/equipment/picker.js';
 import { createQuestLayout } from './components/quests/index.js';
 import { createBackNavigation } from './components/navigation/back.js';
 import { createPlayerStatus } from './components/world/player-status.js';
+import { createSettingsLayout } from './components/settings/index.js';
 import { createDialogLayout } from './components/dialogs/controls.js';
 import { createHiscoresLayout } from './components/hiscores/index.js';
 import { createPvpLayout } from './components/combat/pvp.js';
@@ -75,6 +76,7 @@ export function initializeMobileUi(css) {
     const unlocks = createUnlocksLayout({ state });
     const trees = createTreeLayout({ state });
     const quests = createQuestLayout({ state });
+    const settings = createSettingsLayout({ state });
     const hiscores = createHiscoresLayout({ state });
     const playerStatus = createPlayerStatus({ state });
     const combat = createCombatDetails({ state, setFlag, scheduleGeometry: geometry.schedule });
@@ -155,6 +157,7 @@ export function initializeMobileUi(css) {
       unlocks.update();
       trees.update();
       quests.update();
+      settings.update();
       hiscores.update();
       pvp.update();
       playerStatus.update();
@@ -250,6 +253,7 @@ export function initializeMobileUi(css) {
         unlocks.suspend();
         trees.suspend();
         quests.suspend();
+        settings.suspend();
         playerStatus.suspend();
         hiscores.suspend();
         pvp.suspend();

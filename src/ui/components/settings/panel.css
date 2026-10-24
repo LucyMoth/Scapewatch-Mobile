@@ -143,6 +143,81 @@ html.sw-mobile #tab-settings .settings-color-picker {
   width: 44px;
   height: 44px;
 }
+html.sw-mobile
+  #tab-settings:has(.settings-search-bar .sw-lang-picker)
+  #settings-sec-build
+  .settings-account-row:has(.sw-lang-picker) {
+  display: none !important;
+}
+html.sw-mobile #tab-settings .sw-lang-picker {
+  min-height: 44px;
+  max-width: 100%;
+  color: var(--text-light);
+  background: var(--bg-cell);
+  border-color: var(--border-primary);
+}
+html.sw-mobile #tab-settings .sw-settings-original-note {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-accent);
+}
+html.sw-mobile
+  #tab-settings
+  .sw-settings-original
+  > :is(.settings-icon-size-control, .settings-quality-control) {
+  opacity: 0.5;
+}
+html.sw-mobile
+  #tab-settings
+  :is(
+    .settings-search-input,
+    .settings-nav-btn,
+    .settings-section-header,
+    .settings-account-row,
+    .settings-icon-size-btn,
+    .settings-color-picker,
+    .settings-sound-preview
+  ) {
+  border-color: var(--border-primary);
+}
+html.sw-mobile
+  #tab-settings
+  :is(.settings-icon-size-btn, .settings-color-picker, .settings-sound-preview, .settings-switch) {
+  background: var(--bg-cell);
+  color: var(--text-light);
+}
+html.sw-mobile #tab-settings .settings-toggle-label {
+  color: var(--text-light);
+}
+html.sw-mobile #tab-settings :is(.settings-quality-badge, .settings-switch.on) {
+  color: var(--text-accent);
+  background: var(--bg-hover);
+  border-color: var(--text-accent);
+}
+html.sw-mobile #tab-settings .settings-switch.on .settings-switch-knob {
+  background: var(--text-accent);
+}
+html.sw-mobile #tab-settings .settings-quality-slider::-webkit-slider-thumb {
+  background: var(--text-accent);
+  border-color: var(--border-primary);
+}
+html.sw-mobile #tab-settings .settings-quality-slider::-moz-range-thumb {
+  background: var(--text-accent);
+  border-color: var(--border-primary);
+}
+html.sw-mobile
+  #tab-settings
+  :is(.settings-nav-btn, .settings-icon-size-btn, .settings-sound-preview):hover {
+  color: var(--text-accent);
+  background: var(--bg-hover);
+  border-color: var(--text-accent);
+}
+html.sw-mobile #tab-settings .settings-icon-size-btn.active {
+  color: var(--text-accent);
+  border-color: var(--text-accent);
+  background: var(--bg-hover);
+}
 html.sw-mobile #tab-settings .settings-hotkey-row {
   display: grid;
   grid-template-columns: 44px 28px minmax(0, 1fr) 44px;
