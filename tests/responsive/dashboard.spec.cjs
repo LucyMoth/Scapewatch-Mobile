@@ -73,6 +73,15 @@ for (const viewport of [
       await expect(page.locator('.dashboard-titlebar-min')).toBeHidden();
       const tabbar = await page.locator('.dashboard-tabbar').boundingBox();
       expect(tabbar.height).toBeLessThanOrEqual(68);
+      const ids = await page
+        .locator('.dashboard-tab')
+        .evaluateAll((tabs) => tabs.map((tab) => tab.dataset.tab));
+      await page.evaluate(() => {
+        window.fixtureDashboardPicks = [];
+        document.querySelectorAll('.dashboard-tab').forEach((tab) => {
+          tab.addEventListener('click', () => window.fixtureDashboardPicks.push(tab.dataset.tab));
+        });
+      });
       for (const tab of await page.locator('.dashboard-tab').all()) {
         const id = await tab.getAttribute('data-tab');
         await tab.scrollIntoViewIfNeeded();
@@ -88,6 +97,7 @@ for (const viewport of [
             .evaluate((el) => el.scrollWidth <= el.clientWidth + 1),
         ).toBe(true);
       }
+      expect(await page.evaluate(() => window.fixtureDashboardPicks)).toEqual(ids);
       await selectTab(page, 'xp');
       const rows = await page.locator('.dash-skill-row').all();
       const first = await rows[0].boundingBox();

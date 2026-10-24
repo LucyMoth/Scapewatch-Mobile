@@ -52,7 +52,7 @@ test('Menu groups destinations and keeps future native destinations reachable', 
   const before = await nativeSnapshot(page);
   await page.locator('#sw-nav [data-sw-view=menu]').tap();
   const menu = page.locator('#sw-menu');
-  await expect(menu.getByRole('button', { name: 'Character', exact: true })).toBeVisible();
+  await expect(menu.getByRole('button', { name: 'Game', exact: true })).toBeVisible();
   await expect(menu.getByRole('button', { name: 'Activities', exact: true })).toHaveCount(0);
   await expect(menu.getByRole('button', { name: 'Settings', exact: true })).toBeVisible();
   await expect(page.locator('#sw-character-grid')).toBeVisible();
@@ -76,7 +76,7 @@ test('Menu groups destinations and keeps future native destinations reachable', 
   await expect(page.locator('#sw-orientation-toggle')).toBeHidden();
   await expect(page.locator('#sw-character-grid')).toBeHidden();
   await expect(page.locator('#sw-game-grid')).toBeHidden();
-  await menu.getByRole('button', { name: 'Character', exact: true }).tap();
+  await menu.getByRole('button', { name: 'Game', exact: true }).tap();
   await expect(page.locator('#sw-game-grid .sw-menu-heading')).toHaveText(['Combat', 'Crafting']);
   await expect(page.locator('#sw-character-grid')).toBeVisible();
   await expect(page.locator('.sw-render-setting:has(#sw-render-mode)')).toBeHidden();

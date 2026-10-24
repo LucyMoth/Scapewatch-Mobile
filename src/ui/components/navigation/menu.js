@@ -37,6 +37,21 @@ export function createMenu({
       !original || document.body.classList.contains('login-active') || !name?.textContent.trim();
     button.disabled = !!original?.disabled;
   }
+  function filterMenus() {
+    const query = $('#sw-menu-search').value.trim().toLowerCase();
+    let matches = 0;
+    all('[data-sw-menu-panel="character"] .sw-menu-group').forEach((group) => {
+      const title = group.querySelector('.sw-menu-heading').textContent;
+      const items = Array.from(group.querySelectorAll('.sw-menu-item'));
+      items.forEach((button) => {
+        button.hidden = !`${title} ${button.textContent}`.toLowerCase().includes(query);
+        if (!button.hidden) matches++;
+      });
+      group.hidden = items.every((button) => button.hidden);
+    });
+    $('#sw-menu-search-clear').hidden = !query;
+    $('#sw-menu-search-empty').hidden = !query || !!matches;
+  }
   function originalAction(kind, tab) {
     if (document.body.classList.contains('login-active')) {
       toast('Sign in to Scapewatch first.');
@@ -146,6 +161,7 @@ export function createMenu({
       });
       if (remaining.size) $('#sw-game-grid').appendChild(menuGroup('More', [...remaining]));
       $('#sw-menu-empty').hidden = !!(dockItems.length || gameItems.length);
+      filterMenus();
     }
     all('.modal-tabs .tab-btn[data-tab]').forEach((el) => {
       const text = label(el);
@@ -156,6 +172,12 @@ export function createMenu({
   }
   function bindControls() {
     $('#sw-sleep-toggle').addEventListener('click', () => originalAction('action', 'sleep'));
+    $('#sw-menu-search').addEventListener('input', filterMenus);
+    $('#sw-menu-search-clear').addEventListener('click', () => {
+      $('#sw-menu-search').value = '';
+      filterMenus();
+      $('#sw-menu-search').focus();
+    });
     $('#sw-nav [data-sw-view=menu]').addEventListener('click', () => {
       syncSleep();
       assets.schedule();
@@ -175,6 +197,7 @@ export function createMenu({
     all('[data-sw-menu-section]').forEach((button) =>
       button.addEventListener('click', () => {
         const section = button.dataset.swMenuSection;
+        $('#sw-menu-search-wrap').hidden = section !== 'character';
         all('[data-sw-menu-panel]').forEach((panel) => {
           panel.hidden = panel.dataset.swMenuPanel !== section;
         });
@@ -192,6 +215,7 @@ export function createMenu({
     );
     $('#sw-notes-toggle').addEventListener('click', () => {
       const notes = $('.patch-notes-panel');
+      if (notes?.style.display === 'none') $('.window-control-btn-patch-notes')?.click();
       if (!notes || notes.style.display === 'none') {
         toast('Patch notes are available on the login screen.');
         return;

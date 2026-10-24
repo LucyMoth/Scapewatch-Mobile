@@ -64,7 +64,8 @@ html.sw-mobile.sw-landscape #sw-menu {
   color: var(--text-light, #cccccc);
   font-size: 14px;
 }
-.sw-menu-item img {
+.sw-menu-item img,
+.sw-menu-item svg {
   width: 28px;
   height: 28px;
   object-fit: contain;
@@ -118,6 +119,40 @@ html.sw-mobile.sw-landscape #sw-menu {
   border-color: var(--text-accent, #c8a83e);
   background: var(--bg-cell, #3a3226);
   color: var(--text-bright, #ffff00);
+}
+#sw-menu-search-wrap {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+#sw-menu-search {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--text-light, #cccccc);
+  background: var(--bg-dark, #1c1c0e);
+  border: 1px solid var(--border-primary, #5c4a2a);
+  border-radius: 3px;
+}
+#sw-menu-search::-webkit-search-cancel-button {
+  display: none;
+}
+#sw-menu-search-clear {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 20px;
+  color: var(--text-light, #cccccc);
+  background: var(--bg-cell, #3a3226);
+  border: 1px solid var(--border-primary, #5c4a2a);
+  border-radius: 3px;
+}
+#sw-menu-search:focus-visible,
+#sw-menu-search-clear:focus-visible {
+  outline: 2px solid var(--text-accent, #c8a83e);
+  outline-offset: 1px;
 }
 .sw-menu-item:not(:disabled):active,
 .sw-menu-tabs button:active {

@@ -28,13 +28,28 @@
   <div id="sw-menu-header">
     <h2>Menu</h2>
     <nav class="sw-menu-tabs" aria-label="Menu sections">
-      <button type="button" data-sw-menu-section="character" aria-pressed="true">Character</button>
+      <button type="button" data-sw-menu-section="character" aria-pressed="true">Game</button>
       <button type="button" data-sw-menu-section="display" aria-pressed="false">Settings</button>
       <button type="button" data-sw-menu-section="about" aria-pressed="false">About</button>
     </nav>
+    <div id="sw-menu-search-wrap">
+      <input
+        type="search"
+        id="sw-menu-search"
+        aria-label="Find a game menu"
+        placeholder="Search game menus…"
+        autocomplete="off"
+      />
+      <button type="button" id="sw-menu-search-clear" aria-label="Clear menu search" hidden>
+        ×
+      </button>
+    </div>
   </div>
   <p id="sw-menu-empty">Game menus appear after you sign in.</p>
-  <section data-sw-menu-panel="character" aria-label="Character and activity">
+  <section data-sw-menu-panel="character" aria-label="Game menus">
+    <p id="sw-menu-search-empty" role="status" hidden>
+      No matching menus. Try a different name or clear the search.
+    </p>
     <div id="sw-character-grid"></div>
     <div id="sw-game-grid"></div>
   </section>
