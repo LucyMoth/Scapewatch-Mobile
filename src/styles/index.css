@@ -66,6 +66,7 @@
 @import '../ui/components/quests/panel.css';
 @import '../ui/components/barter/panel.css';
 @import '../ui/components/combat/selection.css';
+@import '../ui/components/combat/pvp.css';
 @import '../ui/components/hiscores/panel.css';
 @import '../ui/components/equipment/picker.css';
 @import '../ui/components/processing/navigation.css';

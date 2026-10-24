@@ -29,6 +29,7 @@ import { createBackNavigation } from './components/navigation/back.js';
 import { createPlayerStatus } from './components/world/player-status.js';
 import { createDialogLayout } from './components/dialogs/controls.js';
 import { createHiscoresLayout } from './components/hiscores/index.js';
+import { createPvpLayout } from './components/combat/pvp.js';
 
 export function initializeMobileUi(css) {
   'use strict';
@@ -100,6 +101,7 @@ export function initializeMobileUi(css) {
       dashboard,
     });
     const equipment = createEquipmentPicker({ state, render, toast: navigation.toast });
+    const pvp = createPvpLayout({ state, toast: navigation.toast });
     const menu = createMenu({
       state,
       setFlag,
@@ -154,6 +156,7 @@ export function initializeMobileUi(css) {
       trees.update();
       quests.update();
       hiscores.update();
+      pvp.update();
       playerStatus.update();
       dashboard.update();
     }
@@ -249,6 +252,7 @@ export function initializeMobileUi(css) {
         quests.suspend();
         playerStatus.suspend();
         hiscores.suspend();
+        pvp.suspend();
         itemDetails.suspend();
         dialogs.suspend();
         dashboard.suspend();
