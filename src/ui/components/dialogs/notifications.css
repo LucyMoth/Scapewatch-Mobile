@@ -58,3 +58,14 @@ html.sw-mobile .celebration-container :is(.celeb-collection, .celeb-pet, .celeb-
 html.sw-mobile.sw-landscape .celebration-container {
   top: calc(var(--sw-top) + 60px);
 }
+html.sw-mobile:not(.sw-world) :is(.xp-drops-container, .loot-drop-zone, .celebration-container),
+html.sw-mobile.sw-menu-open :is(.xp-drops-container, .loot-drop-zone, .celebration-container),
+html.sw-mobile body.modal-open :is(.xp-drops-container, .loot-drop-zone, .celebration-container),
+html.sw-mobile:has(
+    .cd-popup-overlay,
+    .steam-prompt-overlay:not([style*='display: none']):not([hidden]),
+    .ledger-return-overlay:not([style*='display: none']):not([hidden])
+  )
+  :is(.xp-drops-container, .loot-drop-zone, .celebration-container) {
+  visibility: hidden !important;
+}

@@ -240,6 +240,7 @@ export function initializeMobileUi(css) {
         unlocks.suspend();
         trees.suspend();
         quests.suspend();
+        playerStatus.suspend();
         itemDetails.suspend();
         dashboard.suspend();
         clearTimeout(syncTimer);

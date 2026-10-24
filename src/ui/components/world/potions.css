@@ -1,5 +1,5 @@
 /* Potions occupy the other HUD column below Recenter; opening the original
-   panel never sends a280px row across the player/status module. */
+   panel never sends a 280px row across the player/status module. */
 html.sw-mobile {
   --sw-potions-top: calc(var(--sw-right-top) + max(44px, var(--sw-camera-height)) + 4px);
 }
@@ -20,12 +20,27 @@ html.sw-mobile:not(.sw-world) :is(.active-potions-panel, .active-potions-pill) {
   display: none !important;
 }
 html.sw-mobile .active-potions-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
   min-height: 44px;
-  padding: 4px 8px;
+  padding: 4px;
+  box-sizing: border-box;
   font-size: 14px;
   border: 1px solid var(--border-secondary);
   border-radius: 6px;
   box-shadow: none;
+}
+html.sw-mobile .active-potions-pill-icon {
+  width: 24px;
+  height: 24px;
+}
+html.sw-mobile .active-potions-pill-chev {
+  font-size: 10px;
 }
 html.sw-mobile .active-potions-panel {
   width: 104px;

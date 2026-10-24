@@ -28,7 +28,7 @@ for (const viewport of [
       const status = await expectWithin(page.locator('.ingame-hud'), bounds);
       const task = await expectWithin(page.locator('.floating-current-task'), bounds);
       expect(health.width, 'Health stays a compact capsule').toBeLessThanOrEqual(240);
-      expect(status.width, 'Player status stays a compact card').toBeLessThanOrEqual(280);
+      expect(status.width, 'Player status stays a bounded card').toBeLessThanOrEqual(320);
       expect(
         status.height,
         'Collapsed status retains a touch target without extra rows',

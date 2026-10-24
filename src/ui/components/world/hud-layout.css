@@ -6,10 +6,25 @@ html.sw-mobile .ingame-hud {
 }
 html.sw-mobile .tutorial-checklist {
   top: calc(var(--sw-hud-bottom) + 8px) !important;
-  left: 12px !important;
-  max-width: calc(100% - 24px);
+  left: var(--sw-left) !important;
+  width: calc(var(--sw-width) - var(--sw-left) - var(--sw-right) - 112px);
+  min-width: 0;
+  max-width: calc(var(--sw-width) - var(--sw-left) - var(--sw-right) - 112px);
   max-height: 25dvh;
+  box-sizing: border-box;
+  padding: 4px 8px;
   overflow: auto;
+}
+html.sw-mobile :is(.tutorial-checklist-header, .tutorial-checklist-row) {
+  min-height: 44px;
+  white-space: normal;
+}
+html.sw-mobile .tutorial-checklist-title {
+  min-width: 0;
+  font-size: 16px;
+}
+html.sw-mobile .tutorial-checklist-row {
+  font-size: 14px;
 }
 html.sw-mobile .floating-current-task {
   left: var(--sw-left) !important;
@@ -35,4 +50,8 @@ html.sw-mobile .active-potions-pill {
   top: calc(var(--sw-top) + 70px) !important;
   right: 12px !important;
   left: auto !important;
+}
+html.sw-mobile:not(.sw-world-ready)
+  :is(.ingame-hud, .active-potions-panel, .active-potions-pill, .tutorial-checklist) {
+  display: none !important;
 }
