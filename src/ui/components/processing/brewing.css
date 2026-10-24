@@ -2,11 +2,14 @@ html.sw-mobile #tab-brew.active {
   display: block;
   padding: 8px;
   overflow-x: hidden;
-  overflow-y: auto;
+  height: 100%;
+  overflow-y: hidden;
 }
-html.sw-mobile :is(.brew-layout, .brew-recipes-area, .brew-recipes-scroll) {
+html.sw-mobile :is(.brew-layout, .brew-recipes-area) {
   min-width: 0;
-  overflow: visible;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
 }
 html.sw-mobile .brew-recipes-area {
   padding: 0;
@@ -19,24 +22,42 @@ html.sw-mobile .brew-recipes-header {
   gap: 6px;
 }
 html.sw-mobile .brew-style-filters {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
   width: 100%;
   min-width: 0;
   margin: 0;
-  overflow-x: auto;
+  overflow: visible;
   overscroll-behavior-x: contain;
 }
 html.sw-mobile .brew-style-tab {
+  justify-content: center;
+  min-width: 0;
   min-height: 44px;
-  flex: 0 0 auto;
-  padding: 4px 8px;
+  gap: 3px;
+  padding: 4px 2px;
 }
 html.sw-mobile .brew-style-tab-name {
-  font-size: 13px;
+  font-size: 12px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.sw-mobile .brew-style-tab .style-dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
 }
 html.sw-mobile .brew-recipes-header .proc-amount-control {
   order: 0;
 }
 html.sw-mobile .brew-recipes-scroll {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 8px;
 }
 html.sw-mobile .brew-tier-level {
@@ -81,4 +102,16 @@ html.sw-mobile.sw-landscape .brew-recipes-scroll {
   flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+html.sw-mobile.sw-landscape .brew-style-filters {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+@media (max-width: 340px) {
+  html.sw-mobile .brew-style-tab .style-dot {
+    display: none;
+  }
+  html.sw-mobile .brew-style-tab-name {
+    white-space: nowrap;
+  }
 }

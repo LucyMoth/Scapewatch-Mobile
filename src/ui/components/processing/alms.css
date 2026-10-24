@@ -106,6 +106,7 @@ html.sw-mobile .alms-path-controls {
   gap: 4px;
 }
 html.sw-mobile #ui-container :is(.alms-path-filter, .alms-path-claim-btn) {
+  min-width: 44px;
   min-height: 44px;
   padding: 4px 6px;
   font-size: 13px;
