@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/LucyMoth/Scapewatch-Mobile/releases/tag/v1.0"><img src="https://img.shields.io/badge/release-v1.0-gold" alt="Release v1.0"></a>
+  <a href="https://github.com/LucyMoth/Scapewatch-Mobile/releases/tag/v1.1"><img src="https://img.shields.io/badge/release-v1.1-gold" alt="Release v1.1"></a>
   <img src="https://img.shields.io/badge/Android-7.0%2B-3DDC84?logo=android&logoColor=white" alt="Android 7.0 or newer">
   <img src="https://img.shields.io/badge/Capacitor-8-119EFF?logo=capacitor&logoColor=white" alt="Built with Capacitor 8">
   <img src="https://img.shields.io/badge/iOS-planned-lightgrey?logo=apple" alt="iOS planned">
@@ -29,7 +29,7 @@ the live game in a WebView and adds an interface designed for phones:
 - A full world map with a draggable task queue and live route preview.
 - Mobile layouts for inventory, equipment, crafting, combat and progress screens.
 
-**Android v1.0 is available in [Releases](https://github.com/LucyMoth/Scapewatch-Mobile/releases/latest).**
+**Android v1.1 is available in [Releases](https://github.com/LucyMoth/Scapewatch-Mobile/releases/latest).**
 An iOS build is planned; there is no iOS project or release yet.
 
 Scapewatch and its original artwork are by PuzzleDrop and the credited artists.
