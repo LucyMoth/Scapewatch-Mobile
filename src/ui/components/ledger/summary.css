@@ -1,15 +1,17 @@
-/* Return summaries use the same information in one scrollable column.
-   Narrowing the card alone cannot contain the legacy 360px/640px grids. */
+/* Scroll the receipt body while the native return actions remain reachable. */
 html.sw-mobile .ledger-return-overlay {
-  padding: 8px !important;
+  position: fixed;
+  height: var(--sw-height);
+  padding: calc(var(--sw-top) + 8px) var(--sw-right) calc(var(--sw-bottom) + 8px) var(--sw-left) !important;
 }
 html.sw-mobile .ledger-card {
   width: 100% !important;
   min-width: 0;
   max-width: 100%;
+  max-height: 100%;
   padding: 10px !important;
   gap: 10px;
-  overflow-x: hidden !important;
+  overflow: hidden !important;
   border-radius: 4px;
   box-shadow: none;
   overscroll-behavior: contain;
@@ -21,6 +23,13 @@ html.sw-mobile :is(.ledger, .ledger-compact, .ledger-body, .ledger-night-body) {
   min-width: 0;
   height: auto;
   gap: 10px;
+}
+html.sw-mobile .ledger-card > .ledger-compact {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 html.sw-mobile :is(.ledger-compact-left, .ledger-compact-right, .ledger-col, .ledger-night-col) {
   min-width: 0;
@@ -230,4 +239,9 @@ html.sw-mobile .ledger-table td[data-sw-ledger-label]::before {
 html.sw-mobile .ledger-table .ledger-total-row {
   background: var(--bg-cell);
   border-top: 2px solid var(--border-secondary);
+}
+
+html.sw-mobile.sw-landscape .ledger-card > .ledger-compact {
+  grid-template-columns: minmax(210px, 0.8fr) minmax(0, 1.2fr) !important;
+  align-items: start;
 }

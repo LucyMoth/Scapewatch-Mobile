@@ -145,11 +145,15 @@ for (const viewport of [
       await expectContainedSummary(page, card);
       const lastLoot = card.locator('.ledger-slot').last();
       await expectReachable(page, lastLoot, { scroll: true });
-      const lootBounds = await lastLoot.boundingBox();
-      const footerBounds = await card.locator('.ledger-card-foot').boundingBox();
-      expect(footerBounds.y, 'Receipt actions follow the final loot item').toBeGreaterThanOrEqual(
-        lootBounds.y + lootBounds.height - 1,
+      const footerBounds = await expectWithin(
+        card.locator('.ledger-card-foot'),
+        await viewportBounds(page),
       );
+      const bodyBounds = await card.locator('.ledger-compact').boundingBox();
+      expect(
+        footerBounds.y,
+        'Receipt actions stay outside the scrolling body',
+      ).toBeGreaterThanOrEqual(bodyBounds.y + bodyBounds.height - 1);
       await lastLoot.tap();
       expect(await page.evaluate(() => window.fixtureNativeLedger.actions)).toEqual(['Spent:0']);
       await screenshot(page, 'receipt-skills-loot');
