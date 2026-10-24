@@ -319,14 +319,16 @@ test('reversible layout and presentation-only changes', async ({ page }) => {
   assert(audit.gameplayUnchanged, 'gameplay fixture untouched');
   assert(
     audit.storage.every((call) =>
-      [
-        'sw_mobile_ui',
-        'sw_mobile_render',
-        'sw_mobile_chat',
-        'sw_mobile_orientation',
-        'sw_mobile_map_defaults',
-      ].includes(call[1]),
+      call[1] === 'scapewatch_layout'
+        ? call[0] === 'getItem' || (call[0] === 'setItem' && call[2] === 'desktop')
+        : [
+            'sw_mobile_ui',
+            'sw_mobile_render',
+            'sw_mobile_chat',
+            'sw_mobile_orientation',
+            'sw_mobile_map_defaults',
+          ].includes(call[1]),
     ),
-    'only namespaced presentation preferences accessed',
+    'only presentation preferences and the native desktop layout preference accessed',
   );
 });

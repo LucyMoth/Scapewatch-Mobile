@@ -1,6 +1,6 @@
 import { $, all, visible } from '../../dom.js';
 import { PREFERENCE_KEYS } from '../../../environment.js';
-import { dock, dockSelector, gameMenu, labels } from './game-controls.js';
+import { dock, dockRootSelector, dockSelector, gameMenu, labels } from './game-controls.js';
 export function createNavigation({ state, setFlag, render, updateCombat, fullMap, dashboard }) {
   let toastTimer;
   function toast(message) {
@@ -146,7 +146,7 @@ export function createNavigation({ state, setFlag, render, updateCombat, fullMap
   }
   function handleDockClick(event) {
     const button = event.target.closest?.('.panel-tab-btn');
-    if (button && button.closest('#ui-container > .panel-tab-bar')) {
+    if (button && button.closest(dockRootSelector)) {
       if (state.enabled) dashboard.close();
       reflectNativePanel(button.dataset.tab);
       render();

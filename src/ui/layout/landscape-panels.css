@@ -1,5 +1,5 @@
 html.sw-mobile.sw-landscape
-  #ui-container
+  :is(#ui-container, #hud-layer)
   > :is(
     .uq-panel,
     .tasks-panel,

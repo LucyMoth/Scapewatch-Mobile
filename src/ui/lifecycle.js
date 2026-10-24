@@ -1,27 +1,45 @@
 import { $, hasChangedElement } from './dom.js';
+import { dockRootSelector } from './components/navigation/game-controls.js';
 export function createUiLifecycle({ state, skills, combat, chat, menu, render, scheduleSync }) {
   let menusDirty = true;
   let structureDirty = true;
   let dockRoot;
   let menuRoot;
+  let controlsRoot;
   const navObservers = [];
   const structureObservers = [];
   let bodyObserver;
   let uiObserver;
+  let hudObserver;
+  let hudRoot;
   let shellObserver;
   let combatObserver;
   let ui;
   let modalOpen = document.body.classList.contains('modal-open');
   function watchStructure() {
     structureDirty = false;
-    const newDock = $('#ui-container > .panel-tab-bar');
+    const newDock = $(dockRootSelector);
+    const nextHud = $('#ui-container > #hud-layer');
+    if (nextHud !== hudRoot) {
+      hudObserver?.disconnect();
+      hudRoot = nextHud;
+      if (hudRoot) {
+        hudObserver = new MutationObserver(() => {
+          structureDirty = true;
+          scheduleSync();
+        });
+        hudObserver.observe(hudRoot, { childList: true });
+      }
+    }
     const newMenu = $('.floating-tab-strip');
-    if (newDock !== dockRoot || newMenu !== menuRoot) {
+    const newControls = $('.window-controls');
+    if (newDock !== dockRoot || newMenu !== menuRoot || newControls !== controlsRoot) {
       navObservers.splice(0).forEach((observer) => observer.disconnect());
       dockRoot = newDock;
       menuRoot = newMenu;
+      controlsRoot = newControls;
       menusDirty = true;
-      [dockRoot, menuRoot, $('.modal-tabs')].filter(Boolean).forEach((node) => {
+      [dockRoot, menuRoot, controlsRoot, $('.modal-tabs')].filter(Boolean).forEach((node) => {
         const observer = new MutationObserver((records) => {
           if (records.some((record) => record.type === 'childList' && record.target === node)) {
             menusDirty = true;
@@ -104,9 +122,12 @@ export function createUiLifecycle({ state, skills, combat, chat, menu, render, s
     navObservers.forEach((observer) => observer.disconnect());
     dockRoot = null;
     menuRoot = null;
+    controlsRoot = null;
     structureObservers.forEach((observer) => observer.disconnect());
     bodyObserver?.disconnect();
     uiObserver?.disconnect();
+    hudObserver?.disconnect();
+    hudRoot = null;
     combatObserver?.disconnect();
     shellObserver?.disconnect();
   }

@@ -29,7 +29,8 @@ export const labels = {
   dashboard: 'Dashboard',
   map: 'Map',
 };
-export const dockSelector = '#ui-container > .panel-tab-bar .panel-tab-btn[data-tab]';
+export const dockRootSelector = ':is(#ui-container, #hud-layer) > .panel-tab-bar';
+export const dockSelector = `${dockRootSelector} .panel-tab-btn[data-tab]`;
 export const menuSelector =
   '.floating-tab-strip .floating-tab-btn[data-tab], .floating-tab-strip .dashboard-launcher';
 export function controlTab(el) {

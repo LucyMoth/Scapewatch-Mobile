@@ -1,6 +1,9 @@
 import styles from './styles/index.css';
+import { prepareGameLayout } from './game-layout.js';
 import { initializeRenderer } from './mobile-renderer.js';
 import { initializeMobileUi } from './ui/index.js';
 
-initializeRenderer();
-initializeMobileUi(styles);
+if (prepareGameLayout()) {
+  initializeRenderer();
+  initializeMobileUi(styles);
+}

@@ -22,7 +22,7 @@ export function createGeometry({ root, state }) {
     const task = $('.floating-current-task');
     const combatHud = $('.combat-encounter:not(.chalk-board) .combat-hud');
     const fortressLeave = $('.gauntlet-leave-btn');
-    const hp = $('#ui-container > .hp-bar') || $('.hp-bar');
+    const hp = $(':is(#ui-container, #hud-layer) > .hp-bar') || $('.hp-bar');
     const hud = $('.ingame-hud');
     const mini = $('#sw-mini-chat');
     setMeasure('--sw-hp-height', liveHeight(hp));

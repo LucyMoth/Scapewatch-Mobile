@@ -38,6 +38,13 @@ html.sw-mobile #ui-container {
   --panel-width: calc(var(--sw-width) - 16px);
   --playable-center-x: 50% !important;
 }
+html.sw-mobile #ui-container > #hud-layer {
+  zoom: 1 !important;
+  --playable-center-x: 50% !important;
+}
+body:has(> #sw-shell) > .m-switch-back {
+  display: none !important;
+}
 html.sw-mobile #game-container {
   left: 0 !important;
   top: 0 !important;
@@ -108,7 +115,7 @@ html.sw-mobile
   ) {
   display: none !important;
 }
-html.sw-mobile #ui-container > .panel-tab-bar,
-html.sw-mobile #ui-container > .floating-tab-strip {
+html.sw-mobile :is(#ui-container, #hud-layer) > .panel-tab-bar,
+html.sw-mobile :is(#ui-container, #hud-layer) > .floating-tab-strip {
   display: none !important;
 }

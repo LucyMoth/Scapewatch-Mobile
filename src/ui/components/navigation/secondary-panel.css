@@ -27,7 +27,7 @@
   font-size: 24px;
 }
 html.sw-mobile.sw-secondary-panel
-  #ui-container
+  :is(#ui-container, #hud-layer)
   > :is(
     .skills-panel,
     .quests-panel,
@@ -45,7 +45,7 @@ html.sw-mobile.sw-landscape #sw-secondary-header {
   top: calc(var(--sw-top) + 8px);
 }
 html.sw-mobile.sw-landscape.sw-secondary-panel
-  #ui-container
+  :is(#ui-container, #hud-layer)
   > :is(
     .skills-panel,
     .quests-panel,
