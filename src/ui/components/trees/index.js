@@ -76,6 +76,10 @@ export function createTreeLayout({ state }) {
       entry.view.bonuses = details.open;
     });
     bar.append(details);
+    const hint = document.createElement('div');
+    hint.className = 'sw-tree-gesture-hint';
+    hint.textContent = 'Drag to explore · Pinch or use + / − to zoom';
+    bar.append(hint);
     return bar;
   }
 

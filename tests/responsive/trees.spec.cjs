@@ -121,6 +121,7 @@ for (const viewport of [
         await loadTree(page, skill);
         await expect(page.locator('.rtv-root:visible .rtv-meter .n')).toHaveText(['1', '0', '146']);
         const controls = page.locator('.rtv-root:visible .sw-tree-controls');
+        await expect(controls.locator('.sw-tree-gesture-hint')).toContainText('Drag to explore');
         for (const button of await controls.locator('button').all())
           await expectReachable(page, button);
         await expectReachable(page, controls.locator('summary'));
