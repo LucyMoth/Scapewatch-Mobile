@@ -7,6 +7,8 @@ export function createUnlocksLayout({ state }) {
     const width = grid.clientWidth;
     if (!width) return;
     const rewards = Math.max(1, Math.min(8, Math.floor((width - 60) / 48)));
+    if (entry.rewards === rewards) return;
+    entry.rewards = rewards;
     const rows = Math.ceil((Math.ceil(entry.nodes.length / entry.headers) - 1) / rewards);
     grid.style.setProperty('--sw-unlock-columns', String(rewards + 1));
     entry.nodes.forEach((node, index) => {
@@ -23,6 +25,7 @@ export function createUnlocksLayout({ state }) {
 
   function restore(grid, entry) {
     observer.unobserve(grid);
+    entry.observer.disconnect();
     grid.classList.remove('sw-unlocks-grid');
     grid.style.removeProperty('--sw-unlock-columns');
     entry.nodes.forEach((node, index) => {
@@ -38,14 +41,7 @@ export function createUnlocksLayout({ state }) {
 
   function update() {
     grids.forEach((entry, grid) => {
-      if (
-        !state.enabled ||
-        state.suspended ||
-        !grid.isConnected ||
-        entry.nodes.length !== grid.children.length ||
-        entry.nodes.some((node, index) => node !== grid.children[index])
-      )
-        restore(grid, entry);
+      if (!state.enabled || state.suspended || !grid.isConnected) restore(grid, entry);
     });
     if (!state.enabled || state.suspended) return;
     document.querySelectorAll('#tab-unlocks .unlocks-grid').forEach((grid) => {
@@ -61,12 +57,17 @@ export function createUnlocksLayout({ state }) {
       const entry = {
         nodes,
         headers,
+        observer: new MutationObserver(() => {
+          restore(grid, entry);
+          update();
+        }),
         unstyled: new Set(nodes.filter((node) => !node.hasAttribute('style'))),
         styles: nodes.map((node) =>
           properties.map((property) => node.style.getPropertyValue(property)),
         ),
       };
       grids.set(grid, entry);
+      entry.observer.observe(grid, { childList: true });
       grid.classList.add('sw-unlocks-grid');
       observer.observe(grid);
       arrange(grid, entry);

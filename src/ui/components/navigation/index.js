@@ -38,7 +38,6 @@ export function createNavigation({ state, setFlag, render, updateCombat, fullMap
       const open = visible($('.modal-overlay')) && $('#tab-bank')?.classList.contains('active');
       fullMap.close();
       state.view = 'world';
-      render();
       if (open) closeModal();
       else target.click();
       render();
