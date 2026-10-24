@@ -8,6 +8,8 @@ export function createChatPreview({ state, setFlag, scheduleGeometry, blockingOv
   let chatArea;
   let chatPanel;
   let chatContent;
+  let chatInputRow;
+  let compactChannel;
   let chatFrame;
   let miniSignature = '';
   const chatPreferenceKey = PREFERENCE_KEYS.chat;
@@ -16,7 +18,47 @@ export function createChatPreview({ state, setFlag, scheduleGeometry, blockingOv
     miniEnabled = localStorage.getItem(chatPreferenceKey) !== 'off';
   } catch (_) {}
 
+  function clearPresentation() {
+    compactChannel?.classList.remove('sw-chat-channel-repeated');
+    compactChannel = null;
+  }
+
+  function updateComposer() {
+    const label = chatInputRow?.querySelector('.chat-channel-label');
+    if (label !== compactChannel) compactChannel?.classList.remove('sw-chat-channel-repeated');
+    compactChannel = label;
+    const room =
+      chatInputRow?.querySelector('.chat-room-pill-label') ||
+      chatInputRow?.querySelector('.chat-room-pill');
+    const channelName = label?.textContent
+      .trim()
+      .replace(/^\[|\]$/g, '')
+      .trim();
+    const roomName = room?.textContent.trim();
+    const globalColor = chatPanel?.querySelector('[data-chat-filter=global]')?.style.color;
+    const friendsColor = chatPanel?.querySelector('[data-chat-filter=friends]')?.style.color;
+    // A DM uses the Friends color even if its recipient resembles a room name.
+    // Keep the label when custom colors make that distinction ambiguous.
+    const publicChannel =
+      globalColor &&
+      friendsColor &&
+      globalColor !== friendsColor &&
+      label?.style.color === globalColor;
+    label?.classList.toggle(
+      'sw-chat-channel-repeated',
+      !!(
+        state.enabled &&
+        !state.suspended &&
+        publicChannel &&
+        channelName &&
+        channelName === roomName
+      ),
+    );
+  }
+
   function updateMiniVisibility() {
+    if (!state.enabled || state.suspended) clearPresentation();
+    else updateComposer();
     const mini = $('#sw-mini-chat');
     if (!mini) return;
     const show =
@@ -84,26 +126,37 @@ export function createChatPreview({ state, setFlag, scheduleGeometry, blockingOv
     const panel = $('#chat-panel');
     const content = panel?.querySelector('.chat-content-wrap');
     const area = panel?.querySelector('.chat-message-area');
-    if (panel !== chatPanel || content !== chatContent) {
+    const inputRow = panel?.querySelector('.chat-input-row');
+    if (panel !== chatPanel || content !== chatContent || inputRow !== chatInputRow) {
       chatStructureObserver?.disconnect();
       chatPanel = panel;
       chatContent = content;
+      chatInputRow = inputRow;
       if (panel) {
         chatStructureObserver = new MutationObserver((records) => {
           if (
             hasChangedElement(
               records,
               (node) =>
-                node.matches('.chat-message-area, .chat-content-wrap') ||
+                node.matches('.chat-message-area, .chat-content-wrap, .chat-input-row') ||
                 node.querySelector('.chat-message-area'),
             )
           )
             watchChat();
+          updateComposer();
         });
-        // Only replacements of the message container matter here. Message
-        // content is handled by the narrow observer below.
+        // Composer state and container replacements stay separate from the
+        // history observer below.
         chatStructureObserver.observe(panel, { childList: true });
         if (content) chatStructureObserver.observe(content, { childList: true });
+        if (inputRow)
+          chatStructureObserver.observe(inputRow, {
+            childList: true,
+            subtree: true,
+            characterData: true,
+            attributes: true,
+            attributeFilter: ['style'],
+          });
       }
     }
     if (area !== chatArea) {
@@ -111,10 +164,17 @@ export function createChatPreview({ state, setFlag, scheduleGeometry, blockingOv
       chatArea = area;
       if (area) {
         chatObserver = new MutationObserver(scheduleMiniMessages);
-        chatObserver.observe(area, { childList: true });
+        chatObserver.observe(area, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+          attributes: true,
+          attributeFilter: ['data-channel', 'data-category', 'hidden', 'style'],
+        });
       }
       scheduleMiniMessages();
     }
+    updateComposer();
   }
 
   function bindSettings() {
@@ -133,10 +193,12 @@ export function createChatPreview({ state, setFlag, scheduleGeometry, blockingOv
   }
 
   function suspend() {
+    clearPresentation();
     chatObserver?.disconnect();
     chatStructureObserver?.disconnect();
     chatPanel = null;
     chatContent = null;
+    chatInputRow = null;
     chatArea = null;
     if (chatFrame) cancelAnimationFrame(chatFrame);
     chatFrame = null;

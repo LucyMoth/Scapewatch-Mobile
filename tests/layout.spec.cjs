@@ -663,9 +663,11 @@ test('direct chat observation and original APIs network and game state remain in
     scopes.every(
       (scope) =>
         scope.options.childList &&
-        !scope.options.subtree &&
-        !scope.options.characterData &&
-        !scope.options.attributes,
+        scope.options.subtree &&
+        scope.options.characterData &&
+        scope.options.attributes &&
+        JSON.stringify(scope.options.attributeFilter) ===
+          JSON.stringify(['data-channel', 'data-category', 'hidden', 'style']),
     ),
     JSON.stringify(scopes),
   );

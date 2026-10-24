@@ -19,11 +19,14 @@ html.sw-mobile .chat-message-area {
   font-size: 16px;
   line-height: 1.45;
   padding: 10px;
-  gap: 3px;
+  gap: 4px;
 }
 html.sw-mobile #chat-panel .chat-message {
   flex-shrink: 0;
-  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  border: none;
+  line-height: 1.45;
 }
 html.sw-mobile #chat-panel .chat-timestamp {
   width: auto;
@@ -32,7 +35,11 @@ html.sw-mobile #chat-panel .chat-timestamp {
   font-variant-numeric: tabular-nums;
 }
 html.sw-mobile #chat-panel .chat-badge-slot {
-  width: 1.2em;
+  width: auto;
+  margin-right: 0.2em;
+}
+html.sw-mobile #chat-panel .chat-badge-slot:empty {
+  display: none;
 }
 html.sw-mobile #chat-panel .chat-staff-crown {
   width: 1.2em;
@@ -116,4 +123,8 @@ html.sw-mobile .chat-font-btn,
 html.sw-mobile .chat-toggle-btn {
   min-width: 36px;
   min-height: 44px;
+}
+
+html.sw-mobile #chat-panel .chat-channel-label.sw-chat-channel-repeated {
+  display: none;
 }

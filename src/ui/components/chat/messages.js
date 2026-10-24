@@ -12,7 +12,12 @@ export function readCommunityMessage(row) {
   // Read the already filtered, rendered message after the sender. Timestamps,
   // badges and world tags are siblings before it, never mirror those.
   for (let next = sender.nextSibling; next; next = next.nextSibling) {
-    if (next.nodeType === 3 || (next.nodeType === 1 && next.tagName === 'SPAN' && !next.className))
+    if (
+      next.nodeType === 3 ||
+      (next.nodeType === 1 &&
+        next.tagName === 'SPAN' &&
+        (!next.className || next.classList.contains('chat-text')))
+    )
       chunks.push(next.textContent);
   }
   const message = chunks
