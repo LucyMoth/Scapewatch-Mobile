@@ -44,3 +44,31 @@ html.sw-mobile .ctrl-global-tooltip {
   box-shadow: none;
   overflow: auto;
 }
+html.sw-mobile .global-tooltip.node-style {
+  position: fixed !important;
+  top: auto !important;
+  bottom: calc(var(--sw-bottom) + 8px) !important;
+  left: var(--sw-left) !important;
+  right: var(--sw-right) !important;
+  width: auto !important;
+  max-width: none;
+  max-height: min(65dvh, calc(var(--sw-height) - var(--sw-top) - var(--sw-bottom) - 70px));
+  box-sizing: border-box;
+  padding: 12px;
+  pointer-events: auto;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+html.sw-mobile .global-tooltip.node-style .tt-act-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+html.sw-mobile .global-tooltip.node-style .tt-act-name {
+  min-width: 0;
+  white-space: normal;
+}
+html.sw-mobile .global-tooltip.node-style .tt-bank-line {
+  white-space: normal;
+}

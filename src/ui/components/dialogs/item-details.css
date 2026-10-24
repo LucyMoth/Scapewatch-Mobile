@@ -65,7 +65,7 @@ html.sw-mobile .sw-item-actions button {
   color: var(--text-light);
   font: inherit;
 }
-html.sw-mobile .sw-item-action {
+html.sw-mobile .sw-item-actions button.sw-item-action {
   color: var(--text-gold);
   border-color: var(--text-gold);
 }

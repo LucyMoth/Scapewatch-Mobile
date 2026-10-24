@@ -1,8 +1,9 @@
 window.fixtureItemDetails = function () {
   const ui = document.getElementById('ui-container');
-  const tip = document.querySelector('.global-tooltip');
+  let tip = document.querySelector('.global-tooltip');
   let active;
   let suppressClick = false;
+  let lastTouchAt = 0;
   const triggers =
     '.inv-slot, .loot-slot, .potion-row, .potion-stats-toggle-wrap, .equip-compare-toggle-wrap, .spirit-stats-toggle-wrap, .gearcalc-launch-wrap';
   window.fixtureItems = { actions: [], dismissed: 0 };
@@ -58,7 +59,7 @@ window.fixtureItemDetails = function () {
     });
   });
   ui.addEventListener('mouseout', (event) => {
-    if (active && !active.contains(event.relatedTarget)) {
+    if (active && Date.now() - lastTouchAt >= 1500 && !active.contains(event.relatedTarget)) {
       active = null;
       tip.style.display = 'none';
       window.fixtureItems.dismissed++;
@@ -67,7 +68,8 @@ window.fixtureItemDetails = function () {
   document.addEventListener(
     'touchstart',
     (event) => {
-      const trigger = event.target.closest(triggers);
+      lastTouchAt = Date.now();
+      const trigger = event.target.closest?.(triggers);
       if (!trigger) {
         if (active) window.fixtureItems.dismissed++;
         active = null;
@@ -82,6 +84,15 @@ window.fixtureItemDetails = function () {
     },
     true,
   );
+  window.fixtureReplaceTooltip = function () {
+    const next = tip.cloneNode(false);
+    next.className = 'tooltip global-tooltip';
+    next.style.display = 'none';
+    tip.replaceWith(next);
+    tip = next;
+    active = null;
+    suppressClick = false;
+  };
   document.addEventListener(
     'click',
     (event) => {

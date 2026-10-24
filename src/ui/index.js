@@ -27,6 +27,7 @@ import { createEquipmentPicker } from './components/equipment/picker.js';
 import { createQuestLayout } from './components/quests/index.js';
 import { createBackNavigation } from './components/navigation/back.js';
 import { createPlayerStatus } from './components/world/player-status.js';
+import { createDialogLayout } from './components/dialogs/controls.js';
 
 export function initializeMobileUi(css) {
   'use strict';
@@ -65,6 +66,7 @@ export function initializeMobileUi(css) {
     const gestures = createMapGestures({ state, blockingOverlay, onInteraction: initialZoom.stop });
     const fullMapGestures = createFullMapGestures({ state, blockingOverlay });
     const itemDetails = createItemDetails({ state });
+    const dialogs = createDialogLayout({ state });
     const bank = createBankLayout({ state });
     const ledger = createLedgerLayout({ state });
     const appearance = createAppearanceLayout({ state });
@@ -141,6 +143,7 @@ export function initializeMobileUi(css) {
     function updatePanels() {
       navigation.update();
       menu.updateSleep();
+      dialogs.update();
       bank.update();
       equipment.update();
       ledger.update();
@@ -243,6 +246,7 @@ export function initializeMobileUi(css) {
         quests.suspend();
         playerStatus.suspend();
         itemDetails.suspend();
+        dialogs.suspend();
         dashboard.suspend();
         clearTimeout(syncTimer);
         syncTimer = null;

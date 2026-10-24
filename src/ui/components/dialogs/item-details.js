@@ -3,11 +3,14 @@ import { gameMenu } from '../navigation/game-controls.js';
 
 export function createItemDetails({ state }) {
   const selector = '.global-tooltip.sw-item-details';
+  const nodeSelector = '.global-tooltip.node-style';
   const triggers =
     '.potion-row, .inv-slot:not(.empty), .paperdoll .inv-slot.empty, .loot-slot, .potion-stats-toggle-wrap, .equip-compare-toggle-wrap, .spirit-stats-toggle-wrap, .gearcalc-launch-wrap';
   let activeTrigger;
   let touchTrigger;
+  let observedTip;
   const actions = new WeakMap();
+  const tooltipObserver = new MutationObserver(updateActions);
 
   function enabled() {
     return state.enabled && !state.suspended;
@@ -15,7 +18,7 @@ export function createItemDetails({ state }) {
 
   function keepDetailsOpen(event) {
     if (!enabled()) return;
-    if (event.target.closest?.(selector)) {
+    if (event.target.closest?.(`${selector}, ${nodeSelector}`)) {
       // Native tap-outside dismissal runs on document. Let the browser scroll
       // the details without treating that touch as a tap outside the HUD row.
       event.stopPropagation();
@@ -28,6 +31,7 @@ export function createItemDetails({ state }) {
 
   function markDetails(event) {
     if (!enabled() || event.target.closest?.('.global-tooltip')) return;
+    watchTooltip();
     const trigger = event.target.closest?.(triggers);
     if (touchTrigger && trigger !== touchTrigger) {
       event.stopPropagation();
@@ -153,6 +157,14 @@ export function createItemDetails({ state }) {
     tip.append(bar);
   }
 
+  function watchTooltip() {
+    const tip = document.querySelector('.global-tooltip');
+    if (tip === observedTip) return;
+    tooltipObserver.disconnect();
+    observedTip = tip;
+    if (tip) tooltipObserver.observe(tip, { childList: true });
+  }
+
   function positionDetails() {
     if (!enabled() || !activeTrigger?.isConnected) return;
     const tip = document.querySelector(selector);
@@ -190,6 +202,7 @@ export function createItemDetails({ state }) {
     // The singleton lives outside the UI root. Forward its departure to the
     // original trigger so the game's tooltip manager clears its own state.
     const trigger = activeTrigger;
+    const touched = !!touchTrigger;
     activeTrigger = null;
     touchTrigger = null;
     const tip = document.querySelector(selector);
@@ -198,13 +211,41 @@ export function createItemDetails({ state }) {
     const origin = trigger?.isConnected ? trigger : document.getElementById('ui-container');
     if (trigger || tip)
       origin?.dispatchEvent(new MouseEvent('mouseout', { bubbles: true, relatedTarget }));
+    if (touched) {
+      // Recent touches suppress native mouseout dismissal. Use its touch-outside
+      // handler on the containing UI, without dispatching a gameplay click.
+      let outside = trigger?.isConnected ? trigger.parentElement : null;
+      while (outside?.closest(triggers)) outside = outside.parentElement;
+      (outside || document.getElementById('ui-container'))?.dispatchEvent(
+        new TouchEvent('touchstart', {
+          bubbles: true,
+          cancelable: true,
+          touches: [],
+          targetTouches: [],
+          changedTouches: [],
+        }),
+      );
+    }
     if (tip) tip.style.display = 'none';
   }
 
   function back() {
+    const node = document.querySelector(nodeSelector);
+    const nodeOpen = visible(node);
+    if (nodeOpen) {
+      document.body.dispatchEvent(
+        new TouchEvent('touchstart', {
+          bubbles: true,
+          touches: [],
+          targetTouches: [],
+          changedTouches: [],
+        }),
+      );
+      node.style.display = 'none';
+    }
     const open = visible(document.querySelector(selector));
     dismissDetails(document.body);
-    return open;
+    return nodeOpen || open;
   }
 
   function handleMouseOut(event) {
@@ -224,8 +265,16 @@ export function createItemDetails({ state }) {
     window.addEventListener('touchstart', keepDetailsOpen, { capture: true, passive: true });
     window.addEventListener('mouseover', markDetails, { capture: true });
     window.addEventListener('mouseout', handleMouseOut, { capture: true });
-    const tip = document.querySelector('.global-tooltip');
-    if (tip) new MutationObserver(updateActions).observe(tip, { childList: true });
+    window.addEventListener('click', (event) => {
+      if (
+        enabled() &&
+        !event.defaultPrevented &&
+        activeTrigger?.contains(event.target) &&
+        !actionable(activeTrigger)
+      )
+        back();
+    });
+    watchTooltip();
     const resize = () => requestAnimationFrame(positionDetails);
     window.addEventListener('resize', resize);
     window.visualViewport?.addEventListener('resize', resize);
@@ -238,5 +287,11 @@ export function createItemDetails({ state }) {
     );
   }
 
-  return { bind, back, suspend: back };
+  function suspend() {
+    back();
+    tooltipObserver.disconnect();
+    observedTip = null;
+  }
+
+  return { bind, back, suspend };
 }
