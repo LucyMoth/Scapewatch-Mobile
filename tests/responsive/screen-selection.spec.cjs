@@ -168,9 +168,9 @@ for (const viewport of [
       await loadGame(page, { scripts: ['game.js', 'hiscores.js'] });
       await page.evaluate(() => window.fixtureOpenModal('hiscores'));
       await settle(page);
-      const category = page.locator('.hs-cat-item', { hasText: /^Fortify$/ });
-      await expectReachable(page, category, { scroll: true });
-      await category.tap();
+      const category = page.getByLabel('Ranking category');
+      await expectReachable(page, category);
+      await category.selectOption({ label: 'Fortify' });
       const name = page.locator('.hs-search-input').first();
       await expectReachable(page, name);
       await name.fill('Adventurer');

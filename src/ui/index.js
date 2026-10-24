@@ -28,6 +28,7 @@ import { createQuestLayout } from './components/quests/index.js';
 import { createBackNavigation } from './components/navigation/back.js';
 import { createPlayerStatus } from './components/world/player-status.js';
 import { createDialogLayout } from './components/dialogs/controls.js';
+import { createHiscoresLayout } from './components/hiscores/index.js';
 
 export function initializeMobileUi(css) {
   'use strict';
@@ -73,6 +74,7 @@ export function initializeMobileUi(css) {
     const unlocks = createUnlocksLayout({ state });
     const trees = createTreeLayout({ state });
     const quests = createQuestLayout({ state });
+    const hiscores = createHiscoresLayout({ state });
     const playerStatus = createPlayerStatus({ state });
     const combat = createCombatDetails({ state, setFlag, scheduleGeometry: geometry.schedule });
     const fullMap = createFullMap({
@@ -151,6 +153,7 @@ export function initializeMobileUi(css) {
       unlocks.update();
       trees.update();
       quests.update();
+      hiscores.update();
       playerStatus.update();
       dashboard.update();
     }
@@ -245,6 +248,7 @@ export function initializeMobileUi(css) {
         trees.suspend();
         quests.suspend();
         playerStatus.suspend();
+        hiscores.suspend();
         itemDetails.suspend();
         dialogs.suspend();
         dashboard.suspend();
