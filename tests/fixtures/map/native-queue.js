@@ -5,8 +5,11 @@
   let columns = [column];
   let drag;
   let optionsEnabled = false;
+  let rerollsEnabled = false;
   const wiredRows = new WeakSet();
   map.longPressCalls = [];
+  map.rerollCalls = [];
+  map.rowNavigationCalls = [];
 
   function signature() {
     return map.queue.map((id) => `skill:${id}:${id}`);
@@ -68,14 +71,33 @@
         alternative.className = 'icon-option';
         alternative.dataset.optionIndex = '1';
         alternative.innerHTML = `<img src="${icon}" alt="Forage"><div class="icon-tooltip uq-tooltip"><div class="tt-name">Forage</div><div class="tt-line">Follow a new route to the forage destination.</div></div>`;
-        alternative.addEventListener('click', () => {
-          map.queue[index] = 'forage';
-          map.optionCalls.push({ slotIndex: index, optionIndex: 1 });
-          paint();
-        });
         container.querySelector('.icons-wrapper').appendChild(alternative);
       }
-      if (!wiredRows.has(row))
+      if (rerollsEnabled) {
+        const reroll = document.createElement('div');
+        reroll.className = 'reroll-option uq-reroll' + (index === 1 ? ' disabled' : '');
+        reroll.dataset.lane = 'skill';
+        reroll.innerHTML = `<img src="${icon}" alt="Skilling"><span class="uq-reroll-glyph">↻</span><div class="icon-tooltip"><div class="tt-name">Reroll row (5 credits)</div><div class="tt-line">Keeps the option you picked, rerolls the other 2 as skilling tasks</div><div class="tt-line">You have ${index === 1 ? 0 : 68} reroll credits</div></div>`;
+        reroll.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (reroll.classList.contains('disabled') || reroll.classList.contains('paused')) return;
+          map.rerollCalls.push({ slotIndex: index });
+        });
+        row.querySelector('.icons-wrapper').appendChild(reroll);
+      }
+      if (!wiredRows.has(row)) {
+        // Native queue selection bubbles from the option to its row handler.
+        row.addEventListener('click', (event) => {
+          const option = event.target.closest('.icon-option');
+          if (option?.dataset.optionIndex === '1' && optionsEnabled && index === 0) {
+            event.stopPropagation();
+            map.queue[index] = 'forage';
+            map.optionCalls.push({ slotIndex: index, optionIndex: 1 });
+            paint();
+          } else if (!event.target.closest('.icon-option, .reroll-option')) {
+            map.rowNavigationCalls.push({ slotIndex: index });
+          }
+        });
         row.addEventListener('pointerdown', (event) => {
           if (
             event.target.closest('.icon-container') ||
@@ -91,6 +113,7 @@
             toSlot: index,
           };
         });
+      }
       wiredRows.add(row);
       const destination =
         columns[
@@ -119,7 +142,7 @@
             )
               container.classList.remove('tap-open');
           } else {
-            const option = event.target.closest('.icon-option');
+            const option = event.target.closest('.icon-option, .reroll-option');
             if (!option) continue;
             if (option.classList.contains('tap-preview')) option.classList.remove('tap-preview');
             else {
@@ -217,6 +240,10 @@
     optionsEnabled = true;
     map.optionCalls = [];
     map.nodes.forage = { x: 280, y: 800 };
+    paint();
+  };
+  map.enableRerolls = function () {
+    rerollsEnabled = true;
     paint();
   };
   paint();

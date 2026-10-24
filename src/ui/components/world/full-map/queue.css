@@ -1,4 +1,4 @@
-html.sw-mobile.sw-map #ui-container > #unified-queue-panel {
+html.sw-mobile.sw-map :is(#ui-container, #hud-layer) > #unified-queue-panel {
   top: auto !important;
   bottom: calc(var(--sw-bottom) + 8px) !important;
   left: var(--sw-left) !important;
@@ -13,7 +13,7 @@ html.sw-mobile.sw-map #ui-container > #unified-queue-panel {
   overflow: hidden !important;
 }
 html.sw-mobile.sw-map #unified-queue-panel::after {
-  content: 'Swipe below · drag to reorder';
+  content: '↔ Swipe tasks · drag icons to reorder';
   position: absolute;
   bottom: 5px;
   left: 76px;
@@ -39,6 +39,13 @@ html.sw-mobile.sw-map #unified-queue-panel .uq-rows {
   scrollbar-width: thin;
   touch-action: pan-x;
   overscroll-behavior-x: contain;
+}
+html.sw-mobile.sw-map:not(.sw-landscape) #unified-queue-panel::after {
+  bottom: 8px;
+  line-height: 18px;
+}
+html.sw-mobile.sw-map:not(.sw-landscape) #unified-queue-panel .uq-rows {
+  padding-bottom: 56px;
 }
 html.sw-mobile.sw-map #unified-queue-panel .uq-col {
   display: contents;
@@ -110,6 +117,9 @@ html.sw-mobile.sw-map #unified-queue-panel .icon-option {
   min-height: 44px;
   flex: 0 0 44px;
 }
+html.sw-mobile.sw-map #unified-queue-panel .reroll-option {
+  display: none !important;
+}
 html.sw-mobile.sw-map #unified-queue-panel .icon-option.selected {
   display: flex !important;
 }
@@ -156,6 +166,26 @@ html.sw-mobile.sw-map
   .icon-option {
   display: flex !important;
 }
+html.sw-mobile.sw-map
+  #unified-queue-panel
+  .queue-slot-draggable.sw-map-focus
+  .icon-container.tap-open
+  .reroll-option {
+  display: flex !important;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  flex: 0 0 44px;
+}
+html.sw-mobile.sw-map #unified-queue-panel .reroll-option > img {
+  max-width: 34px;
+  max-height: 34px;
+}
+html.sw-mobile.sw-map #unified-queue-panel .uq-reroll-glyph {
+  font-size: 28px;
+  line-height: 28px;
+}
 html.sw-mobile.sw-map #unified-queue-panel .sw-task-preview {
   display: none;
 }
@@ -191,17 +221,17 @@ html.sw-mobile.sw-map
   #unified-queue-panel
   :is(
     .uq-controls,
-    .uq-reroll,
     .uq-switch,
     .uq-lane,
     .uq-insert,
     .queue-pin-btn,
-    .queue-collapse-btn
+    .queue-collapse-btn,
+    .queue-compact-btn
   ) {
   display: none !important;
 }
 
-html.sw-mobile.sw-map-route-layout #ui-container > #unified-queue-panel {
+html.sw-mobile.sw-map-route-layout :is(#ui-container, #hud-layer) > #unified-queue-panel {
   top: var(--sw-map-queue-top) !important;
   bottom: auto !important;
 }

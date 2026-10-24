@@ -1,6 +1,7 @@
-const { test, expect, settle } = require('../support/game.cjs');
+const { test, expect, settle, screenshot } = require('../support/game.cjs');
 const { loadMapGame } = require('../support/map.cjs');
 const { touch } = require('../support/map-input.cjs');
+const { expectReachable } = require('../support/responsive.cjs');
 
 async function rowPoint(page, index, fraction = 0.5) {
   const row = page.locator('#unified-queue-panel .queue-slot-draggable').nth(index);
@@ -112,12 +113,20 @@ test('the horizontal scroll gutter reaches the last task without reordering or p
   page,
 }) => {
   await page.setViewportSize({ width: 360, height: 740 });
-  await loadMapGame(page);
+  await loadMapGame(page, {
+    beforeAdapter: async (page) => page.evaluate(() => window.fixtureMap.enableRerolls()),
+  });
   await page.locator('#sw-nav [data-sw-view=map]').tap();
   await settle(page);
   const wrap = page.locator('#unified-queue-panel .uq-rows');
   const rect = await wrap.boundingBox();
-  const point = { x: rect.x + rect.width - 20, y: rect.y + rect.height - 12 };
+  const row = await wrap.locator('.uq-row').first().boundingBox();
+  const gutter = rect.y + rect.height - row.y - row.height;
+  expect(
+    gutter,
+    'The swipe gutter has a full-height touch target below the draggable icons',
+  ).toBeGreaterThanOrEqual(44);
+  const point = { x: rect.x + rect.width - 20, y: row.y + row.height + gutter / 2 };
   const cdp = await page.context().newCDPSession(page);
   await touch(cdp, 'touchStart', point);
   for (const delta of [12, 24, 40, 60, 80])
@@ -131,7 +140,120 @@ test('the horizontal scroll gutter reaches the last task without reordering or p
     .boundingBox();
   expect(last.x + last.width).toBeLessThanOrEqual(rect.x + rect.width + 1);
   expect(await page.evaluate(() => window.fixtureMap.reorderCalls)).toEqual([]);
+  expect(await page.evaluate(() => window.fixtureMap.rerollCalls)).toEqual([]);
   expect(await page.evaluate(() => window.fixtureMap.mouseMoves)).toBe(0);
+});
+
+test('Map swipes and rerolls use the current native HUD layer without replacing its controls', async ({
+  page,
+}) => {
+  await loadMapGame(page, {
+    beforeAdapter: async (page) =>
+      page.evaluate(() => {
+        window.fixtureMap.enableRerolls();
+        const hud = document.createElement('div');
+        hud.id = 'hud-layer';
+        const queue = document.getElementById('unified-queue-panel');
+        document.getElementById('ui-container').appendChild(hud);
+        hud.appendChild(queue);
+        window.fixtureMap.originalRows = Array.from(queue.querySelectorAll('.uq-row'));
+      }),
+  });
+  await page.locator('#sw-nav [data-sw-view=map]').tap();
+  const wrap = page.locator('#hud-layer #unified-queue-panel .uq-rows');
+  const rect = await wrap.boundingBox();
+  const row = await wrap.locator('.uq-row').first().boundingBox();
+  const point = { x: rect.x + rect.width - 20, y: row.y + row.height + 24 };
+  const cdp = await page.context().newCDPSession(page);
+  await touch(cdp, 'touchStart', point);
+  for (const delta of [12, 24, 40, 60, 80])
+    await touch(cdp, 'touchMove', { ...point, x: point.x - delta });
+  await touch(cdp, 'touchEnd');
+  await cdp.detach();
+  await expect.poll(() => wrap.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+  expect(await page.evaluate(() => window.fixtureMap.reorderCalls)).toEqual([]);
+  expect(await page.evaluate(() => window.fixtureMap.rerollCalls)).toEqual([]);
+  const last = wrap.locator('.uq-row').last();
+  await last.locator('.selected').tap();
+  const reroll = last.locator('.uq-reroll');
+  await reroll.scrollIntoViewIfNeeded();
+  await expectReachable(page, reroll);
+  await reroll.tap();
+  await expect(last.locator('.sw-task-preview')).toContainText('Reroll row (5 credits)');
+  expect(await page.evaluate(() => window.fixtureMap.rerollCalls)).toEqual([]);
+  await reroll.tap();
+  expect(await page.evaluate(() => window.fixtureMap.rerollCalls)).toEqual([{ slotIndex: 3 }]);
+  expect(
+    await page.evaluate(() => window.fixtureMap.originalRows.every((row) => row.isConnected)),
+  ).toBe(true);
+});
+
+for (const viewport of [
+  { width: 320, height: 700 },
+  { width: 360, height: 740 },
+  { width: 740, height: 360 },
+]) {
+  test(`Map exposes the native reroll cost before committing one reroll at ${viewport.width}×${viewport.height}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize(viewport);
+    await loadMapGame(page, {
+      beforeAdapter: async (page) =>
+        page.evaluate(() => {
+          window.fixtureMap.enableOptions();
+          window.fixtureMap.enableRerolls();
+          window.fixtureMap.originalReroll = document.querySelector(
+            '.queue-slot-draggable .uq-reroll',
+          );
+        }),
+    });
+    await page.locator('#sw-nav [data-sw-view=map]').tap();
+    const row = page.locator('#unified-queue-panel .queue-slot-draggable').first();
+    const reroll = row.locator('.uq-reroll');
+    await expect(reroll).toBeHidden();
+    await row.locator('.selected').tap();
+    await expectReachable(page, reroll);
+    await reroll.tap();
+    const preview = row.locator('.sw-task-preview');
+    await expect(preview).toContainText('Reroll row (5 credits)');
+    await expect(preview).toContainText('You have 68 reroll credits');
+    expect(await page.evaluate(() => window.fixtureMap.rerollCalls)).toEqual([]);
+    await screenshot(page, 'map-reroll-preview');
+    await reroll.tap();
+    expect(await page.evaluate(() => window.fixtureMap.rerollCalls)).toEqual([{ slotIndex: 0 }]);
+    expect(await page.evaluate(() => window.fixtureMap.optionCalls)).toEqual([]);
+    expect(await page.evaluate(() => window.fixtureMap.reorderCalls)).toEqual([]);
+    expect(await page.evaluate(() => window.fixtureMap.mouseMoves)).toBe(0);
+    expect(await reroll.evaluate((element) => element === window.fixtureMap.originalReroll)).toBe(
+      true,
+    );
+    await page.locator('#sw-map-close').tap();
+    await page.locator('#sw-nav [data-sw-view=menu]').tap();
+    await page.locator('#sw-layout-toggle').tap();
+    await expect(page.locator('html')).not.toHaveClass(/sw-map/);
+    await expect(page.locator('.sw-map-step')).toHaveCount(0);
+    expect(await reroll.evaluate((element) => element === window.fixtureMap.originalReroll)).toBe(
+      true,
+    );
+    expect(await page.evaluate(() => window.fixtureMap.rerollCalls)).toEqual([{ slotIndex: 0 }]);
+  });
+}
+
+test('Map keeps native insufficient-credit and paused rerolls inert', async ({ page }) => {
+  await loadMapGame(page, {
+    beforeAdapter: async (page) => page.evaluate(() => window.fixtureMap.enableRerolls()),
+  });
+  await page.locator('#sw-nav [data-sw-view=map]').tap();
+  const row = page.locator('#unified-queue-panel .queue-slot-draggable').nth(1);
+  await row.locator('.selected').tap();
+  const reroll = row.locator('.uq-reroll');
+  await reroll.tap();
+  await expect(row.locator('.sw-task-preview')).toContainText('You have 0 reroll credits');
+  await reroll.tap();
+  expect(await page.evaluate(() => window.fixtureMap.rerollCalls)).toEqual([]);
+  await reroll.evaluate((element) => element.classList.add('paused'));
+  await expect(reroll).toHaveCSS('pointer-events', 'none');
+  expect(await page.evaluate(() => window.fixtureMap.reorderCalls)).toEqual([]);
 });
 
 test('queue advancement cancels a pending drag instead of committing stale task indices', async ({

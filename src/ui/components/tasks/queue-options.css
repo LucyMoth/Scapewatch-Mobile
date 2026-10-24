@@ -1,7 +1,7 @@
 /* Queue options open inside their row, not leftward over the world.
    Normal-flow wrapping keeps reroll/skip/master controls inside both the
    viewport and the queue's scroll area without moving event-bearing nodes. */
-html.sw-mobile #ui-container > .uq-panel {
+html.sw-mobile :is(#ui-container, #hud-layer) > .uq-panel {
   overflow: hidden !important;
 }
 html.sw-mobile :is(.uq-row, .current-task-slot, .queue-slot) {

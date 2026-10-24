@@ -104,7 +104,10 @@ export function createFullMap({ state, setFlag, render, toast }) {
     if (bounds && portrait) {
       const root = document.documentElement;
       root.style.setProperty('--sw-map-queue-top', `${bounds.bottom + 8}px`);
-      root.style.setProperty('--sw-map-route-top', `${bounds.bottom + 126}px`);
+      root.style.setProperty(
+        '--sw-map-route-top',
+        `calc(${bounds.bottom + 16}px + var(--sw-map-queue-height))`,
+      );
     }
   }
 

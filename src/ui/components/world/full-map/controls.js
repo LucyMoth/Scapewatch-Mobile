@@ -20,6 +20,7 @@ export function createMapControls() {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = `sw-map-control ${node.matches('.map-filter-panel') ? 'sw-map-filter-control' : 'sw-map-legend-control'}`;
+      button.textContent = node.matches('.map-filter-panel') ? 'Filters' : 'Route';
       button.setAttribute(
         'aria-label',
         node.matches('.map-filter-panel') ? 'Map filters' : 'Route legend',

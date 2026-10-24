@@ -23,7 +23,7 @@ for (const viewport of [
     await page.locator('#sw-nav [data-sw-view=map]').tap();
     await settle(page);
     const queue = await page.locator('#unified-queue-panel').boundingBox();
-    expect(queue.height).toBeLessThanOrEqual(112);
+    expect(queue.height).toBeLessThanOrEqual(viewport.width < viewport.height ? 146 : 112);
     const cards = page.locator('#unified-queue-panel .queue-slot-draggable');
     const first = await cards.nth(0).boundingBox();
     const second = await cards.nth(1).boundingBox();

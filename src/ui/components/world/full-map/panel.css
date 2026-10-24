@@ -6,6 +6,9 @@
 html.sw-mobile.sw-map {
   --sw-map-queue-height: 110px;
 }
+html.sw-mobile.sw-map:not(.sw-landscape) {
+  --sw-map-queue-height: 144px;
+}
 html.sw-mobile.sw-map #sw-map-surface {
   display: block;
   position: fixed;
@@ -63,42 +66,45 @@ html.sw-mobile.sw-map #sw-map-tools :is(.map-filter-panel, .map-legend-panel) {
   position: relative;
   top: auto;
   left: auto;
-  width: 46px;
-  min-width: 46px;
-  max-width: 46px;
+  width: 82px;
+  min-width: 82px;
+  max-width: 82px;
   max-height: none;
   overflow: visible;
   padding: 0;
   border-width: 1px;
-  flex: 0 0 46px;
+  flex: 0 0 82px;
 }
 html.sw-mobile.sw-map :is(.map-filter-title, .map-legend-title) {
   display: none;
 }
 html.sw-mobile.sw-map #sw-map-tools .sw-map-control {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 80px;
+  min-width: 80px;
   min-height: 44px;
   margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
   color: var(--text-gold, #ff0);
+  font-size: 13px;
 }
 html.sw-mobile.sw-map .sw-map-filter-control::before {
   content: '';
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   background: currentColor;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3zM6 3h2v7H6zm10 6h2v7h-2zm-6 5h2v7h-2z'/%3E%3C/svg%3E")
     center / contain no-repeat;
 }
 html.sw-mobile.sw-map .sw-map-legend-control::before {
   content: '';
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   background: currentColor;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 4h4v4H4zm6 1h10v2H10zM4 10h4v4H4zm6 1h10v2H10zM4 16h4v4H4zm6 1h10v2H10z'/%3E%3C/svg%3E")
     center / contain no-repeat;
@@ -151,7 +157,7 @@ html.sw-mobile.sw-map :is(.hp-bar, #sw-mini-chat) {
   display: none !important;
 }
 html.sw-mobile.sw-map
-  #ui-container
+  :is(#ui-container, #hud-layer)
   > :is(
     .skills-panel,
     .inventory-panel,
