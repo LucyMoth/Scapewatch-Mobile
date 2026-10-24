@@ -95,12 +95,12 @@ html.sw-mobile #tab-raid .raid-invite-listrow {
 }
 html.sw-mobile #tab-raid .raid-party-row-item {
   display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
+  grid-template-columns: 76px minmax(0, 1fr);
   height: auto;
   overflow: visible;
   min-width: 0;
-  gap: 10px;
-  padding: 10px;
+  gap: 8px;
+  padding: 8px;
 }
 html.sw-mobile #tab-raid .raid-party-row-item.empty {
   display: flex;
@@ -123,8 +123,8 @@ html.sw-mobile #tab-raid .raid-row-info-line {
   white-space: normal;
 }
 html.sw-mobile #tab-raid .raid-row-sprite {
-  width: 100px;
-  height: 104px;
+  width: 72px;
+  height: 80px;
 }
 html.sw-mobile #tab-raid :is(.raid-row-stats, .raid-row-skill-grid) {
   min-width: 0;
@@ -203,4 +203,68 @@ html.sw-mobile.sw-landscape #tab-raid .raid-diff-row {
     grid-column: 2;
     grid-row: 3;
   }
+}
+
+html.sw-mobile #tab-raid :is(.raid-row-leftgroup, .raid-row-body) {
+  display: contents;
+}
+html.sw-mobile #tab-raid .raid-action-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+html.sw-mobile #tab-raid .raid-action-row > * {
+  width: auto;
+  min-width: 0;
+  padding: 8px 4px;
+  white-space: normal;
+}
+html.sw-mobile #tab-raid .raid-party-section > .raid-section-label {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 8px 4px;
+  background: var(--bg-panel);
+}
+html.sw-mobile #tab-raid .sw-raid-equipment {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  background: var(--bg-dark);
+}
+html.sw-mobile #tab-raid .sw-raid-equipment > summary {
+  grid-column: 1 / -1;
+  min-height: 44px;
+  padding: 12px 8px;
+  color: var(--text-accent);
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+html.sw-mobile #tab-raid .sw-raid-equipment:not([open]) > :not(summary) {
+  display: none;
+}
+html.sw-mobile #tab-raid .sw-raid-equipment > :is(.raid-row-paperdoll, .raid-row-equip-stats) {
+  grid-column: 1;
+  grid-row: auto;
+  padding: 8px;
+}
+@media (min-width: 700px) {
+  html.sw-mobile.sw-landscape #tab-raid .sw-raid-equipment {
+    grid-template-columns: 152px minmax(0, 1fr);
+  }
+  html.sw-mobile.sw-landscape #tab-raid .sw-raid-equipment > .raid-row-equip-stats {
+    grid-column: 2;
+  }
+}
+html.sw-mobile #tab-raid .sw-raid-equipment > .raid-row-paperdoll.paperdoll {
+  grid-template-columns: repeat(3, 44px);
+  grid-template-rows: repeat(5, 44px);
+}
+html.sw-mobile #tab-raid .sw-raid-equipment .inv-slot.inv-s10 {
+  width: 44px;
+  height: 44px;
 }

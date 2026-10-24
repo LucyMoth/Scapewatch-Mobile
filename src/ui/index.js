@@ -32,6 +32,7 @@ import { createMobSelectionLayout } from './components/combat/selection.js';
 import { createDialogLayout } from './components/dialogs/controls.js';
 import { createHiscoresLayout } from './components/hiscores/index.js';
 import { createPvpLayout } from './components/combat/pvp.js';
+import { createRaidLayout } from './components/raids/index.js';
 
 export function initializeMobileUi(css) {
   'use strict';
@@ -80,6 +81,7 @@ export function initializeMobileUi(css) {
     const settings = createSettingsLayout({ state });
     const mobSelection = createMobSelectionLayout({ state });
     const hiscores = createHiscoresLayout({ state });
+    const raids = createRaidLayout({ state });
     const playerStatus = createPlayerStatus({ state });
     const combat = createCombatDetails({ state, setFlag, scheduleGeometry: geometry.schedule });
     const fullMap = createFullMap({
@@ -164,6 +166,7 @@ export function initializeMobileUi(css) {
       mobSelection.update();
       hiscores.update();
       pvp.update();
+      raids.update();
       playerStatus.update();
       dashboard.update();
     }
@@ -263,6 +266,7 @@ export function initializeMobileUi(css) {
         playerStatus.suspend();
         hiscores.suspend();
         pvp.suspend();
+        raids.suspend();
         itemDetails.suspend();
         dialogs.suspend();
         dashboard.suspend();
