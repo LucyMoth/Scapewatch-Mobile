@@ -96,3 +96,39 @@ html.sw-mobile #ui-container .barter-btn {
 html.sw-mobile :is(.barter-consumed-title, .barter-consumed-sub) {
   font-size: 16px;
 }
+html.sw-mobile .barter-slot-row.barter-slot-locked {
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 44px;
+  align-items: center;
+  opacity: 1;
+  background: var(--bg-dark);
+  color: var(--text-muted);
+}
+html.sw-mobile .barter-slot-locked .barter-slot-type {
+  grid-area: 1 / 1;
+  align-self: center;
+}
+html.sw-mobile .barter-slot-locked .barter-slot-info {
+  grid-area: 1 / 2;
+  align-self: center;
+}
+html.sw-mobile
+  .barter-slot-locked
+  :is(.barter-slot-icon, .barter-slot-controls, .barter-mod-label) {
+  display: none;
+}
+html.sw-mobile .barter-slot-locked .barter-price::before {
+  content: 'Requires Barter ';
+  font-size: 14px;
+}
+html.sw-mobile .barter-qty-label::before {
+  content: 'Quantity: ';
+}
+html.sw-mobile .barter-slot-active .barter-price::before {
+  content: 'Total: ';
+  font-size: 13px;
+}
+
+html.sw-mobile .barter-slot-locked .barter-gold-icon {
+  display: none;
+}
