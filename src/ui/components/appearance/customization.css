@@ -148,3 +148,27 @@ html.sw-mobile.sw-landscape
   .modal-close {
   grid-column: 3;
 }
+html.sw-mobile .character-creator .sw-appearance-details {
+  flex: 0 0 auto;
+  min-width: 0;
+  margin-bottom: 8px;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  background: var(--bg-dark);
+}
+html.sw-mobile .character-creator .sw-appearance-details > summary {
+  min-height: 44px;
+  padding: 12px 8px;
+  color: var(--text-accent);
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+html.sw-mobile .character-creator .sw-appearance-details > .cc-pack-banner {
+  padding: 4px;
+  margin: 0;
+}
+html.sw-mobile .character-creator .sw-appearance-details .cc-ls-title {
+  display: none;
+}

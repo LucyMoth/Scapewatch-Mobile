@@ -60,7 +60,7 @@ export function createUiLifecycle({ state, skills, combat, chat, menu, render, s
             records,
             (el) =>
               el.matches(
-                '.skill-custom-tab, .main-layout, .total-content, .history-sidebar, .columns-container, .column, .skill-columns-section, #tab-settings, .quest-layout, .mob-layout',
+                '.skill-custom-tab, .main-layout, .total-content, .history-sidebar, .columns-container, .column, .skill-columns-section, #tab-settings, .quest-layout, .mob-layout, .character-creator',
               ) || el.querySelector('.main-layout'),
           )
         ) {

@@ -138,6 +138,11 @@ for (const viewport of [
       await expectReachable(page, page.locator('.cc-dir-btns button').last());
       await expectReachable(page, page.locator('.cc-save-btn').first());
       await expectReachable(page, page.locator('.modal-close'));
+      const packs = page.locator('.sw-appearance-details > summary', {
+        hasText: 'Appearance packs',
+      });
+      await expectReachable(page, packs, { scroll: true });
+      await packs.tap();
       const pack = page.locator('.cc-pack-card').last();
       await pack.scrollIntoViewIfNeeded();
       await expectWithin(pack, bounds);
@@ -244,7 +249,9 @@ test('Appearance and Unlocks restore original DOM and inline grid placement afte
   await loadGame(page, { scripts: ['game.js', 'dialogs.js', 'collections.js'] });
   await page.evaluate(() => window.fixtureCustomize());
   await settle(page);
-  await expect(page.locator('.creator-center > .cc-layers-summary')).toHaveCount(1);
+  await expect(
+    page.locator('.creator-center > .sw-appearance-details > .cc-layers-summary'),
+  ).toHaveCount(1);
   await page.locator('.modal-close').tap();
   await page.evaluate(() => window.fixtureUnlocksView('Unlocks'));
   await settle(page);
@@ -276,7 +283,9 @@ test('Appearance and Unlocks restore original DOM and inline grid placement afte
     window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true }));
   });
   await settle(page);
-  await expect(page.locator('.creator-center > .cc-layers-summary')).toHaveCount(1);
+  await expect(
+    page.locator('.creator-center > .sw-appearance-details > .cc-layers-summary'),
+  ).toHaveCount(1);
   await expect(page.locator('.unlocks-grid')).toHaveClass(/sw-unlocks-grid/);
   await page.locator('.modal-close').tap();
   await page.locator('#sw-nav [data-sw-view="menu"]').tap();
